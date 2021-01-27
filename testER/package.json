@@ -1,0 +1,28 @@
+{
+  "name": "testER",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server --mode development --open",
+    "build": "webpack --mode production",
+    "lint": "eslint --cache --format codeframe --ext mjs,jsx,js src"
+  },
+  "dependencies": {
+    "mapbox-gl": "^2.0.1",
+    "prop-types": "^15",
+    "react": "^16",
+    "react-dom": "^16",
+    "react-hot-loader": "^4",
+    "react-mapbox-gl": "^5.1.1"
+  },
+  "devDependencies": {
+    "@neutrinojs/react": "^9.5.0",
+    "@neutrinojs/standardjs": "^9.5.0",
+    "eslint": "^7",
+    "neutrino": "^9.5.0",
+    "webpack": "^4",
+    "webpack-cli": "^3",
+    "webpack-dev-server": "^3"
+  }
+}
