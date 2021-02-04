@@ -946,7 +946,7 @@
     "@babel/core" "^7.12.10"
     babel-loader "^8.2.2"
 
-"@neutrinojs/dev-server@9.5.0":
+"@neutrinojs/dev-server@9.5.0", "@neutrinojs/dev-server@^9.5.0":
   version "9.5.0"
   resolved "https://registry.yarnpkg.com/@neutrinojs/dev-server/-/dev-server-9.5.0.tgz#ef60be2bcd9c5e694091d2a913efdddba4dac19f"
   integrity sha512-QONS3kNAd4Q/lrE9JsQ4RgU0XPqhPAn/1Dp2MS4jEhQteglO2ikRgssnUZcSrpBQi58YJoNguKdXe7YxF6S+zA==

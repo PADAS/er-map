@@ -17,6 +17,7 @@
     "react-mapbox-gl": "^5.1.1"
   },
   "devDependencies": {
+    "@neutrinojs/dev-server": "^9.5.0",
     "@neutrinojs/react": "^9.5.0",
     "@neutrinojs/standardjs": "^9.5.0",
     "eslint": "^7",
