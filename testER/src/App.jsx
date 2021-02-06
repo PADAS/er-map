@@ -10,12 +10,12 @@ const Map = ReactMapboxGl({
 
 const App = () => {
   return (
-    <div>
+    <div id='map-container'>
       <Map
         style='mapbox://styles/mapbox/satellite-v9'
         containerStyle={{
-          height: '100vh',
-          width: '100vw'
+          height: '98vh',
+          width: '95wh'
         }}
       >
         <MapContext.Consumer>
@@ -44,6 +44,10 @@ const App = () => {
           }}
         </MapContext.Consumer>
       </Map>
+      {/* earthranger logo */}
+      <a href='https://earthranger.com/'>
+        <img src='./public/images/LogoEarthRanger.png' id='earth-ranger-logo' />
+      </a>
     </div>
   )
 }

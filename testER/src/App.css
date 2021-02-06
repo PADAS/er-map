@@ -1,3 +1,20 @@
 .App {
   padding: 20px;
 }
+
+#map-container {
+  position: relative;
+}
+
+#earth-ranger-logo {
+  height: 5vh;
+  position: absolute;
+  padding: 10px 15px 10px 15px;
+  top: 0;
+  right: 0;
+}
+
+#earth-ranger-logo:hover {
+  cursor: pointer;
+}
+
