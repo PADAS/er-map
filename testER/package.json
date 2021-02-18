@@ -2,6 +2,7 @@
   "name": "testER",
   "version": "1.0.0",
   "main": "index.js",
+  "proxy": "http://localhost:5000",
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
@@ -13,6 +14,7 @@
     "prop-types": "^15",
     "react": "^16",
     "react-dom": "^16",
+    "react-ga": "^3.3.0",
     "react-hot-loader": "^4",
     "react-mapbox-gl": "^5.1.1"
   },
