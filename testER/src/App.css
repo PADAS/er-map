@@ -4,6 +4,7 @@
 
 #map-container {
   position: relative;
+  height: 100vh;
 }
 
 #earth-ranger-logo {
@@ -17,4 +18,6 @@
 #earth-ranger-logo:hover {
   cursor: pointer;
 }
+
+
 

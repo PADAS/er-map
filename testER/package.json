@@ -10,13 +10,12 @@
     "lint": "eslint --cache --format codeframe --ext mjs,jsx,js src"
   },
   "dependencies": {
-    "mapbox-gl": "^2.0.1",
+    "mapbox-gl": "^2.1.1",
     "prop-types": "^15",
     "react": "^16",
     "react-dom": "^16",
     "react-ga": "^3.3.0",
-    "react-hot-loader": "^4",
-    "react-mapbox-gl": "^5.1.1"
+    "react-hot-loader": "^4"
   },
   "devDependencies": {
     "@neutrinojs/dev-server": "^9.5.0",
