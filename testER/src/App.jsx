@@ -53,12 +53,10 @@ function drawIcon (json) {
 
 const App = () => {
   useEffect(() => {
-    const trackingId = '258434087' // Google Analytics tracking ID
+    const trackingId = 'UA-128569083-10' // Google Analytics tracking ID
     ReactGA.initialize(trackingId)
-    ReactGA.event({
-      category: 'Map',
-      action: 'Loaded'
-    })
+    ReactGA.pageview(window.location.pathname + window.location.search)
+    console.log('GA')
 
     GlobalMap = new mapboxgl.Map({
       container: 'map-container', // container ID
