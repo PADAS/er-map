@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react'
 import ReactGA from 'react-ga'
 import mapboxgl from 'mapbox-gl'
+import ReactDOM from 'react-dom'
+import SubjectPopup from './components/Popup'
+
 import './App.css'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
@@ -43,6 +46,24 @@ function drawIcon (json) {
           'icon-size': 1.0
         }
       })
+      // bind popup to subject
+      GlobalMap.on('click', 'points' + json.id, (e) => {
+        var coordinates = e.features[0].geometry.coordinates.slice()
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
+        }
+
+        const placeholder = document.createElement('div')
+        ReactDOM.render(<SubjectPopup subject={json} />, placeholder)
+        new mapboxgl.Popup()
+          .setDOMContent(placeholder)
+          .setLngLat(coordinates)
+          .addTo(GlobalMap)
+      })
     }
   )
 }
@@ -56,17 +77,16 @@ const App = () => {
     const trackingId = 'UA-128569083-10' // Google Analytics tracking ID
     ReactGA.initialize(trackingId)
     ReactGA.pageview(window.location.pathname + window.location.search)
-    console.log('GA')
 
     GlobalMap = new mapboxgl.Map({
       container: 'map-container', // container ID
       style: 'mapbox://styles/mapbox/satellite-v9',
       center: [-109.3666652, -27.1166662], // starting position [lng, lat]
-      zoom: 14 // starting zoom
+      zoom: 11 // starting zoom
     })
 
-    var nav = new mapboxgl.NavigationControl();
-    GlobalMap.addControl(nav, 'top-left');
+    var nav = new mapboxgl.NavigationControl()
+    GlobalMap.addControl(nav, 'top-left')
 
     GlobalMap.on('load', function () {
       // add the 3D terrain source
@@ -99,9 +119,9 @@ const App = () => {
   return (
     <>
       <div id='map-container'>
-          <a href='https://earthranger.com/'>
-            <img src='./public/images/LogoEarthRanger.png' id='earth-ranger-logo' />
-          </a>
+        <a href='https://earthranger.com/'>
+          <img src='./public/images/LogoEarthRanger.png' id='earth-ranger-logo' />
+        </a>
       </div>
     </>
   )
