@@ -11,7 +11,7 @@ const Animal = ({ mes }) => {
         </div>
         <div id='animal-img'>
           {/* <p>image</p> */}
-          <img src={mes.image_url}/>
+          <img src={mes.last_position.properties.image}/>
         </div>
         <div id='animal-name'>
           <p>{mes.name}</p>
