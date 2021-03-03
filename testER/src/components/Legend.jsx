@@ -7,7 +7,6 @@ var data = [{ name: 'joe' }, { name: 'jane' }, { name: 'joe' }, { name: 'jane' }
   { name: 'joe' }, { name: 'jane' }, { name: 'joe' }, { name: 'jane' }]
 
 const Legend = ({ subs }) => {
-
   console.log(subs)
 
   return (
@@ -18,10 +17,10 @@ const Legend = ({ subs }) => {
         </div>
         <div id='legend-content'>
           {/* // map all content  */}
-          {subs === undefined ? <div></div> :
-          subs.map((s) => (
-            <Animal mes={s} />
-          ))}
+          {subs === undefined ? <div />
+            : subs.map((s) => (
+              <Animal mes={s} />
+            ))}
         </div>
       </div>
     </>

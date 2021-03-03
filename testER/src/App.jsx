@@ -26,9 +26,9 @@ var GlobalMap
 //       resp.data.data.map((subject) => drawIcon(subject)) // looping through array of subjects
 //       return resp
 //     })
-//     .then(resp => { 
+//     .then(resp => {
 //       console.log(resp.data.data)
-//       return resp.data.data 
+//       return resp.data.data
 //     })
 //     .catch(console.error)
 // }
@@ -60,7 +60,7 @@ function drawIcon (json) {
 // as zoom, hide individual icon, covered by cluster radius/layer
 
 const App = () => {
-  var [subjects, setSubjects] = useState([]);
+  var [subjects, setSubjects] = useState([])
 
   useEffect(() => {
     const trackingId = 'UA-128569083-10' // Google Analytics tracking ID
@@ -71,7 +71,7 @@ const App = () => {
       action: 'Loaded'
     })
 
-    // fetch call for subjects 
+    // fetch call for subjects
     const url = 'http://localhost:5000/api/v1.0/subjects'
     fetch(url)
       .then(resp => {
