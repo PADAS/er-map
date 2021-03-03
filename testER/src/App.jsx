@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import ReactGA from 'react-ga'
 import mapboxgl from 'mapbox-gl'
+import { IconButton } from '@material-ui/core'
 import './App.css'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
@@ -12,7 +13,6 @@ function mapSubjects () {
   const url = 'http://localhost:5000/api/v1.0/subjects'
   fetch(url)
     .then(resp => {
-      console.log(resp)
       if (resp.ok) {
         return resp
       }
@@ -20,13 +20,19 @@ function mapSubjects () {
     })
     .then(resp => resp.json()) // returns a json object
     .then(resp => {
+      fetchTrack(resp.data.data[0].id)
       resp.data.data.map((subject) => drawIcon(subject)) // looping through array of subjects
     })
     .catch(console.error)
 }
 
 function drawIcon (json) {
-  GlobalMap.loadImage(json.last_position.properties.image,
+  //fetchTrack(json.id)
+  /*<IconButton aria-label="delete" onClick={() => {
+    alert('clicked')
+  }}>Display Tracks</IconButton>*/
+
+  /*GlobalMap.loadImage(json.last_position.properties.image,
     function (error, image) {
       if (error) throw error
       GlobalMap.addImage(json.subject_subtype + json.id, image)
@@ -44,7 +50,46 @@ function drawIcon (json) {
         }
       })
     }
-  )
+  )*/
+}
+
+// Draw tracks and add button component to display tracks
+function fetchTrack (subject_id) {
+  const url = 'http://localhost:5000/api/v1.0/subject/' + subject_id + '/tracks'
+  fetch(url)
+    .then(resp => {
+      if (resp.ok) {
+        return resp
+      }
+      throw Error('Error in request:' + resp.statusText)
+    })
+    .then(resp => resp.json()) // returns a json object
+    .then(resp => {
+      drawTrack(resp.data)
+    })
+    .catch(console.error)
+}
+
+function drawTrack (json) {
+  console.log(json)
+  GlobalMap.addSource(json.features[0].geometry.type + ' ' + json.features[0].properties.id, {
+    type: 'geojson',
+    data: json
+  })
+
+  GlobalMap.addLayer({
+    id: json.features[0].geometry.type + ' ' + json.features[0].properties.id,
+    type: 'line',
+    source: json.features[0].geometry.type + ' ' + json.features[0].properties.id,
+    layout: {
+      'line-join': 'round',
+      'line-cap': 'round'
+    },
+    paint: {
+      'line-color': '#953ae4',
+      'line-width': 3
+    }
+  })
 }
 
 // point_count and cluster layer
@@ -65,8 +110,8 @@ const App = () => {
       zoom: 14 // starting zoom
     })
 
-    var nav = new mapboxgl.NavigationControl();
-    GlobalMap.addControl(nav, 'top-left');
+    var nav = new mapboxgl.NavigationControl()
+    GlobalMap.addControl(nav, 'top-left')
 
     GlobalMap.on('load', function () {
       // add the 3D terrain source
@@ -99,9 +144,9 @@ const App = () => {
   return (
     <>
       <div id='map-container'>
-          <a href='https://earthranger.com/'>
-            <img src='./public/images/LogoEarthRanger.png' id='earth-ranger-logo' />
-          </a>
+        <a href='https://earthranger.com/'>
+          <img src='./public/images/LogoEarthRanger.png' id='earth-ranger-logo' />
+        </a>
       </div>
     </>
   )
