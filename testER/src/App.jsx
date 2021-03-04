@@ -10,12 +10,12 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 // instantiate the Map
 mapboxgl.accessToken = 'pk.eyJ1IjoidmpvZWxtIiwiYSI6ImNra2hiZXNpMzA1bTcybnA3OXlycnN2ZjcifQ.gH6Nls61WTMVutUH57jMJQ' // development token
 var GlobalMap
+var config
 
 function mapSubjects () {
   const url = 'http://localhost:5000/api/v1.0/subjects'
   fetch(url)
     .then(resp => {
-      console.log(resp)
       if (resp.ok) {
         return resp
       }
@@ -46,6 +46,7 @@ function drawIcon (json) {
           'icon-size': 1.0
         }
       })
+
       // bind popup to subject
       GlobalMap.on('click', 'points' + json.id, (e) => {
         var coordinates = e.features[0].geometry.coordinates.slice()
@@ -58,22 +59,53 @@ function drawIcon (json) {
         }
 
         const placeholder = document.createElement('div')
-        ReactDOM.render(<SubjectPopup subject={json} />, placeholder)
+        ReactDOM.render(<SubjectPopup subject={json} subjectData={config.subjects[json.id]} />, placeholder)
+
         new mapboxgl.Popup()
           .setDOMContent(placeholder)
           .setLngLat(coordinates)
           .addTo(GlobalMap)
       })
+
+      // change mouse when hovering over a subject
+      GlobalMap.on('mouseenter', 'points' + json.id, () => {
+        GlobalMap.getCanvas().style.cursor = 'pointer'
+      })
+      GlobalMap.on('mouseleave', 'points' + json.id, () => {
+        GlobalMap.getCanvas().style.cursor = ''
+      })
     }
   )
 }
 
-// point_count and cluster layer
-// filter, detemrine radius
-// as zoom, hide individual icon, covered by cluster radius/layer
-
-const App = () => {
+/* eslint-disable react/prop-types */
+const App = (props) => {
   useEffect(() => {
+    let isSubscribed = true
+    // load configuration data
+    fetch(props.configFile, {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      }
+    })
+      .then((response) => {
+        return response.json()
+      })
+      .then((json) => {
+        if (isSubscribed) {
+          config = json
+        }
+      })
+    // Cancel the subscription to useEffect().
+    return function cleanup () {
+      isSubscribed = false
+    }
+  })
+
+  // TODO: use config data for initial map
+  useEffect(() => {
+    // set up google analytics
     const trackingId = 'UA-128569083-10' // Google Analytics tracking ID
     ReactGA.initialize(trackingId)
     ReactGA.pageview(window.location.pathname + window.location.search)
@@ -108,10 +140,12 @@ const App = () => {
         }
       })
 
+      // add 3D terrain
       GlobalMap.on('render', function () {
         // add the DEM source as a terrain layer with exaggerated height
         GlobalMap.setTerrain({ source: 'mapbox-dem', exaggeration: 3 })
       })
+
       mapSubjects()
     })
   }, [])

@@ -1,0 +1,48 @@
+{
+    "map": {
+        "center": [-109.3666652, -27.1166662],
+        "zoom": 11
+    },
+    "subjects":
+    {
+        "d98cad8d-f6cb-4e62-a3fe-5fe38e69a347":
+        {    
+            "name": "Najin",
+            "pictures":
+            [
+                {
+                    "path": "https://www.eurekalert.org/multimedia/pub/web/221627_web.jpg"
+                }
+            ],
+            "detail_description": "<font>Detailed description of <b>Najin</b> in simple HTML</font>",
+            "more_info_path": "http://georgia-fan-club.org"
+        },
+        "f6b20ca9-9f72-44ed-adf7-41e84f3d2407":
+        {   
+            "name": "Horton", 
+            "pictures":
+            [
+                {
+                    "path": "https://assets.nrdc.org/sites/default/files/styles/full_content--retina/public/media-uploads/wlds43_654640_2400.jpg"
+                }
+            ],
+            "detail_description": "<font>Detailed description of <b>Horton</b> in simple HTML</font>",
+            "more_info_path": "http://georgia-fan-club.org"
+        },
+        "b12007c0-955f-4b15-9a9f-d335b9413aa4":
+        {   
+            "name": "Fatu", 
+            "pictures":
+            [
+                {
+                    "path": "https://c402277.ssl.cf1.rackcdn.com/photos/18360/images/carousel_small/African_White_Rhino_WW2131989.jpg"
+                },
+                {
+                    "path": "https://www.eurekalert.org/multimedia/pub/web/221627_web.jpg"
+                }
+            ],
+            "detail_description": "<font>Detailed description of <b>Fatu</b> in simple HTML</font>",
+            "more_info_path": "http://georgia-fan-club.org"
+        }
+    }
+}
