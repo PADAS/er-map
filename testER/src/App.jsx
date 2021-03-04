@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactGA from 'react-ga'
 import mapboxgl from 'mapbox-gl'
 import { IconButton } from '@material-ui/core'
+import Legend from './components/Legend.jsx'
 import './App.css'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
@@ -97,11 +98,33 @@ function drawTrack (json) {
 // as zoom, hide individual icon, covered by cluster radius/layer
 
 const App = () => {
+  var [subjects, setSubjects] = useState([]);
+
   useEffect(() => {
     const trackingId = 'UA-128569083-10' // Google Analytics tracking ID
     ReactGA.initialize(trackingId)
     ReactGA.pageview(window.location.pathname + window.location.search)
-    console.log('GA')
+    ReactGA.event({
+      category: 'Map',
+      action: 'Loaded'
+    })
+
+    // fetch call for subjects 
+    const url = 'http://localhost:5000/api/v1.0/subjects'
+    fetch(url)
+      .then(resp => {
+        // console.log(resp)
+        if (resp.ok) {
+          return resp
+        }
+        throw Error('Error in request:' + resp.statusText)
+      })
+      .then(resp => resp.json()) // returns a json object
+      .then(resp => {
+        resp.data.data.map((subject) => drawIcon(subject)) // looping through array of subjects
+        setSubjects(resp.data.data)
+      })
+      .catch(console.error)
 
     GlobalMap = new mapboxgl.Map({
       container: 'map-container', // container ID
@@ -137,7 +160,6 @@ const App = () => {
         // add the DEM source as a terrain layer with exaggerated height
         GlobalMap.setTerrain({ source: 'mapbox-dem', exaggeration: 3 })
       })
-      mapSubjects()
     })
   }, [])
 
@@ -147,6 +169,7 @@ const App = () => {
         <a href='https://earthranger.com/'>
           <img src='./public/images/LogoEarthRanger.png' id='earth-ranger-logo' />
         </a>
+        <Legend subs={subjects} />
       </div>
     </>
   )

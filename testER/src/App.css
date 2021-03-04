@@ -8,7 +8,8 @@
 }
 
 #earth-ranger-logo {
-  height: 5vh;
+  /* Should this be fixed or not */
+  height: 45px;
   position: absolute;
   padding: 10px 15px 10px 15px;
   top: 0;
@@ -19,6 +20,15 @@
 #earth-ranger-logo:hover {
   cursor: pointer;
 }
+
+/* LEGEND CSS */
+#legend {
+  z-index: 1;
+  top: 65px;
+  right: 0;
+  position: absolute;
+}
+
 
 
 
