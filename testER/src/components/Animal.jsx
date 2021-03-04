@@ -10,8 +10,8 @@ const Animal = ({ mes }) => {
           <input type='checkbox' unchecked />
         </div>
         <div id='animal-img'>
-          {/* <p>image</p> */}
-          <img src={mes.last_position.properties.image} />
+          <p>image</p>
+          {/* <img src={mes.last_position.properties.image} /> */}
         </div>
         <div id='animal-name'>
           <p>{mes.name}</p>
