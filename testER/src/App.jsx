@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import ReactGA from 'react-ga'
 import mapboxgl from 'mapbox-gl'
+
 import Legend from './components/Legend.jsx'
+
 import './App.css'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
@@ -9,30 +11,30 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 mapboxgl.accessToken = 'pk.eyJ1IjoidmpvZWxtIiwiYSI6ImNra2hiZXNpMzA1bTcybnA3OXlycnN2ZjcifQ.gH6Nls61WTMVutUH57jMJQ' // development token
 var GlobalMap
 
-function mapSubjects () {
-  const url = 'http://localhost:5000/api/v1.0/subjects'
-  fetch(url)
-    .then(resp => {
-      if (resp.ok) {
-        return resp
-      }
-      throw Error('Error in request:' + resp.statusText)
-    })
-    .then(resp => resp.json()) // returns a json object
-    .then(resp => {
-      fetchTrack(resp.data.data[0].id)
-      resp.data.data.map((subject) => drawIcon(subject)) // looping through array of subjects
-    })
-    .catch(console.error)
-}
+// function mapSubjects () {
+//   const url = 'http://localhost:5000/api/v1.0/subjects'
+//   fetch(url)
+//     .then(resp => {
+//       if (resp.ok) {
+//         return resp
+//       }
+//       throw Error('Error in request:' + resp.statusText)
+//     })
+//     .then(resp => resp.json()) // returns a json object
+//     .then(resp => {
+//       fetchTrack(resp.data.data[0].id)
+//       resp.data.data.map((subject) => drawIcon(subject)) // looping through array of subjects
+//     })
+//     .catch(console.error)
+// }
 
 function drawIcon (json) {
-  //fetchTrack(json.id)
-  /*<IconButton aria-label="delete" onClick={() => {
+  // fetchTrack(json.id)
+  /* <IconButton aria-label="delete" onClick={() => {
     alert('clicked')
-  }}>Display Tracks</IconButton>*/
+  }}>Display Tracks</IconButton> */
 
-  /*GlobalMap.loadImage(json.last_position.properties.image,
+  /* GlobalMap.loadImage(json.last_position.properties.image,
     function (error, image) {
       if (error) throw error
       GlobalMap.addImage(json.subject_subtype + json.id, image)
@@ -50,7 +52,7 @@ function drawIcon (json) {
         }
       })
     }
-  )*/
+  ) */
 }
 
 // Draw tracks and add button component to display tracks
@@ -98,6 +100,7 @@ function drawTrack (json) {
 
 const App = () => {
   var [subjects, setSubjects] = useState([])
+  var [tracks, setTracks] = useState(false)
 
   useEffect(() => {
     const trackingId = 'UA-128569083-10' // Google Analytics tracking ID
@@ -120,6 +123,7 @@ const App = () => {
       })
       .then(resp => resp.json()) // returns a json object
       .then(resp => {
+        fetchTrack(resp.data.data[0].id)
         resp.data.data.map((subject) => drawIcon(subject)) // looping through array of subjects
         setSubjects(resp.data.data)
       })
@@ -162,13 +166,25 @@ const App = () => {
     })
   }, [])
 
+  // function trackClicked(updatedTrack) {
+  //   setTracks(updatedTrack)
+  //   // complete this later
+  //   console.log(updatedTrack)
+  // }
+
+  // let trackClicked = (updatedTrack) => {
+    
+  //   console.log(updatedTrack)
+  // // }
+  // }
+
   return (
     <>
       <div id='map-container'>
         <a href='https://earthranger.com/'>
           <img src='./public/images/LogoEarthRanger.png' id='earth-ranger-logo' />
         </a>
-        <Legend subs={subjects} />
+        <Legend subs={subjects} track={tracks} onTrackClick={(updatedTrack) => setTracks(updatedTrack)}/>
       </div>
     </>
   )

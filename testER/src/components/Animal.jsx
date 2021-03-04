@@ -1,13 +1,13 @@
 import React from 'react'
+import ButtonContainer from './ButtonContainer.jsx'
 import './Legend.css'
 
-const Animal = ({ mes }) => {
+const Animal = ({ mes, track_vis, onTrackClick }) => {
   return (
     <>
       <div id='animal-legend-content'>
         <div id='track-buttons'>
-          {/* <div>button</div> */}
-          <input type='checkbox' unchecked />
+          <ButtonContainer track_visibility={track_vis} onTrackClickedButton={onTrackClick}/>
         </div>
         <div id='animal-img'>
           <p>image</p>
@@ -16,7 +16,6 @@ const Animal = ({ mes }) => {
         <div id='animal-name'>
           <p>{mes.name}</p>
         </div>
-        {/* <p>{mes}</p> */}
       </div>
     </>
   )
