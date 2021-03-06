@@ -4,22 +4,14 @@
 
 /* LEGEND BUTTON */
 #legend {
-    /* height: 400px; */
     height: 600px;
-    width: 20px;
+    width: 260px;
     background-color: white;
-
     display: grid;
     grid-template-columns: 26px 234px;
-
-    /* make this a method on the legend div  */
-    transition: width 2s;
+    transition: width 1s;
 }
 
-#legend:hover {
-    width: 260px;
-    cursor: pointer;
-}
 
 #legend-open-button {
     /* border: solid blue; */
@@ -28,9 +20,10 @@
     align-items: center;
     writing-mode: vertical-rl;
     text-orientation: upright;
-    font-size: 17px; 
+    font-size: 15px; 
     word-spacing: 700px;
     font-family: 'Baloo 2', cursive;
+    cursor: pointer;
 }
 
 #legend-content{
@@ -46,12 +39,13 @@
     height: 90px;
 
     display: grid;
-    grid-template-columns: 40px 90px 104px;  
+    grid-template-columns: 70px 74px 90px;  
 }
 
 #track-buttons {
     /* border: solid; */
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
@@ -68,4 +62,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#button-container {
+    /* border: solid; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+#button-container img {
+    /* border: solid; */
+    margin: auto;
+}
+
+#button-container img {
+    /* border: solid; */
+    cursor: pointer;
 }

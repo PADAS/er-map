@@ -2,24 +2,32 @@ import React, { useState } from 'react'
 import './Legend.css'
 import Animal from './Animal.jsx'
 
-var data = [{ name: 'joe' }, { name: 'jane' }, { name: 'joe' }, { name: 'jane' },
-  { name: 'joe' }, { name: 'jane' }, { name: 'joe' }, { name: 'jane' },
-  { name: 'joe' }, { name: 'jane' }, { name: 'joe' }, { name: 'jane' }]
 
-const Legend = ({ subs }) => {
-  console.log(subs)
+const Legend = ({ subs, track, onTrackClick}) => {
+
+  var [leg, setLeg] = useState(true)
+  var l = document.getElementById('legend')
+
+  function toggleLegend() {
+    setLeg(!leg)
+    if(leg) {
+      l.style.width = "20px"
+    } else {
+      l.style.width = "260px"
+    }
+  }
 
   return (
     <>
       <div id='legend'>
-        <div id='legend-open-button'>
+        <div id='legend-open-button' onClick={() => toggleLegend()}>
           LEGEND
         </div>
         <div id='legend-content'>
           {/* // map all content  */}
           {subs === undefined ? <div />
             : subs.map((s) => (
-              <Animal mes={s} />
+              <Animal animal={s} animalTrack={track} animalOnTrackClick={(updatedTrack) => onTrackClick(updatedTrack)}/>
             ))}
         </div>
       </div>

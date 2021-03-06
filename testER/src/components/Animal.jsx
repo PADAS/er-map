@@ -2,19 +2,20 @@ import React from 'react'
 import ButtonContainer from './ButtonContainer.jsx'
 import './Legend.css'
 
-const Animal = ({ mes, track_vis, onTrackClick }) => {
+const Animal = ({ animal, animalTrack, animalOnTrackClicked }) => {
   return (
     <>
       <div id='animal-legend-content'>
         <div id='track-buttons'>
-          <ButtonContainer track_visibility={track_vis} onTrackClickedButton={onTrackClick}/>
+        {/* track_visibility={track_vis} onTrackClickedButton={onTrackClick} */}
+          <ButtonContainer buttonTrack={animalTrack} animalOnTrackClicked={(updatedTrack) => animalOnTrackClicked(updatedTrack)}/>
         </div>
         <div id='animal-img'>
-          <p>image</p>
-          {/* <img src={mes.last_position.properties.image} /> */}
+          {/* <p>image</p> */}
+          <img src={animal.last_position.properties.image} />
         </div>
         <div id='animal-name'>
-          <p>{mes.name}</p>
+          <p>{animal.name}</p>
         </div>
       </div>
     </>

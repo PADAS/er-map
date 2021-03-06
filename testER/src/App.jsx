@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import ReactGA from 'react-ga'
 import mapboxgl from 'mapbox-gl'
 
@@ -30,11 +30,11 @@ var GlobalMap
 
 function drawIcon (json) {
   // fetchTrack(json.id)
-  /* <IconButton aria-label="delete" onClick={() => {
-    alert('clicked')
-  }}>Display Tracks</IconButton> */
+  // <IconButton aria-label="delete" onClick={() => {
+  //   alert('clicked')
+  // }}>Display Tracks</IconButton>
 
-  /* GlobalMap.loadImage(json.last_position.properties.image,
+  GlobalMap.loadImage(json.last_position.properties.image,
     function (error, image) {
       if (error) throw error
       GlobalMap.addImage(json.subject_subtype + json.id, image)
@@ -52,7 +52,7 @@ function drawIcon (json) {
         }
       })
     }
-  ) */
+  )
 }
 
 // Draw tracks and add button component to display tracks
@@ -166,17 +166,10 @@ const App = () => {
     })
   }, [])
 
-  // function trackClicked(updatedTrack) {
-  //   setTracks(updatedTrack)
-  //   // complete this later
-  //   console.log(updatedTrack)
-  // }
-
-  // let trackClicked = (updatedTrack) => {
-    
-  //   console.log(updatedTrack)
-  // // }
-  // }
+  // const t = useCallback(() => {
+  //   // setTracks(updatedTrack)
+  //   console
+  // }, [])
 
   return (
     <>
