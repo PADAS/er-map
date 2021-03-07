@@ -2,18 +2,17 @@ import React, { useState } from 'react'
 import './Legend.css'
 import Animal from './Animal.jsx'
 
-
-const Legend = ({ subs, track, onTrackClick}) => {
-
+/* eslint-disable react/prop-types */
+const Legend = ({ subs, track, onTrackClick }) => {
   var [leg, setLeg] = useState(true)
   var l = document.getElementById('legend')
 
-  function toggleLegend() {
+  function toggleLegend () {
     setLeg(!leg)
-    if(leg) {
-      l.style.width = "20px"
+    if (leg) {
+      l.style.width = '20px'
     } else {
-      l.style.width = "260px"
+      l.style.width = '260px'
     }
   }
 
@@ -27,7 +26,7 @@ const Legend = ({ subs, track, onTrackClick}) => {
           {/* // map all content  */}
           {subs === undefined ? <div />
             : subs.map((s) => (
-              <Animal animal={s} animalTrack={track} animalOnTrackClick={(updatedTrack) => onTrackClick(updatedTrack)}/>
+              <Animal animal={s} animalTrack={track} animalOnTrackClicked={onTrackClick} key={s.id} />
             ))}
         </div>
       </div>

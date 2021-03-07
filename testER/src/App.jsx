@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactGA from 'react-ga'
 import mapboxgl from 'mapbox-gl'
 
@@ -56,8 +56,8 @@ function drawIcon (json) {
 }
 
 // Draw tracks and add button component to display tracks
-function fetchTrack (subject_id) {
-  const url = 'http://localhost:5000/api/v1.0/subject/' + subject_id + '/tracks'
+function fetchTrack (subjectId) {
+  const url = 'http://localhost:5000/api/v1.0/subject/' + subjectId + '/tracks'
   fetch(url)
     .then(resp => {
       if (resp.ok) {
@@ -100,7 +100,8 @@ function drawTrack (json) {
 
 const App = () => {
   var [subjects, setSubjects] = useState([])
-  var [tracks, setTracks] = useState(false)
+  var [tracks, setTracks] = useState({})
+  // console.log("initial track" + tracks)
 
   useEffect(() => {
     const trackingId = 'UA-128569083-10' // Google Analytics tracking ID
@@ -123,8 +124,9 @@ const App = () => {
       })
       .then(resp => resp.json()) // returns a json object
       .then(resp => {
-        fetchTrack(resp.data.data[0].id)
-        resp.data.data.map((subject) => drawIcon(subject)) // looping through array of subjects
+        resp.data.data.map((subject) => { // setTracks(tracks[subject.id] = false)
+          drawIcon(subject)
+        }) // looping through array of subjects
         setSubjects(resp.data.data)
       })
       .catch(console.error)
@@ -166,10 +168,23 @@ const App = () => {
     })
   }, [])
 
-  // const t = useCallback(() => {
-  //   // setTracks(updatedTrack)
-  //   console
-  // }, [])
+  function displayTracks (updatedTrack) {
+    const id = updatedTrack[0]
+    const displayed = updatedTrack[1]
+
+    const layer = GlobalMap.getLayer('LineString ' + id)
+    console.log(layer)
+
+    if (displayed) {
+      if (layer === undefined) {
+        fetchTrack(id)
+      } else {
+        GlobalMap.setLayoutProperty('LineString ' + id, 'visibility', 'visible') // turn on visibility
+      }
+    } else {
+      GlobalMap.setLayoutProperty('LineString ' + id, 'visibility', 'none') // turn off visibility
+    }
+  }
 
   return (
     <>
@@ -177,7 +192,12 @@ const App = () => {
         <a href='https://earthranger.com/'>
           <img src='./public/images/LogoEarthRanger.png' id='earth-ranger-logo' />
         </a>
-        <Legend subs={subjects} track={tracks} onTrackClick={(updatedTrack) => setTracks(updatedTrack)}/>
+        <Legend
+          subs={subjects} track={tracks} onTrackClick={(updatedTrack) => {
+          //  setTracks(tracks[updatedTrack[0]] = updatedTrack[1])
+            displayTracks(updatedTrack)
+          }}
+        />
       </div>
     </>
   )

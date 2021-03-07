@@ -2,13 +2,14 @@ import React from 'react'
 import ButtonContainer from './ButtonContainer.jsx'
 import './Legend.css'
 
+/* eslint-disable react/prop-types */
 const Animal = ({ animal, animalTrack, animalOnTrackClicked }) => {
   return (
     <>
       <div id='animal-legend-content'>
         <div id='track-buttons'>
-        {/* track_visibility={track_vis} onTrackClickedButton={onTrackClick} */}
-          <ButtonContainer buttonTrack={animalTrack} animalOnTrackClicked={(updatedTrack) => animalOnTrackClicked(updatedTrack)}/>
+          {/* track_visibility={track_vis} onTrackClickedButton={onTrackClick} */}
+          <ButtonContainer id={animal.id} buttonTrack={animalTrack} buttonOnTrackClicked={animalOnTrackClicked} />
         </div>
         <div id='animal-img'>
           {/* <p>image</p> */}
