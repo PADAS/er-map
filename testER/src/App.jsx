@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import ReactGA from 'react-ga'
 import mapboxgl from 'mapbox-gl'
-
+import ReactDOM from 'react-dom'
+import SubjectPopup from './components/Popup'
 import Legend from './components/Legend.jsx'
 
 import './App.css'
@@ -9,24 +10,55 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 
 // instantiate the Map
 mapboxgl.accessToken = 'pk.eyJ1IjoidmpvZWxtIiwiYSI6ImNra2hiZXNpMzA1bTcybnA3OXlycnN2ZjcifQ.gH6Nls61WTMVutUH57jMJQ' // development token
-var GlobalMap
+let GlobalMap
+let config
 
-// function mapSubjects () {
-//   const url = 'http://localhost:5000/api/v1.0/subjects'
-//   fetch(url)
-//     .then(resp => {
-//       if (resp.ok) {
-//         return resp
-//       }
-//       throw Error('Error in request:' + resp.statusText)
-//     })
-//     .then(resp => resp.json()) // returns a json object
-//     .then(resp => {
-//       fetchTrack(resp.data.data[0].id)
-//       resp.data.data.map((subject) => drawIcon(subject)) // looping through array of subjects
-//     })
-//     .catch(console.error)
-// }
+// TODO: detailed handling of missing config info
+function initMap () {
+  // set up google analytics
+  const trackingId = 'UA-128569083-10' // Google Analytics tracking ID
+  ReactGA.initialize(trackingId)
+  ReactGA.pageview(window.location.pathname + window.location.search)
+
+  GlobalMap = new mapboxgl.Map({
+    container: 'map-container', // container ID
+    style: 'mapbox://styles/mapbox/satellite-v9',
+    center: config.map.center === undefined ? [-109.3666652, -27.1166662] : config.map.center, // starting position [lng, lat]
+    zoom: config.map.zoom === undefined ? 11 : config.map.zoom // starting zoom
+  })
+
+  var nav = new mapboxgl.NavigationControl()
+  GlobalMap.addControl(nav, 'top-left')
+
+  GlobalMap.on('load', function () {
+    // add the 3D terrain source
+    GlobalMap.addSource('mapbox-dem', {
+      type: 'raster-dem',
+      url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
+      tileSize: 512,
+      maxzoom: 14
+    })
+
+    // add a sky layer that will show when the map is highly pitched
+    GlobalMap.addLayer({
+      id: 'sky',
+      type: 'sky',
+      paint: {
+        'sky-type': 'atmosphere',
+        'sky-atmosphere-sun': [0.0, 0.0],
+        'sky-atmosphere-sun-intensity': 15
+      }
+    })
+
+    // add 3D terrain
+    GlobalMap.on('render', function () {
+      // add the DEM source as a terrain layer with exaggerated height
+      GlobalMap.setTerrain({ source: 'mapbox-dem', exaggeration: 3 })
+    })
+
+    mapSubjects()
+  })
+}
 
 function drawIcon (json) {
   // fetchTrack(json.id)
@@ -50,6 +82,33 @@ function drawIcon (json) {
           'icon-image': json.subject_subtype + json.id,
           'icon-size': 1.0
         }
+      })
+
+      // bind popup to subject
+      GlobalMap.on('click', 'points' + json.id, (e) => {
+        var coordinates = e.features[0].geometry.coordinates.slice()
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
+        }
+
+        const placeholder = document.createElement('div')
+        ReactDOM.render(<SubjectPopup subject={json} subjectData={config.subjects[json.id]} />, placeholder)
+        new mapboxgl.Popup()
+          .setDOMContent(placeholder)
+          .setLngLat(coordinates)
+          .addTo(GlobalMap)
+      })
+
+      // change mouse when hovering over a subject
+      GlobalMap.on('mouseenter', 'points' + json.id, () => {
+        GlobalMap.getCanvas().style.cursor = 'pointer'
+      })
+      GlobalMap.on('mouseleave', 'points' + json.id, () => {
+        GlobalMap.getCanvas().style.cursor = ''
       })
     }
   )
@@ -94,14 +153,7 @@ function drawTrack (json) {
   })
 }
 
-// point_count and cluster layer
-// filter, detemrine radius
-// as zoom, hide individual icon, covered by cluster radius/layer
-
 const App = () => {
-  var [subjects, setSubjects] = useState([])
-  var [tracks, setTracks] = useState({})
-  // console.log("initial track" + tracks)
 
   useEffect(() => {
     const trackingId = 'UA-128569083-10' // Google Analytics tracking ID
@@ -116,7 +168,6 @@ const App = () => {
     const url = 'http://localhost:5000/api/v1.0/subjects'
     fetch(url)
       .then(resp => {
-        // console.log(resp)
         if (resp.ok) {
           return resp
         }
@@ -141,32 +192,34 @@ const App = () => {
     var nav = new mapboxgl.NavigationControl()
     GlobalMap.addControl(nav, 'top-left')
 
-    GlobalMap.on('load', function () {
-      // add the 3D terrain source
-      GlobalMap.addSource('mapbox-dem', {
-        type: 'raster-dem',
-        url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
-        tileSize: 512,
-        maxzoom: 14
+/* eslint-disable react/prop-types */
+const App = (props) => {
+  var [subjects, setSubjects] = useState([])
+  var [tracks, setTracks] = useState({})
+  
+  useEffect(() => {
+    let isSubscribed = true
+    // load configuration data
+    fetch(props.configFile, {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      }
+    })
+      .then((response) => {
+        return response.json()
       })
-
-      // add a sky layer that will show when the map is highly pitched
-      GlobalMap.addLayer({
-        id: 'sky',
-        type: 'sky',
-        paint: {
-          'sky-type': 'atmosphere',
-          'sky-atmosphere-sun': [0.0, 0.0],
-          'sky-atmosphere-sun-intensity': 15
+      .then((json) => {
+        if (isSubscribed) {
+          config = json
+          initMap()
         }
       })
-
-      GlobalMap.on('render', function () {
-        // add the DEM source as a terrain layer with exaggerated height
-        GlobalMap.setTerrain({ source: 'mapbox-dem', exaggeration: 3 })
-      })
-    })
-  }, [])
+    // Cancel the subscription to useEffect().
+    return function cleanup () {
+      isSubscribed = false
+    }
+  })
 
   function displayTracks (updatedTrack) {
     const id = updatedTrack[0]
