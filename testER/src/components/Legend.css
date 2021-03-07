@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2&display=swap');
+
+/* LEGEND CSS  */
+
+/* LEGEND BUTTON */
+#legend {
+    height: 600px;
+    width: 260px;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 26px 234px;
+    transition: width 1s;
+}
+
+
+#legend-open-button {
+    /* border: solid blue; */
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-size: 15px; 
+    word-spacing: 700px;
+    font-family: 'Baloo 2', cursive;
+    cursor: pointer;
+}
+
+#legend-content{
+    /* border: solid purple; */
+    overflow: auto;
+    /* border-right-style: black solid 20px; */
+}
+
+/* ANIMAL LEGEND CONTENT */
+#animal-legend-content {
+    /* border: solid green; */
+    width: 100%;
+    height: 90px;
+
+    display: grid;
+    grid-template-columns: 70px 74px 90px;  
+}
+
+#track-buttons {
+    /* border: solid; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#animal-img {
+    /* border: solid; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#animal-name {
+    /* border: solid; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#button-container {
+    /* border: solid; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+#button-container img {
+    /* border: solid; */
+    margin: auto;
+}
+
+#button-container img {
+    /* border: solid; */
+    cursor: pointer;
+}
