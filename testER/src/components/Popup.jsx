@@ -1,4 +1,6 @@
 import React from 'react'
+import ButtonContainer from './ButtonContainer.jsx'
+import './Popup.css'
 
 /* eslint-disable react/prop-types */
 const SubjectPopup = (props) => {
@@ -11,9 +13,13 @@ const SubjectPopup = (props) => {
   // TODO: styling
   const data = props.subjectData
   const subject = props.subject
+
   return (
     <div>
-      <p><b>{subject.name}</b></p>
+      <div className="buttonContainer">
+        <h2>{subject.name}</h2>
+        <ButtonContainer id={subject.id} buttonTrack={props.track} buttonOnTrackClicked={props.onTrackClick} />
+      </div>
       <p>{subject.last_position.properties.DateTime && new Intl.DateTimeFormat('en-US', {
         year: 'numeric',
         month: 'long',

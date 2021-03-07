@@ -1,0 +1,8 @@
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.buttonContainer h2 {
+  padding: 5px;
+}

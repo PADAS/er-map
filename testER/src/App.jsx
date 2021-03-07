@@ -13,60 +13,6 @@ mapboxgl.accessToken = 'pk.eyJ1IjoidmpvZWxtIiwiYSI6ImNra2hiZXNpMzA1bTcybnA3OXlyc
 let GlobalMap
 let config
 
-function drawIcon (json) {
-  // fetchTrack(json.id)
-  // <IconButton aria-label="delete" onClick={() => {
-  //   alert('clicked')
-  // }}>Display Tracks</IconButton>
-
-  GlobalMap.loadImage(json.last_position.properties.image,
-    function (error, image) {
-      if (error) throw error
-      GlobalMap.addImage(json.subject_subtype + json.id, image)
-      GlobalMap.addSource('point' + json.id, {
-        type: 'geojson',
-        data: json.last_position
-      })
-      GlobalMap.addLayer({
-        id: 'points' + json.id,
-        type: 'symbol',
-        source: 'point' + json.id,
-        layout: {
-          'icon-image': json.subject_subtype + json.id,
-          'icon-size': 1.0
-        }
-      })
-
-      // bind popup to subject
-      GlobalMap.on('click', 'points' + json.id, (e) => {
-        var coordinates = e.features[0].geometry.coordinates.slice()
-
-        // Ensure that if the map is zoomed out such that multiple
-        // copies of the feature are visible, the popup appears
-        // over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
-        }
-
-        const placeholder = document.createElement('div')
-        ReactDOM.render(<SubjectPopup subject={json} subjectData={config.subjects[json.id]} />, placeholder)
-        new mapboxgl.Popup()
-          .setDOMContent(placeholder)
-          .setLngLat(coordinates)
-          .addTo(GlobalMap)
-      })
-
-      // change mouse when hovering over a subject
-      GlobalMap.on('mouseenter', 'points' + json.id, () => {
-        GlobalMap.getCanvas().style.cursor = 'pointer'
-      })
-      GlobalMap.on('mouseleave', 'points' + json.id, () => {
-        GlobalMap.getCanvas().style.cursor = ''
-      })
-    }
-  )
-}
-
 // Draw tracks and add button component to display tracks
 function fetchTrack (subjectId) {
   const url = 'http://localhost:5000/api/v1.0/subject/' + subjectId + '/tracks'
@@ -203,7 +149,6 @@ const App = (props) => {
     const displayed = updatedTrack[1]
 
     const layer = GlobalMap.getLayer('LineString ' + id)
-    console.log(layer)
 
     if (displayed) {
       if (layer === undefined) {
@@ -216,6 +161,61 @@ const App = (props) => {
     }
   }
 
+  function drawIcon (json) {
+    // fetchTrack(json.id)
+    // <IconButton aria-label="delete" onClick={() => {
+    //   alert('clicked')
+    // }}>Display Tracks</IconButton>
+
+    GlobalMap.loadImage(json.last_position.properties.image,
+      function (error, image) {
+        if (error) throw error
+        GlobalMap.addImage(json.subject_subtype + json.id, image)
+        GlobalMap.addSource('point' + json.id, {
+          type: 'geojson',
+          data: json.last_position
+        })
+        GlobalMap.addLayer({
+          id: 'points' + json.id,
+          type: 'symbol',
+          source: 'point' + json.id,
+          layout: {
+            'icon-image': json.subject_subtype + json.id,
+            'icon-size': 1.0
+          }
+        })
+
+        // bind popup to subject
+        GlobalMap.on('click', 'points' + json.id, (e) => {
+          var coordinates = e.features[0].geometry.coordinates.slice()
+
+          // Ensure that if the map is zoomed out such that multiple
+          // copies of the feature are visible, the popup appears
+          // over the copy being pointed to.
+          while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
+          }
+
+          const placeholder = document.createElement('div')
+          ReactDOM.render(<SubjectPopup subject={json} subjectData={config.subjects[json.id]}
+            track={tracks} onTrackClick={(updatedTrack) => displayTracks(updatedTrack)} />, placeholder)
+          new mapboxgl.Popup()
+            .setDOMContent(placeholder)
+            .setLngLat(coordinates)
+            .addTo(GlobalMap)
+        })
+
+        // change mouse when hovering over a subject
+        GlobalMap.on('mouseenter', 'points' + json.id, () => {
+          GlobalMap.getCanvas().style.cursor = 'pointer'
+        })
+        GlobalMap.on('mouseleave', 'points' + json.id, () => {
+          GlobalMap.getCanvas().style.cursor = ''
+        })
+      }
+    )
+  }
+
   return (
     <>
       <div id='map-container'>
@@ -224,7 +224,8 @@ const App = (props) => {
         </a>
         <Legend
           subs={subjects} track={tracks} onTrackClick={(updatedTrack) => {
-          //  setTracks(tracks[updatedTrack[0]] = updatedTrack[1])
+            //let subjectId = updatedTrack[0]
+            //setTracks(tracks[subjectId] = updatedTrack[1])
             displayTracks(updatedTrack)
           }}
         />

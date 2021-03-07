@@ -12,15 +12,14 @@
     transition: width 1s;
 }
 
-
 #legend-open-button {
     /* border: solid blue; */
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
     writing-mode: vertical-rl;
     text-orientation: upright;
-    font-size: 15px; 
+    font-size: 15px;
     word-spacing: 700px;
     font-family: 'Baloo 2', cursive;
     cursor: pointer;
@@ -39,7 +38,7 @@
     height: 90px;
 
     display: grid;
-    grid-template-columns: 70px 74px 90px;  
+    grid-template-columns: 70px 74px 90px;
 }
 
 #track-buttons {
@@ -68,16 +67,17 @@
     /* border: solid; */
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     margin: auto;
 }
 
-#button-container img {
-    /* border: solid; */
+/*#button-container img {
+    // border: solid;
     margin: auto;
-}
+}*/
 
 #button-container img {
     /* border: solid; */
     cursor: pointer;
+    padding: 7px;
 }
