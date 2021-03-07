@@ -13,53 +13,6 @@ mapboxgl.accessToken = 'pk.eyJ1IjoidmpvZWxtIiwiYSI6ImNra2hiZXNpMzA1bTcybnA3OXlyc
 let GlobalMap
 let config
 
-// TODO: detailed handling of missing config info
-function initMap () {
-  // set up google analytics
-  const trackingId = 'UA-128569083-10' // Google Analytics tracking ID
-  ReactGA.initialize(trackingId)
-  ReactGA.pageview(window.location.pathname + window.location.search)
-
-  GlobalMap = new mapboxgl.Map({
-    container: 'map-container', // container ID
-    style: 'mapbox://styles/mapbox/satellite-v9',
-    center: config.map.center === undefined ? [-109.3666652, -27.1166662] : config.map.center, // starting position [lng, lat]
-    zoom: config.map.zoom === undefined ? 11 : config.map.zoom // starting zoom
-  })
-
-  var nav = new mapboxgl.NavigationControl()
-  GlobalMap.addControl(nav, 'top-left')
-
-  GlobalMap.on('load', function () {
-    // add the 3D terrain source
-    GlobalMap.addSource('mapbox-dem', {
-      type: 'raster-dem',
-      url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
-      tileSize: 512,
-      maxzoom: 14
-    })
-
-    // add a sky layer that will show when the map is highly pitched
-    GlobalMap.addLayer({
-      id: 'sky',
-      type: 'sky',
-      paint: {
-        'sky-type': 'atmosphere',
-        'sky-atmosphere-sun': [0.0, 0.0],
-        'sky-atmosphere-sun-intensity': 15
-      }
-    })
-
-    // add 3D terrain
-    GlobalMap.on('render', function () {
-      // add the DEM source as a terrain layer with exaggerated height
-      GlobalMap.setTerrain({ source: 'mapbox-dem', exaggeration: 3 })
-    })
-
-    mapSubjects()
-  })
-}
-
 function drawIcon (json) {
   // fetchTrack(json.id)
   // <IconButton aria-label="delete" onClick={() => {
@@ -153,50 +106,74 @@ function drawTrack (json) {
   })
 }
 
-const App = () => {
+/* eslint-disable react/prop-types */
+const App = (props) => {
+  var [subjects, setSubjects] = useState([])
+  var [tracks, setTracks] = useState({})
 
-  useEffect(() => {
+  // TODO: detailed handling of missing config info
+  function initMap () {
+    // set up google analytics
     const trackingId = 'UA-128569083-10' // Google Analytics tracking ID
     ReactGA.initialize(trackingId)
     ReactGA.pageview(window.location.pathname + window.location.search)
-    ReactGA.event({
-      category: 'Map',
-      action: 'Loaded'
-    })
-
-    // fetch call for subjects
-    const url = 'http://localhost:5000/api/v1.0/subjects'
-    fetch(url)
-      .then(resp => {
-        if (resp.ok) {
-          return resp
-        }
-        throw Error('Error in request:' + resp.statusText)
-      })
-      .then(resp => resp.json()) // returns a json object
-      .then(resp => {
-        resp.data.data.map((subject) => { // setTracks(tracks[subject.id] = false)
-          drawIcon(subject)
-        }) // looping through array of subjects
-        setSubjects(resp.data.data)
-      })
-      .catch(console.error)
 
     GlobalMap = new mapboxgl.Map({
       container: 'map-container', // container ID
       style: 'mapbox://styles/mapbox/satellite-v9',
-      center: [-109.3666652, -27.1166662], // starting position [lng, lat]
-      zoom: 14 // starting zoom
+      center: config.map.center === undefined ? [-109.3666652, -27.1166662] : config.map.center, // starting position [lng, lat]
+      zoom: config.map.zoom === undefined ? 11 : config.map.zoom // starting zoom
     })
 
     var nav = new mapboxgl.NavigationControl()
     GlobalMap.addControl(nav, 'top-left')
 
-/* eslint-disable react/prop-types */
-const App = (props) => {
-  var [subjects, setSubjects] = useState([])
-  var [tracks, setTracks] = useState({})
-  
+    GlobalMap.on('load', function () {
+      // add the 3D terrain source
+      GlobalMap.addSource('mapbox-dem', {
+        type: 'raster-dem',
+        url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
+        tileSize: 512,
+        maxzoom: 14
+      })
+
+      // add a sky layer that will show when the map is highly pitched
+      GlobalMap.addLayer({
+        id: 'sky',
+        type: 'sky',
+        paint: {
+          'sky-type': 'atmosphere',
+          'sky-atmosphere-sun': [0.0, 0.0],
+          'sky-atmosphere-sun-intensity': 15
+        }
+      })
+
+      // add 3D terrain
+      GlobalMap.on('render', function () {
+        // add the DEM source as a terrain layer with exaggerated height
+        GlobalMap.setTerrain({ source: 'mapbox-dem', exaggeration: 3 })
+      })
+
+      // fetch call for subjects
+      const url = 'http://localhost:5000/api/v1.0/subjects'
+      fetch(url)
+        .then(resp => {
+          if (resp.ok) {
+            return resp
+          }
+          throw Error('Error in request:' + resp.statusText)
+        })
+        .then(resp => resp.json()) // returns a json object
+        .then(resp => {
+          resp.data.data.map((subject) => { // setTracks(tracks[subject.id] = false)
+            drawIcon(subject)
+          }) // looping through array of subjects
+          setSubjects(resp.data.data)
+        })
+        .catch(console.error)
+    })
+  }
+
   useEffect(() => {
     let isSubscribed = true
     // load configuration data
@@ -219,7 +196,7 @@ const App = (props) => {
     return function cleanup () {
       isSubscribed = false
     }
-  })
+  }, [])
 
   function displayTracks (updatedTrack) {
     const id = updatedTrack[0]
