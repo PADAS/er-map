@@ -81,3 +81,51 @@
     cursor: pointer;
     padding: 7px;
 }
+
+/* POP-UP STYLING */
+#pop-up {
+    height: 300px;
+    overflow: auto;
+}
+
+#pop-up-header p {
+    font-size: 17px;
+    margin: 0;
+}
+
+#pop-up-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0 10px 0;
+}
+
+#pop-up-info p {
+    display: flex;
+    margin: 2px;
+    text-align: center;
+}
+
+#pop-up-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#pop-up-image p {
+    margin: 3px 0 0 0;
+    text-align: center;
+}
+
+/* #pop-up-url {
+    border:solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#pop-up-url p {
+
+} */

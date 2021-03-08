@@ -1,6 +1,7 @@
 import React from 'react'
-import ButtonContainer from './ButtonContainer.jsx'
 import './Popup.css'
+import './Legend.css'
+import ButtonContainer from './ButtonContainer.jsx'
 
 /* eslint-disable react/prop-types */
 const SubjectPopup = (props) => {
@@ -15,7 +16,7 @@ const SubjectPopup = (props) => {
   const subject = props.subject
 
   return (
-    <div>
+    /*<div>
       <div className="buttonContainer">
         <h2>{subject.name}</h2>
         <ButtonContainer id={subject.id} buttonTrack={props.track} buttonOnTrackClicked={props.onTrackClick} />
@@ -37,7 +38,36 @@ const SubjectPopup = (props) => {
           })}
           <p><a href={data.more_info_path}>View my story</a></p>
         </div>}
-    </div>)
+    </div>)*/
+
+    <div id="pop-up">
+      <div id="pop-up-header">
+        <p><b>{subject.name}</b></p>
+        {/* <ButtonContainer id={subject.id} buttonTrack={animalTrack} buttonOnTrackClicked={animalOnTrackClicked} /> */}
+      </div>
+      <div id="pop-up-info">
+        <p>{subject.last_position.properties.DateTime && new Intl.DateTimeFormat('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: '2-digit',
+          hour: 'numeric',
+          minute: 'numeric'
+        }).format(new Date(subject.last_position.properties.DateTime))}
+        </p>
+        <p>{subject.last_position.geometry.coordinates}</p>
+      </div>
+        {data &&
+          <div id="pop-up-image">
+            <div dangerouslySetInnerHTML={{ __html: data.detail_description }} />
+            {data.pictures.map((pic) => {
+              return <img class="" key={pic} src={pic.path} height={200} width={200} alt='picture' />
+            })}
+            {/* <div id="pop-up-url"> */}
+              <p><a href={data.more_info_path}>View my story</a></p>
+            {/* </div> */}
+          </div>}
+    </div>
+    )
 }
 
 export default SubjectPopup
