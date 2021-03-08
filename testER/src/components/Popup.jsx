@@ -14,12 +14,12 @@ const SubjectPopup = (props) => {
   const data = props.subjectData
   const subject = props.subject
   return (
-    <div id="pop-up">
-      <div id="pop-up-header">
+    <div id='pop-up'>
+      <div id='pop-up-header'>
         <p><b>{subject.name}</b></p>
         {/* <ButtonContainer id={subject.id} buttonTrack={animalTrack} buttonOnTrackClicked={animalOnTrackClicked} /> */}
       </div>
-      <div id="pop-up-info">
+      <div id='pop-up-info'>
         <p>{subject.last_position.properties.DateTime && new Intl.DateTimeFormat('en-US', {
           year: 'numeric',
           month: 'long',
@@ -30,18 +30,18 @@ const SubjectPopup = (props) => {
         </p>
         <p>{subject.last_position.geometry.coordinates}</p>
       </div>
-        {data &&
-          <div id="pop-up-image">
-            <div dangerouslySetInnerHTML={{ __html: data.detail_description }} />
-            {data.pictures.map((pic) => {
-              return <img class="" key={pic} src={pic.path} height={200} width={200} alt='picture' />
-            })}
-            {/* <div id="pop-up-url"> */}
-              <p><a href={data.more_info_path}>View my story</a></p>
-            {/* </div> */}
-          </div>}
+      {data &&
+        <div id='pop-up-image'>
+          <div dangerouslySetInnerHTML={{ __html: data.detail_description }} />
+          {data.pictures.map((pic) => {
+            return <img className='' key={pic} src={pic.path} height={200} width={200} alt='picture' />
+          })}
+          {/* <div id="pop-up-url"> */}
+          <p><a href={data.more_info_path}>View my story</a></p>
+          {/* </div> */}
+        </div>}
     </div>
-    )
+  )
 }
 
 export default SubjectPopup

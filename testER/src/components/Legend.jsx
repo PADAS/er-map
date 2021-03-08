@@ -3,7 +3,7 @@ import './Legend.css'
 import Animal from './Animal.jsx'
 
 /* eslint-disable react/prop-types */
-const Legend = ({ subs, track, onTrackClick }) => {
+const Legend = ({ subs, track, onTrackClick, onLocClick }) => {
   var [leg, setLeg] = useState(true)
   var l = document.getElementById('legend')
 
@@ -26,7 +26,7 @@ const Legend = ({ subs, track, onTrackClick }) => {
           {/* // map all content  */}
           {subs === undefined ? <div />
             : subs.map((s) => (
-              <Animal animal={s} animalTrack={track} animalOnTrackClicked={onTrackClick} key={s.id} />
+              <Animal animal={s} animalTrack={track} animalOnTrackClicked={onTrackClick} key={s.id} animalOnLocClicked={onLocClick} />
             ))}
         </div>
       </div>

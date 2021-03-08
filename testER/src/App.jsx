@@ -216,6 +216,13 @@ const App = (props) => {
     }
   }
 
+  function goToLoc (coords) {
+    GlobalMap.flyTo({
+      center: coords,
+      essential: true
+    })
+  }
+
   return (
     <>
       <div id='map-container'>
@@ -223,10 +230,13 @@ const App = (props) => {
           <img src='./public/images/LogoEarthRanger.png' id='earth-ranger-logo' />
         </a>
         <Legend
-          subs={subjects} track={tracks} onTrackClick={(updatedTrack) => {
+          subs={subjects}
+          track={tracks}
+          onTrackClick={(updatedTrack) => {
           //  setTracks(tracks[updatedTrack[0]] = updatedTrack[1])
             displayTracks(updatedTrack)
           }}
+          onLocClick={(coords) => goToLoc(coords)}
         />
       </div>
     </>
