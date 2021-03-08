@@ -49,7 +49,12 @@ function drawIcon (json) {
         }
 
         const placeholder = document.createElement('div')
-        ReactDOM.render(<SubjectPopup subject={json} subjectData={config.subjects[json.id]} />, placeholder)
+        ReactDOM.render(<SubjectPopup 
+          subject={json} 
+          subjectData={config.subjects[json.id]} 
+          popupOnTrackClicked={(updatedTrack) => displayTracks(updatedTrack)}
+          popupOnLocClick={(coords) => goToLoc(coords)}
+          />, placeholder)
         new mapboxgl.Popup()
           .setDOMContent(placeholder)
           .setLngLat(coordinates)
@@ -103,6 +108,31 @@ function drawTrack (json) {
       'line-color': '#953ae4',
       'line-width': 3
     }
+  })
+}
+
+function displayTracks (updatedTrack) {
+  const id = updatedTrack[0]
+  const displayed = updatedTrack[1]
+
+  const layer = GlobalMap.getLayer('LineString ' + id)
+  console.log(layer)
+
+  if (displayed) {
+    if (layer === undefined) {
+      fetchTrack(id)
+    } else {
+      GlobalMap.setLayoutProperty('LineString ' + id, 'visibility', 'visible') // turn on visibility
+    }
+  } else {
+    GlobalMap.setLayoutProperty('LineString ' + id, 'visibility', 'none') // turn off visibility
+  }
+}
+
+function goToLoc (coords) {
+  GlobalMap.flyTo({
+    center: coords,
+    essential: true
   })
 }
 
@@ -197,31 +227,6 @@ const App = (props) => {
       isSubscribed = false
     }
   }, [])
-
-  function displayTracks (updatedTrack) {
-    const id = updatedTrack[0]
-    const displayed = updatedTrack[1]
-
-    const layer = GlobalMap.getLayer('LineString ' + id)
-    console.log(layer)
-
-    if (displayed) {
-      if (layer === undefined) {
-        fetchTrack(id)
-      } else {
-        GlobalMap.setLayoutProperty('LineString ' + id, 'visibility', 'visible') // turn on visibility
-      }
-    } else {
-      GlobalMap.setLayoutProperty('LineString ' + id, 'visibility', 'none') // turn off visibility
-    }
-  }
-
-  function goToLoc (coords) {
-    GlobalMap.flyTo({
-      center: coords,
-      essential: true
-    })
-  }
 
   return (
     <>
