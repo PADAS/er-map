@@ -1,4 +1,5 @@
 import React from 'react'
+import './Popup.css'
 import './Legend.css'
 import TrackButton from './TrackButton.jsx'
 
@@ -13,11 +14,12 @@ const SubjectPopup = (props) => {
   // TODO: styling
   const data = props.subjectData
   const subject = props.subject
+
   return (
     <div id='pop-up'>
       <div id='pop-up-header'>
         <div>
-          <p><b>{subject.name}</b></p>
+          <h2>{subject.name}</h2>
         </div>
         <div className="popup-track">
           <TrackButton

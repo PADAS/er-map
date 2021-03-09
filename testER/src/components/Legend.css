@@ -12,15 +12,14 @@
     transition: width 1s;
 }
 
-
 #legend-open-button {
     /* border: solid blue; */
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
     writing-mode: vertical-rl;
     text-orientation: upright;
-    font-size: 15px; 
+    font-size: 15px;
     word-spacing: 700px;
     font-family: 'Baloo 2', cursive;
     cursor: pointer;
@@ -39,7 +38,7 @@
     height: 90px;
 
     display: grid;
-    grid-template-columns: 70px 74px 90px;  
+    grid-template-columns: 70px 74px 90px;
 }
 
 #track-buttons {
@@ -70,18 +69,19 @@
     width: 70px;
     margin: auto;
     display: flex;
-    justify-content: center;
-    
-}
-
-#button-container img {
-    /* border: solid; */
+    justify-content: flex-end;
     margin: auto;
 }
+
+/*#button-container img {
+    // border: solid;
+    margin: auto;
+}*/
 
 #button-container img {
     /* border: solid; */
     cursor: pointer;
+    padding: 7px;
 }
 
 /* POP-UP STYLING */
@@ -129,6 +129,10 @@
     text-align: center;
 }
 
+#name-container {
+    padding: 15px;
+}
+
 /* #pop-up-url {
     border:solid;
     display: flex;
@@ -137,5 +141,5 @@
 }
 
 #pop-up-url p {
-   
+
 } */
