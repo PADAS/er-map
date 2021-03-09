@@ -1,8 +1,12 @@
-.buttonContainer {
+/*.buttonContainer {
   display: flex;
   flex-direction: row;
-}
+}*/
 
-.buttonContainer h2 {
+/*h2 {
   padding: 5px;
+}*/
+
+#name-container {
+  padding: 15px;
 }

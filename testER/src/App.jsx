@@ -13,49 +13,14 @@ mapboxgl.accessToken = 'pk.eyJ1IjoidmpvZWxtIiwiYSI6ImNra2hiZXNpMzA1bTcybnA3OXlyc
 let GlobalMap
 let config
 
-// Draw tracks and add button component to display tracks
-function fetchTrack (subjectId) {
-  const url = 'http://localhost:5000/api/v1.0/subject/' + subjectId + '/tracks'
-  fetch(url)
-    .then(resp => {
-      if (resp.ok) {
-        return resp
-      }
-      throw Error('Error in request:' + resp.statusText)
-    })
-    .then(resp => resp.json()) // returns a json object
-    .then(resp => {
-      drawTrack(resp.data)
-    })
-    .catch(console.error)
-}
-
-function drawTrack (json) {
-  console.log(json)
-  GlobalMap.addSource(json.features[0].geometry.type + ' ' + json.features[0].properties.id, {
-    type: 'geojson',
-    data: json
-  })
-
-  GlobalMap.addLayer({
-    id: json.features[0].geometry.type + ' ' + json.features[0].properties.id,
-    type: 'line',
-    source: json.features[0].geometry.type + ' ' + json.features[0].properties.id,
-    layout: {
-      'line-join': 'round',
-      'line-cap': 'round'
-    },
-    paint: {
-      'line-color': '#953ae4',
-      'line-width': 3
-    }
-  })
-}
+const trackColors = ['#953ae4', '#000075', '#469990', '#800000', '#f58231', '#3cb44b', '#42d4f4',
+  '#911eb4', '#e6194b', '#ffe119', '#4363d8', '#f032e6', '#9a6324', '#bfef45', '#f58231', '#808000']
 
 /* eslint-disable react/prop-types */
 const App = (props) => {
   var [subjects, setSubjects] = useState([])
   var [tracks, setTracks] = useState({})
+  var [trackColorIndex, setTrackColorIndex] = useState(0)
 
   // TODO: detailed handling of missing config info
   function initMap () {
@@ -161,12 +126,51 @@ const App = (props) => {
     }
   }
 
-  function drawIcon (json) {
-    // fetchTrack(json.id)
-    // <IconButton aria-label="delete" onClick={() => {
-    //   alert('clicked')
-    // }}>Display Tracks</IconButton>
+  // Draw tracks and add button component to display tracks
+  function fetchTrack (subjectId) {
+    const url = 'http://localhost:5000/api/v1.0/subject/' + subjectId + '/tracks'
+    fetch(url)
+      .then(resp => {
+        if (resp.ok) {
+          return resp
+        }
+        throw Error('Error in request:' + resp.statusText)
+      })
+      .then(resp => resp.json()) // returns a json object
+      .then(resp => {
+        drawTrack(resp.data)
+      })
+      .catch(console.error)
+  }
 
+  function drawTrack (json) {
+    GlobalMap.addSource(json.features[0].geometry.type + ' ' + json.features[0].properties.id, {
+      type: 'geojson',
+      data: json
+    })
+
+    GlobalMap.addLayer({
+      id: json.features[0].geometry.type + ' ' + json.features[0].properties.id,
+      type: 'line',
+      source: json.features[0].geometry.type + ' ' + json.features[0].properties.id,
+      layout: {
+        'line-join': 'round',
+        'line-cap': 'round'
+      },
+      paint: {
+        'line-color': trackColors[trackColorIndex],
+        'line-width': 3
+      }
+    })
+
+    if (trackColorIndex == 15) {
+      setTrackColorIndex(0)
+    } else {
+      setTrackColorIndex(trackColorIndex + 1)
+    }
+  }
+
+  function drawIcon (json) {
     GlobalMap.loadImage(json.last_position.properties.image,
       function (error, image) {
         if (error) throw error
@@ -205,6 +209,17 @@ const App = (props) => {
             .addTo(GlobalMap)
         })
 
+        /*const placeholder = document.createElement('div')
+        const name = document.createElement('p')
+        name.textContent = json.name
+        placeholder.appendChild(name);
+        placeholder.classList.add('name')
+        ReactDOM.render(<p className='name'>{json.name}</p>, placeholder)
+        new mapboxgl.Popup({closeButton: false, offset: {bottom: [0, 50]}, className:'namePopup', closeOnClick: false})
+          .setDOMContent(placeholder)
+          .setLngLat(json.last_position.geometry.coordinates)
+          .addTo(GlobalMap)*/
+
         // change mouse when hovering over a subject
         GlobalMap.on('mouseenter', 'points' + json.id, () => {
           GlobalMap.getCanvas().style.cursor = 'pointer'
@@ -233,7 +248,9 @@ const App = (props) => {
           subs={subjects}
           track={tracks}
           onTrackClick={(updatedTrack) => {
-          //  setTracks(tracks[updatedTrack[0]] = updatedTrack[1])
+            let newState = tracks
+            newState[updatedTrack[0]] = updatedTrack[1]
+            setTracks(newState)
             displayTracks(updatedTrack)
           }}
           onLocClick={(coords) => goToLoc(coords)}
