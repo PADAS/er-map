@@ -16,8 +16,8 @@ const Animal = ({ animal, animalTrack, animalOnTrackClicked, animalOnLocClicked 
                 buttonOnTrackClicked={animalOnTrackClicked}
               />
               <LocButton 
-                  subject={animal}
-                  buttonOnLocClicked={animalOnLocClicked}
+                subject={animal}
+                buttonOnLocClicked={animalOnLocClicked}
               />
           </div>
         </div>
