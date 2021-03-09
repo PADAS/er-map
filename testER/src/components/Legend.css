@@ -119,6 +119,10 @@
     text-align: center;
 }
 
+#name-container {
+    padding: 15px;
+}
+
 /* #pop-up-url {
     border:solid;
     display: flex;

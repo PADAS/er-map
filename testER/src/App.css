@@ -31,7 +31,22 @@
 
 .name {
   height: 0px;
-  padding-bottom: 10px;
+  /*padding-bottom: 10px;*/
+  margin: 0px;
 }
 
+.namePopup {
+  background-color: white;
+  border-radius: 4px;
+  /*box-shadow: none !important;*/
+}
 
+/*.leaflet-popup-tip {
+  width: 0px;
+  height: 0px;
+}
+
+.leaflet-popup-tip {
+  background: rgba(0, 0, 0, 0) !important;
+  box-shadow: none !important;
+}*/

@@ -18,7 +18,7 @@ const SubjectPopup = (props) => {
   return (
     <div id='pop-up'>
       <div id='pop-up-header'>
-        <p><b>{subject.name}</b></p>
+        <h2>{subject.name}</h2>
         {/* <ButtonContainer id={subject.id} buttonTrack={animalTrack} buttonOnTrackClicked={animalOnTrackClicked} /> */}
       </div>
       <div id='pop-up-info'>

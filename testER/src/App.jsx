@@ -209,9 +209,12 @@ const App = (props) => {
         })
 
         /*const placeholder = document.createElement('div')
+        const name = document.createElement('p')
+        name.textContent = json.name
+        placeholder.appendChild(name);
         placeholder.classList.add('name')
-        ReactDOM.render(<p>{json.name}</p>, placeholder)
-        new mapboxgl.Popup({closeButton: false, offset: {bottom: [0, 75]}, closeOnClick: false})
+        ReactDOM.render(<p className='name'>{json.name}</p>, placeholder)
+        new mapboxgl.Popup({closeButton: false, offset: {bottom: [0, 50]}, className:'namePopup', closeOnClick: false})
           .setDOMContent(placeholder)
           .setLngLat(json.last_position.geometry.coordinates)
           .addTo(GlobalMap)*/
