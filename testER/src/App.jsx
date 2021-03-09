@@ -12,6 +12,7 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 mapboxgl.accessToken = 'pk.eyJ1IjoidmpvZWxtIiwiYSI6ImNra2hiZXNpMzA1bTcybnA3OXlycnN2ZjcifQ.gH6Nls61WTMVutUH57jMJQ' // development token
 let GlobalMap
 let config
+
 const trackColors = ['#953ae4', '#000075', '#469990', '#800000', '#f58231', '#3cb44b', '#42d4f4',
   '#911eb4', '#e6194b', '#ffe119', '#4363d8', '#f032e6', '#9a6324', '#bfef45', '#f58231', '#808000']
 

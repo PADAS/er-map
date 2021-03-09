@@ -1,5 +1,6 @@
 import React from 'react'
-import ButtonContainer from './ButtonContainer.jsx'
+import TrackButton from './TrackButton.jsx'
+import LocButton from './LocButton.jsx'
 import './Legend.css'
 
 /* eslint-disable react/prop-types */
@@ -8,14 +9,17 @@ const Animal = ({ animal, animalTrack, animalOnTrackClicked, animalOnLocClicked 
     <>
       <div id='animal-legend-content'>
         <div id='track-buttons'>
-          {/* track_visibility={track_vis} onTrackClickedButton={onTrackClick} */}
-          <ButtonContainer
-            id={animal.id}
-            coords={animal.last_position.geometry.coordinates}
-            buttonTrack={animalTrack}
-            buttonOnTrackClicked={animalOnTrackClicked}
-            buttonOnLocClicked={animalOnLocClicked}
-          />
+          <div id='button-container'>
+              <TrackButton 
+                subject={animal}
+                buttonTrack={animalTrack}
+                buttonOnTrackClicked={animalOnTrackClicked}
+              />
+              <LocButton 
+                subject={animal}
+                buttonOnLocClicked={animalOnLocClicked}
+              />
+          </div>
         </div>
         <div id='animal-img'>
           {/* <p>image</p> */}

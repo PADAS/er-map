@@ -1,7 +1,7 @@
 import React from 'react'
 import './Popup.css'
 import './Legend.css'
-import ButtonContainer from './ButtonContainer.jsx'
+import TrackButton from './TrackButton.jsx'
 
 /* eslint-disable react/prop-types */
 const SubjectPopup = (props) => {
@@ -18,8 +18,17 @@ const SubjectPopup = (props) => {
   return (
     <div id='pop-up'>
       <div id='pop-up-header'>
-        <h2>{subject.name}</h2>
-        {/* <ButtonContainer id={subject.id} buttonTrack={animalTrack} buttonOnTrackClicked={animalOnTrackClicked} /> */}
+        <div>
+          <h2>{subject.name}</h2>
+        </div>
+        <div className="popup-track">
+          <TrackButton
+              subject={subject}
+              buttonTrack={{}}
+              buttonOnTrackClicked={props.popupOnTrackClicked}
+              buttonOnLocClicked={props.popupOnLocClicked}
+            />
+        </div>
       </div>
       <div id='pop-up-info'>
         <p>{subject.last_position.properties.DateTime && new Intl.DateTimeFormat('en-US', {

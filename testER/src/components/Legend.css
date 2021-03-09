@@ -65,7 +65,9 @@
 
 #button-container {
     /* border: solid; */
-    width: 100%;
+    /* width: 100%; */
+    width: 70px;
+    margin: auto;
     display: flex;
     justify-content: flex-end;
     margin: auto;
@@ -88,9 +90,17 @@
     overflow: auto;
 }
 
-#pop-up-header p {
+#pop-up-header { 
     font-size: 17px;
     margin: 0;
+    /* border: solid; */
+    display: grid;
+    grid-template-columns: 80% 20%;
+}
+
+.popup-track { 
+    /* border: solid; */
+    margin: auto;
 }
 
 #pop-up-info {
