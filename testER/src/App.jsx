@@ -202,7 +202,12 @@ const App = (props) => {
 
           const placeholder = document.createElement('div')
           ReactDOM.render(<SubjectPopup subject={json} subjectData={config.subjects[json.id]}
-            track={tracks} onTrackClick={(updatedTrack) => displayTracks(updatedTrack)} />, placeholder)
+            track={tracks} onTrackClick={(updatedTrack) => {
+                let newState = tracks
+                newState[updatedTrack[0]] = updatedTrack[1]
+                setTracks(newState)
+                displayTracks(updatedTrack)
+              }} />, placeholder)
           new mapboxgl.Popup()
             .setDOMContent(placeholder)
             .setLngLat(coordinates)

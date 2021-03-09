@@ -24,8 +24,8 @@ const SubjectPopup = (props) => {
         <div className="popup-track">
           <TrackButton
               subject={subject}
-              buttonTrack={{}}
-              buttonOnTrackClicked={props.popupOnTrackClicked}
+              buttonTrack={props.track}
+              buttonOnTrackClicked={props.onTrackClick}
               buttonOnLocClicked={props.popupOnLocClicked}
             />
         </div>
