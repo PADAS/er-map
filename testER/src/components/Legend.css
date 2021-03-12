@@ -4,7 +4,7 @@
 
 /* LEGEND BUTTON */
 #legend {
-    height: 600px;
+    height: 100%;
     width: 260px;
     background-color: white;
     display: grid;
@@ -86,21 +86,71 @@
 
 /* POP-UP STYLING */
 #pop-up {
-    height: 300px;
+    /* height: 300px; */
+    width: 200px;
     overflow: auto;
 }
 
 #pop-up-header { 
-    font-size: 17px;
-    margin: 0;
-    /* border: solid; */
-    display: grid;
-    grid-template-columns: 80% 20%;
+    font-size: 15px;
 }
 
-.popup-track { 
+#pop-up-header h3 {
+    margin: 0 0 5px 0;
+}
+
+.pop-up-image {
+    width: 100%;
+    height: 150px;
+}
+
+#pop-up-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#pop-up-buttons p {
+    margin: 0 0 0 20px;
+}
+
+.mapboxgl-popup-tip {
+    /* background: green; */
+  }
+
+
+  .mapboxgl-popup {
+    /* border: solid orange; */
+  }
+
+.mapboxgl-popup-content {
+    background: red;
+    /* border: solid red; */
+    margin: 0;
+    padding: 0;
+}
+
+.mapboxgl-popup-close-button {
+    /* border: none; */
+    /* display: none; */
+}
+
+.mapboxgl-popup-content div {
+    padding: 0px;
+    /* border: solid purple; */
+    margin: 0px;
+}
+
+.mapboxgl-popup-content-wrapper {
+    /* border: solid yellow; */
+    padding: 0;
+    margin: 0;
+}
+
+/* .popup-track {  */
     /* border: solid; */
-    margin: auto;
+    /* margin: auto;
 }
 
 #pop-up-info {
@@ -109,8 +159,8 @@
     justify-content: center;
     align-items: center;
     margin: 10px 0 10px 0;
-}
-
+} */
+/* 
 #pop-up-info p {
     display: flex;
     margin: 2px;
@@ -127,7 +177,7 @@
 #pop-up-image p {
     margin: 3px 0 0 0;
     text-align: center;
-}
+} */
 
 #name-container {
     padding: 15px;

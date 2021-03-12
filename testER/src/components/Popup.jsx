@@ -17,7 +17,26 @@ const SubjectPopup = (props) => {
 
   return (
     <div id='pop-up'>
+
       <div id='pop-up-header'>
+        <h3>{subject.name}</h3>
+      </div>
+      <div id=''>
+        {data.pictures.map((pic) => {
+          return <img className='pop-up-image' key={pic} src={pic.path} alt='picture' />
+        })}
+      </div>
+      <div id='pop-up-buttons'>
+        <TrackButton
+          subject={subject}
+          buttonTrack={props.track}
+          buttonOnTrackClicked={props.onTrackClick}
+          buttonOnLocClicked={props.popupOnLocClicked}
+        />
+        <p onClick={() => props.onStoryClick([subject, data])}>View my story</p>
+      </div>
+      
+      {/* <div id='pop-up-header'>
         <div>
           <h2>{subject.name}</h2>
         </div>
@@ -47,10 +66,8 @@ const SubjectPopup = (props) => {
           {data.pictures.map((pic) => {
             return <img className='' key={pic} src={pic.path} height={200} width={200} alt='picture' />
           })}
-          {/* <div id="pop-up-url"> */}
-          <p><a href={data.more_info_path}>View my story</a></p>
-          {/* </div> */}
-        </div>}
+          <p onClick={() => props.onStoryClick(subject)}>View my story</p>
+        </div>} */}
     </div>
   )
 }

@@ -10,15 +10,15 @@ const Animal = ({ animal, animalTrack, animalOnTrackClicked, animalOnLocClicked 
       <div id='animal-legend-content'>
         <div id='track-buttons'>
           <div id='button-container'>
-              <TrackButton 
-                subject={animal}
-                buttonTrack={animalTrack}
-                buttonOnTrackClicked={animalOnTrackClicked}
-              />
-              <LocButton 
-                subject={animal}
-                buttonOnLocClicked={animalOnLocClicked}
-              />
+            <TrackButton
+              subject={animal}
+              buttonTrack={animalTrack}
+              buttonOnTrackClicked={animalOnTrackClicked}
+            />
+            <LocButton
+              subject={animal}
+              buttonOnLocClicked={animalOnLocClicked}
+            />
           </div>
         </div>
         <div id='animal-img'>
