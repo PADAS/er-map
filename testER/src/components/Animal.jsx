@@ -5,29 +5,29 @@ import './Legend.css'
 
 /* eslint-disable react/prop-types */
 const Animal = ({ animal, animalTrack, animalOnTrackClicked, animalOnLocClicked }) => {
+  let backgroundColor = {'backgroundColor': animal.color}
   return (
     <>
       <div id='animal-legend-content'>
-        <div id='track-buttons'>
-          <div id='button-container'>
-            <TrackButton
-              subject={animal}
-              buttonTrack={animalTrack}
-              buttonOnTrackClicked={animalOnTrackClicked}
-            />
-            <LocButton
-              subject={animal}
-              buttonOnLocClicked={animalOnLocClicked}
-            />
-          </div>
-        </div>
-        <div id='animal-img'>
-          {/* <p>image</p> */}
-          <img src={animal.last_position.properties.image} />
+        <div id='animal-color' style={backgroundColor}>
         </div>
         <div id='animal-name'>
           <p>{animal.name}</p>
         </div>
+        <div id='track-buttons'>
+          <TrackButton
+            subject={animal}
+            buttonTrack={animalTrack}
+            buttonOnTrackClicked={animalOnTrackClicked}
+          />
+          <LocButton
+            subject={animal}
+            buttonOnLocClicked={animalOnLocClicked}
+          />
+          { // Add another icon to take to legend description of subject!!
+          /*<img id='arrow' className='hover' src='public/images/arrow.svg'/>*/}
+        </div>
+
       </div>
     </>
   )

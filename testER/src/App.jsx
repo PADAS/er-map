@@ -13,14 +13,11 @@ mapboxgl.accessToken = 'pk.eyJ1IjoidmpvZWxtIiwiYSI6ImNra2hiZXNpMzA1bTcybnA3OXlyc
 let GlobalMap
 let config
 
-const trackColors = ['#953ae4', '#000075', '#469990', '#800000', '#f58231', '#3cb44b', '#42d4f4',
-  '#911eb4', '#e6194b', '#ffe119', '#4363d8', '#f032e6', '#9a6324', '#bfef45', '#f58231', '#808000']
-
 /* eslint-disable react/prop-types */
 const App = (props) => {
   var [subjects, setSubjects] = useState([])
   var [tracks, setTracks] = useState({})
-  var [trackColorIndex, setTrackColorIndex] = useState(0)
+  var [subjectColor, setSubjectColor] = useState({})
   var [legSub, setLegSub] = useState(undefined)
 
   // TODO: detailed handling of missing config info
@@ -79,12 +76,15 @@ const App = (props) => {
         .then(resp => {
           resp.data.data.map((subject) => { // setTracks(tracks[subject.id] = false)
             drawIcon(subject)
+            let oldSubjectColorState = subjectColor
+            oldSubjectColorState[subject.id] = subject.color
+            setSubjectColor(oldSubjectColorState)
           }) // looping through array of subjects
           setSubjects(resp.data.data)
         })
         .catch(console.error)
 
-       // Cluster attempt 
+       // Cluster attempt
       // GlobalMap.addSource('wildlife', {
       //   type: 'geojson',
       //   data: subjects,
@@ -136,7 +136,7 @@ const App = (props) => {
         //   'text-size': 12
         //   }
         //   });
-           
+
         //   GlobalMap.addLayer({
         //   id: 'unclustered-point',
         //   type: 'circle',
@@ -205,12 +205,12 @@ const App = (props) => {
       })
       .then(resp => resp.json()) // returns a json object
       .then(resp => {
-        drawTrack(resp.data)
+        drawTrack(resp.data, subjectId)
       })
       .catch(console.error)
   }
 
-  function drawTrack (json) {
+  function drawTrack (json, subjectId) {
     GlobalMap.addSource(json.features[0].geometry.type + ' ' + json.features[0].properties.id, {
       type: 'geojson',
       data: json
@@ -225,16 +225,10 @@ const App = (props) => {
         'line-cap': 'round'
       },
       paint: {
-        'line-color': trackColors[trackColorIndex],
+        'line-color': subjectColor[subjectId],
         'line-width': 3
       }
     })
-
-    if (trackColorIndex == 15) {
-      setTrackColorIndex(0)
-    } else {
-      setTrackColorIndex(trackColorIndex + 1)
-    }
   }
 
   function drawIcon (json) {

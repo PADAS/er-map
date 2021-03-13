@@ -17,14 +17,19 @@ const Legend = ({ subs, track, onTrackClick, onLocClick, legSub, onReturnClick }
   }
 
   function display () {
-    console.log(legSub)
+    //console.log(legSub)
     if (legSub === undefined) {
       return (
         <div id='legend-content'>
+          <div id='title'>
+            <h1>Legend</h1>
+          </div>
           {/* // map all content  */}
           {subs === undefined ? <div />
             : subs.map((s) => (
+              <div id='subject-div'>
               <Animal animal={s} animalTrack={track} animalOnTrackClicked={onTrackClick} key={s.id} animalOnLocClicked={onLocClick} />
+              </div>
             ))}
         </div>
       )
@@ -32,6 +37,9 @@ const Legend = ({ subs, track, onTrackClick, onLocClick, legSub, onReturnClick }
       return (
         <>
           <div>
+            <div id='title'>
+              <h1>Legend</h1>
+            </div>
             <div onClick={() => onReturnClick(undefined)}>Return</div>
             <h2>{legSub[0].name}</h2>
             {legSub[1].pictures.map((pic) => {
