@@ -35,7 +35,7 @@ const App = (props) => {
     })
 
     var nav = new mapboxgl.NavigationControl()
-    GlobalMap.addControl(nav, 'bottom-left')
+    GlobalMap.addControl(nav, 'top-left')
 
     GlobalMap.on('load', function () {
       // add the 3D terrain source
@@ -76,7 +76,7 @@ const App = (props) => {
         .then(resp => {
           resp.data.data.map((subject) => { // setTracks(tracks[subject.id] = false)
             drawIcon(subject)
-            let oldSubjectColorState = subjectColor
+            const oldSubjectColorState = subjectColor
             oldSubjectColorState[subject.id] = subject.color
             setSubjectColor(oldSubjectColorState)
           }) // looping through array of subjects
@@ -84,7 +84,7 @@ const App = (props) => {
         })
         .catch(console.error)
 
-       // Cluster attempt
+      // Cluster attempt
       // GlobalMap.addSource('wildlife', {
       //   type: 'geojson',
       //   data: subjects,
@@ -125,30 +125,30 @@ const App = (props) => {
       //   }
       //   });
 
-        // GlobalMap.addLayer({
-        //   id: 'cluster-count',
-        //   type: 'symbol',
-        //   source: 'wildlife',
-        //   filter: ['has', 'point_count'],
-        //   layout: {
-        //   'text-field': '{point_count_abbreviated}',
-        //   'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-        //   'text-size': 12
-        //   }
-        //   });
+      // GlobalMap.addLayer({
+      //   id: 'cluster-count',
+      //   type: 'symbol',
+      //   source: 'wildlife',
+      //   filter: ['has', 'point_count'],
+      //   layout: {
+      //   'text-field': '{point_count_abbreviated}',
+      //   'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+      //   'text-size': 12
+      //   }
+      //   });
 
-        //   GlobalMap.addLayer({
-        //   id: 'unclustered-point',
-        //   type: 'circle',
-        //   source: 'wildlife',
-        //   filter: ['!', ['has', 'point_count']],
-        //   paint: {
-        //   'circle-color': '#11b4da',
-        //   'circle-radius': 4,
-        //   'circle-stroke-width': 1,
-        //   'circle-stroke-color': '#fff'
-        //   }
-        //   });
+      //   GlobalMap.addLayer({
+      //   id: 'unclustered-point',
+      //   type: 'circle',
+      //   source: 'wildlife',
+      //   filter: ['!', ['has', 'point_count']],
+      //   paint: {
+      //   'circle-color': '#11b4da',
+      //   'circle-radius': 4,
+      //   'circle-stroke-width': 1,
+      //   'circle-stroke-color': '#fff'
+      //   }
+      //   });
     })
   }
 
@@ -303,6 +303,7 @@ const App = (props) => {
   function goToLoc (coords) {
     GlobalMap.flyTo({
       center: coords,
+      zoom: 15,
       essential: true
     })
   }
@@ -310,9 +311,9 @@ const App = (props) => {
   return (
     <>
       <div id='map-container'>
-        <a href='https://earthranger.com/'>
+        {/* <a href='https://earthranger.com/'>
           <img src='./public/images/LogoEarthRanger.png' id='earth-ranger-logo' />
-        </a>
+        </a> */}
         <Legend
           subs={subjects}
           track={tracks}

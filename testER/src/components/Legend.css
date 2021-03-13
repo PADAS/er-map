@@ -4,11 +4,15 @@
 
 /* LEGEND BUTTON */
 #legend {
+    /* border: solid red; */
     height: 100%;
-    width: 260px;
-    background-color: white;
+    /* width: 260px; */
+    width: 325px;
+    /* background-color: white; */
     display: grid;
-    grid-template-columns: 26px 234px;
+    /* border: solid green; */
+    /* grid-template-columns: 10% 90%; */
+    grid-template-columns: 32.5px 292.5px;
     transition: width 1s;
 }
 
@@ -18,17 +22,53 @@
     justify-content: center;
     align-items: center;
     writing-mode: vertical-rl;
-    text-orientation: upright;
-    font-size: 15px;
-    word-spacing: 700px;
+    /* text-orientation: upright; */
+    font-size: 13px;
+    /* word-spacing: 1px; */
     font-family: 'Baloo 2', cursive;
     cursor: pointer;
+    height: 100px;
+    background-color: white;
 }
 
 #legend-content{
     /* border: solid purple; */
     overflow: auto;
+    background-color: white;
     /* border-right-style: black solid 20px; */
+}
+
+#subs {
+    /* border: solid blue; */
+    /* position: relative; */
+    overflow: visible;
+}
+
+
+.title {
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* display: flex;
+    justify-content: center; */
+    /* padding: 20px; */
+    /* border: solid red; */
+}
+
+.earthranger-logo {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: solid green; */
+}
+
+.earthranger-logo img {
+    width: 100%;
+    margin: auto;
+    padding: 10px 0 10px 0;
+    /* border: solid blue; */
 }
 
 #animal-color {
@@ -43,7 +83,8 @@
     height: 70px;
 
     display: grid;
-    grid-template-columns: 30px 95px 90px;
+    /* grid-template-columns: 14% 45% 41%; */
+    grid-template-columns: 40.9px 131.6px 120px;
 }
 
 #track-buttons {
@@ -69,6 +110,10 @@
     /*padding: 10px;*/
 }
 
+#animal-name:hover {
+    cursor: pointer;
+}
+
 #track-buttons {
     /* border: solid; */
     /* width: 100%; */
@@ -85,10 +130,6 @@
     cursor: pointer;
     padding: 7px;
 }
-
-/*#title {
-    background-color: royalblue;
-}*/
 
 /* POP-UP STYLING */
 #pop-up {
@@ -139,14 +180,14 @@
 }
 
 .mapboxgl-popup-content div {
-    padding: 0px;
+    padding: 0;
     /* border: solid purple; */
     margin: 0px;
 }
 
 .mapboxgl-popup-content-wrapper {
-    /* border: solid yellow; */
-    padding: 0;
+    /* border: solid green; */
+    /* padding: 100px; */
     margin: 0;
 }
 
@@ -224,4 +265,33 @@
 
 #arrow {
     transform: rotate(180deg);
+}
+
+#return {
+    /* border: solid; */
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    height: 40px;
+    background-color: whitesmoke;
+    border-bottom: solid dimgray 0.5px;
+}
+
+#return:hover {
+    cursor: pointer;
+}
+
+.sub-image {
+    /* border: solid red; */
+    width: 100%;
+}
+
+#sub-content {
+    /* border: solid; */
+    /* background-color: red; */
+    /* overflow: scroll; */
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
 }

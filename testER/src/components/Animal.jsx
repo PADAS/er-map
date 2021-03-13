@@ -5,12 +5,11 @@ import './Legend.css'
 
 /* eslint-disable react/prop-types */
 const Animal = ({ animal, animalTrack, animalOnTrackClicked, animalOnLocClicked }) => {
-  let backgroundColor = {'backgroundColor': animal.color}
+  const backgroundColor = { backgroundColor: animal.color }
   return (
     <>
       <div id='animal-legend-content'>
-        <div id='animal-color' style={backgroundColor}>
-        </div>
+        <div id='animal-color' style={backgroundColor} />
         <div id='animal-name'>
           <p>{animal.name}</p>
         </div>
@@ -24,8 +23,8 @@ const Animal = ({ animal, animalTrack, animalOnTrackClicked, animalOnLocClicked 
             subject={animal}
             buttonOnLocClicked={animalOnLocClicked}
           />
-          { // Add another icon to take to legend description of subject!!
-          /*<img id='arrow' className='hover' src='public/images/arrow.svg'/>*/}
+          {// Add another icon to take to legend description of subject!!
+          /* <img id='arrow' className='hover' src='public/images/arrow.svg'/> */}
         </div>
 
       </div>

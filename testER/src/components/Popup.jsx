@@ -15,14 +15,14 @@ const SubjectPopup = (props) => {
   const data = props.subjectData
   const subject = props.subject
 
-  let sex = subject.sex.charAt(0).toUpperCase() + subject.sex.slice(1)
-  let species = subject.subject_subtype.charAt(0).toUpperCase() + subject.subject_subtype.slice(1)
+  const sex = subject.sex.charAt(0).toUpperCase() + subject.sex.slice(1)
+  const species = subject.subject_subtype.charAt(0).toUpperCase() + subject.subject_subtype.slice(1)
   let date = subject.last_position.properties.DateTime
   date = date.substring(5, 10) + '-' + date.substring(2, 4) + ' ' + date.substring(11, 16)
 
-  function returnImage() {
+  function returnImage () {
     if (data != undefined && data.pictures.length > 0) {
-      return <img className='pop-up-image' src={data.pictures[0].path} alt='picture'/>
+      return <img className='pop-up-image' src={data.pictures[0].path} alt='picture' />
     }
   }
 
@@ -30,16 +30,16 @@ const SubjectPopup = (props) => {
     <div id='pop-up'>
 
       <div>
-        {/*data.pictures.map((pic) => {
+        {/* data.pictures.map((pic) => {
           return <img className='pop-up-image' key={pic} src={pic.path} alt='picture' />
-        })*/}
+        }) */}
         {returnImage()}
       </div>
       <div id='pop-up-header'>
         <h3>{subject.name}</h3>
       </div>
       <p>{sex} | Adult | {species}</p>
-      {<p><i>Short, fun fact about {subject.name}</i></p>}
+      <p><i>Short, fun fact about {subject.name}</i></p>
       <div id='pop-up-buttons'>
         <p id='date'>{date}</p>
         <TrackButton
