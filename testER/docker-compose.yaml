@@ -4,16 +4,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
+    ports:
+      - 3000:3000
     volumes:
       - /app/node_modules
       - .:/app
-  nginx:
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile.dev
-    restart: always
-    depends_on:
-      - "web"
-    ports:
-      - '9000:80'
-      - '35729:35729'
+  
