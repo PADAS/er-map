@@ -10,3 +10,5 @@ from a shell, cd into project folder containing docker-compose.yaml. Then execut
 ~~~~
 docker-compose up --build
 ~~~~
+### Local Development
+1. install a version of nodejs (14)

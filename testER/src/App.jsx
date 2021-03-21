@@ -66,7 +66,7 @@ const App = (props) => {
       })
 
       // fetch call for subjects
-      const url = 'http://localhost:5000/api/v1.0/subjects'
+      const url = 'https://ermap-server-sandbox.pamdas.org/api/v1.0/subjects'
       fetch(url)
         .then(resp => {
           if (resp.ok) {
@@ -128,7 +128,7 @@ const App = (props) => {
 
   // Draw tracks and add button component to display tracks
   function fetchTrack (subjectId) {
-    const url = 'http://localhost:5000/api/v1.0/subject/' + subjectId + '/tracks'
+    const url = 'https://ermap-server-sandbox/api/v1.0/subject/' + subjectId + '/tracks'
     fetch(url)
       .then(resp => {
         if (resp.ok) {
