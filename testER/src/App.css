@@ -13,7 +13,7 @@
   position: absolute;
   padding: 10px 15px 10px 15px;
   top: 0;
-  right: 0;
+  /* right: 0; */
   z-index: 1;
 }
 
@@ -24,7 +24,7 @@
 /* LEGEND CSS */
 #legend {
   z-index: 1;
-  top: 65px;
+  /* top: 65px; */
   right: 0;
   position: absolute;
 }
