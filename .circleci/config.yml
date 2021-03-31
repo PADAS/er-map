@@ -22,7 +22,7 @@ jobs:
           from: testER/public
           to: 's3://ermap-sandbox.pamdas.org/public'
       - aws-cloudfront/invalidate:
-          paths: "index.html"
+          paths: "/index.html"
           distribution_id: $SANDBOX_DISTRIBUTION_ID
 
 workflows:
