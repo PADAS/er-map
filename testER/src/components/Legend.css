@@ -168,7 +168,7 @@
   }
 
 .mapboxgl-popup-content {
-    background: red;
+    /*background: red;*/
     /* border: solid red; */
     margin: 0;
     padding: 0;
