@@ -1,0 +1,36 @@
+version: 2.1
+orbs:
+  aws-s3: circleci/aws-s3@2.0.0
+  aws-cloudfront: topmonks/aws-cloudfront@1.0.0
+
+jobs:
+  deploy_testER:
+    docker:
+      - image: cimg/node:14.15
+    steps:
+      - checkout
+      - run:
+          name: Build Production
+          command: |
+            cd testER && yarn add webpack-cli && yarn build
+      - aws-s3/copy:
+          arguments: '--recursive'
+          from: testER/build
+          to: 's3://ermap-sandbox.pamdas.org'
+      - aws-s3/copy:
+          arguments: '--recursive'
+          from: testER/public
+          to: 's3://ermap-sandbox.pamdas.org/public'
+      - aws-cloudfront/invalidate:
+          paths: "/index.html"
+          distribution_id: $SANDBOX_DISTRIBUTION_ID
+
+workflows:
+  build_deploy:
+    jobs:
+      - deploy_testER:
+          context: ermap
+          filters:
+              branches:
+                only:
+                  - develop

@@ -7,7 +7,13 @@ module.exports = {
     root: __dirname,
   },
   use: [
-    standard(),
+    standard({
+        eslint: {
+          failOnError: false,
+          emitWarning: true
+        }
+      }
+    ),
     react({
       html: {
         title: 'testER'
