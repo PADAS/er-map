@@ -195,7 +195,7 @@ const App = (props) => {
 
   // Draw tracks and add button component to display tracks
   function fetchTrack (subjectId) {
-    const url = 'https://ermap-server-sandbox/api/v1.0/subject/' + subjectId + '/tracks'
+    const url = 'https://ermap-server-sandbox.pamdas.org/api/v1.0/subject/' + subjectId + '/tracks'
     fetch(url)
       .then(resp => {
         if (resp.ok) {
