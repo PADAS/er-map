@@ -244,7 +244,7 @@
 #story {
     color: orangered;
     background-color: white;
-    border: solid 1pt rgb(150, 149, 149);
+    /* border: solid 1pt rgb(150, 149, 149); */
     padding: 5px;
     /*margin-left: 1px;*/
     border-radius: 7px;

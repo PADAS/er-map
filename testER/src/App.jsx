@@ -75,7 +75,9 @@ const App = (props) => {
         .then(resp => resp.json()) // returns a json object
         .then(resp => {
           resp.data.data.map((subject) => { // setTracks(tracks[subject.id] = false)
-            drawIcon(subject)
+            if (subject.last_position !== undefined) {
+              drawIcon(subject)
+            }
             const oldSubjectColorState = subjectColor
             oldSubjectColorState[subject.id] = subject.color
             setSubjectColor(oldSubjectColorState)
@@ -232,7 +234,9 @@ const App = (props) => {
   }
 
   function drawIcon (json) {
-    GlobalMap.loadImage(json.last_position.properties.image,
+    // GlobalMap.loadImage(json.last_position.properties.image,
+    let imgURL = config.subjects[json.id] !== undefined ? config.subjects[json.id].icon : json.last_position.properties.image
+    GlobalMap.loadImage(imgURL,
       function (error, image) {
         if (error) throw error
         GlobalMap.addImage(json.subject_subtype + json.id, image)
@@ -246,7 +250,7 @@ const App = (props) => {
           source: 'point' + json.id,
           layout: {
             'icon-image': json.subject_subtype + json.id,
-            'icon-size': 1.0
+            'icon-size': config.subjects[json.id] !== undefined ? config.subjects[json.id].icon_size : 1.0
           }
         })
 
@@ -262,20 +266,59 @@ const App = (props) => {
           }
 
           const placeholder = document.createElement('div')
-          ReactDOM.render(<SubjectPopup
-            subject={json} subjectData={config.subjects[json.id]}
-            track={tracks} onTrackClick={(updatedTrack) => {
-              const newState = tracks
-              newState[updatedTrack[0]] = updatedTrack[1]
-              setTracks(newState)
-              displayTracks(updatedTrack)
-            }}
-            onStoryClick={(subject) => setLegSub(subject)}
-          />, placeholder)
+          ReactDOM.render(
+            <SubjectPopup
+              subject={json} subjectData={config.subjects[json.id]}
+              track={tracks} onTrackClick={(updatedTrack) => {
+                const newState = tracks
+                newState[updatedTrack[0]] = updatedTrack[1]
+                setTracks(newState)
+                displayTracks(updatedTrack)
+              }}
+              onStoryClick={(subject) => setLegSub(subject)}
+            />, placeholder)
           new mapboxgl.Popup()
             .setDOMContent(placeholder)
             .setLngLat(coordinates)
             .addTo(GlobalMap)
+        })
+
+        // popup on hover
+        var popup = new mapboxgl.Popup({
+          closeButton: false,
+          closeOnClick: false
+        })
+
+        GlobalMap.on('mouseenter', 'points' + json.id, (e) => {
+          var coordinates = e.features[0].geometry.coordinates.slice()
+          GlobalMap.getCanvas().style.cursor = 'pointer'
+
+          // Ensure that if the map is zoomed out such that multiple
+          // copies of the feature are visible, the popup appears
+          // over the copy being pointed to.
+          while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
+          }
+
+          const placeholder = document.createElement('div')
+          ReactDOM.render(
+            <SubjectPopup
+              subject={json} subjectData={config.subjects[json.id]}
+              track={tracks} onTrackClick={(updatedTrack) => {
+                const newState = tracks
+                newState[updatedTrack[0]] = updatedTrack[1]
+                setTracks(newState)
+                displayTracks(updatedTrack)
+              }}
+              onStoryClick={(subject) => setLegSub(subject)}
+            />, placeholder)
+
+          popup.setDOMContent(placeholder).setLngLat(coordinates).addTo(GlobalMap)
+        })
+
+        GlobalMap.on('mouseleave', 'points' + json.id, () => {
+          GlobalMap.getCanvas().style.cursor = ''
+          popup.remove()
         })
 
         /* const placeholder = document.createElement('div')
@@ -290,12 +333,12 @@ const App = (props) => {
           .addTo(GlobalMap) */
 
         // change mouse when hovering over a subject
-        GlobalMap.on('mouseenter', 'points' + json.id, () => {
-          GlobalMap.getCanvas().style.cursor = 'pointer'
-        })
-        GlobalMap.on('mouseleave', 'points' + json.id, () => {
-          GlobalMap.getCanvas().style.cursor = ''
-        })
+        // GlobalMap.on('mouseenter', 'points' + json.id, () => {
+        //   GlobalMap.getCanvas().style.cursor = 'pointer'
+        // })
+        // GlobalMap.on('mouseleave', 'points' + json.id, () => {
+        //   GlobalMap.getCanvas().style.cursor = ''
+        // })
       }
     )
   }
