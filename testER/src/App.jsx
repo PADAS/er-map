@@ -235,7 +235,7 @@ const App = (props) => {
 
   function drawIcon (json) {
     // GlobalMap.loadImage(json.last_position.properties.image,
-    let imgURL = config.subjects[json.id] !== undefined ? config.subjects[json.id].icon : json.last_position.properties.image
+    const imgURL = config.subjects[json.id] !== undefined ? config.subjects[json.id].icon : json.last_position.properties.image
     GlobalMap.loadImage(imgURL,
       function (error, image) {
         if (error) throw error
@@ -351,6 +351,16 @@ const App = (props) => {
     })
   }
 
+  const resetMap = () => {
+    GlobalMap.flyTo({
+      center: config.map.center === undefined ? [-109.3666652, -27.1166662] : config.map.center, // starting position [lng, lat]
+      zoom: config.map.zoom === undefined ? 11 : config.map.zoom, // starting zoom
+      essential: true,
+      pitch: 0,
+      bearing: 0,
+    })
+  }
+
   return (
     <>
       <div id='map-container'>
@@ -370,6 +380,7 @@ const App = (props) => {
           legSub={legSub}
           onReturnClick={(subject) => setLegSub(subject)}
         />
+        <p id='reset' onClick={resetMap}>RESET</p>
       </div>
     </>
   )
