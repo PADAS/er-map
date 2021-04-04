@@ -74,8 +74,11 @@ const App = (props) => {
         })
         .then(resp => resp.json()) // returns a json object
         .then(resp => {
+          console.log(resp)
           resp.data.data.map((subject) => { // setTracks(tracks[subject.id] = false)
-            drawIcon(subject)
+            if (subject.last_position != undefined) {
+              drawIcon(subject)
+            }
             const oldSubjectColorState = subjectColor
             oldSubjectColorState[subject.id] = subject.color
             setSubjectColor(oldSubjectColorState)
@@ -232,6 +235,7 @@ const App = (props) => {
   }
 
   function drawIcon (json) {
+    console.log(json)
     GlobalMap.loadImage(json.last_position.properties.image,
       function (error, image) {
         if (error) throw error
@@ -265,7 +269,8 @@ const App = (props) => {
           ReactDOM.render(<SubjectPopup
             subject={json} subjectData={config.subjects[json.id]}
             track={tracks} onTrackClick={(updatedTrack) => {
-              const newState = tracks
+              //const newState = tracks
+              const newState = Object.assign({}, tracks)
               newState[updatedTrack[0]] = updatedTrack[1]
               setTracks(newState)
               displayTracks(updatedTrack)
@@ -318,7 +323,9 @@ const App = (props) => {
           subs={subjects}
           track={tracks}
           onTrackClick={(updatedTrack) => {
-            const newState = tracks
+            //const newState = tracks
+            const newState = Object.assign({}, tracks)
+            console.log(tracks)
             newState[updatedTrack[0]] = updatedTrack[1]
             setTracks(newState)
             displayTracks(updatedTrack)
