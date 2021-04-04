@@ -75,7 +75,9 @@ const App = (props) => {
         .then(resp => resp.json()) // returns a json object
         .then(resp => {
           resp.data.data.map((subject) => { // setTracks(tracks[subject.id] = false)
-            drawIcon(subject)
+            if (subject.last_position !== undefined) {
+              drawIcon(subject)
+            }
             const oldSubjectColorState = subjectColor
             oldSubjectColorState[subject.id] = subject.color
             setSubjectColor(oldSubjectColorState)
@@ -317,6 +319,7 @@ const App = (props) => {
         <Legend
           subs={subjects}
           track={tracks}
+          subjectData={config}
           onTrackClick={(updatedTrack) => {
             const newState = tracks
             newState[updatedTrack[0]] = updatedTrack[1]
@@ -326,6 +329,7 @@ const App = (props) => {
           onLocClick={(coords) => goToLoc(coords)}
           legSub={legSub}
           onReturnClick={(subject) => setLegSub(subject)}
+          onStoryClick={(subject) => setLegSub(subject)}
         />
       </div>
     </>

@@ -110,8 +110,17 @@
     /*padding: 10px;*/
 }
 
-#animal-name:hover {
+.animal-name:hover {
     cursor: pointer;
+    background-color: red;
+}
+
+.animal-name {
+    background-color: orange;
+}
+
+.fit-content {
+    width: fit-content;
 }
 
 #track-buttons {

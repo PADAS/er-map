@@ -3,7 +3,7 @@ import './Legend.css'
 import Animal from './Animal.jsx'
 
 /* eslint-disable react/prop-types */
-const Legend = ({ subs, track, onTrackClick, onLocClick, legSub, onReturnClick }) => {
+const Legend = ({ subs, track, subjectData, onTrackClick, onLocClick, legSub, onReturnClick, onStoryClick }) => {
   var [leg, setLeg] = useState(true)
   var l = document.getElementById('legend')
 
@@ -32,7 +32,9 @@ const Legend = ({ subs, track, onTrackClick, onLocClick, legSub, onReturnClick }
           {subs === undefined ? <div />
             : subs.map((s) => (
               <div id='subject-div'>
-                <Animal animal={s} animalTrack={track} animalOnTrackClicked={onTrackClick} key={s.id} animalOnLocClicked={onLocClick} />
+                <Animal animal={s} configData={subjectData} animalTrack={track}
+                animalOnTrackClicked={onTrackClick} key={s.id}
+                animalOnLocClicked={onLocClick} onNameClick={onStoryClick}/>
               </div>
             ))}
           </div>
@@ -54,7 +56,7 @@ const Legend = ({ subs, track, onTrackClick, onLocClick, legSub, onReturnClick }
                   <img src='./public/images/LogoEarthRanger.png'/>
                 </a>
               {/* </div> */}
-              
+
             </div>
             <div onClick={() => onReturnClick(undefined)} id='return'>&#171; View all Tracked Animals</div>
             <div id='subject-div'>

@@ -4,13 +4,19 @@ import LocButton from './LocButton.jsx'
 import './Legend.css'
 
 /* eslint-disable react/prop-types */
-const Animal = ({ animal, animalTrack, animalOnTrackClicked, animalOnLocClicked }) => {
+const Animal = ({ animal, configData, animalTrack, animalOnTrackClicked, animalOnLocClicked, onNameClick }) => {
   const backgroundColor = { backgroundColor: animal.color }
   return (
     <>
       <div id='animal-legend-content'>
         <div id='animal-color' style={backgroundColor} />
-        <div id='animal-name'>
+        <div className='animal-name' className='fit-content' onClick={() => {
+              //onLocClick(s.last_position.geometry.coordinates)
+              /*if (this.classList.contains('animal-name')) {
+                onNameClick([animal, configData.subjects[animal.id]])
+              }
+              this.classList.toggle('animal-name')*/
+            }}>
           <p>{animal.name}</p>
         </div>
         <div id='track-buttons'>
