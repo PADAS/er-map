@@ -12,7 +12,12 @@ const SubjectPopup = (props) => {
   const subject = props.subject
 
   const sex = subject.sex.charAt(0).toUpperCase() + subject.sex.slice(1)
-  const species = subject.subject_subtype.charAt(0).toUpperCase() + subject.subject_subtype.slice(1)
+  let species
+  if (subject.common_name == null) {
+    species = subject.subject_subtype.replace(/\b\w/g, l => l.toUpperCase())
+  } else {
+    species = subject.common_name.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())
+  }
   let date = subject.last_position.properties.DateTime
   date = date.substring(5, 10) + '-' + date.substring(2, 4) + ' ' + date.substring(11, 16)
 
@@ -44,7 +49,7 @@ const SubjectPopup = (props) => {
           onTrackButtonClicked={props.onTrackClick}
           handleOnLocButtonClicked={props.popupOnLocClicked}
         />
-        <img id='story' className='hover' src='/public/images/button_icons/story-gray.png' onClick={() => props.onStoryClick([subject, data])} />
+        <img width='30' id='story' className='hover' src='/public/images/button_icons/story-gray.png' onClick={() => props.onStoryClick([subject, data])} />
       </div>
 
       {/* <div id='pop-up-header'>

@@ -17,7 +17,7 @@ const TrackButton = ({ subject, buttonTrack, onTrackButtonClicked }) => {
 
   return (
     <>
-      <img className='hover' src={tracks} id='subject-track-button' onClick={() => toggleTracks()} />
+      <img width='30' className='hover' src={tracks} id='subject-track-button' onClick={() => toggleTracks()} />
     </>
   )
 }

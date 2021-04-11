@@ -235,7 +235,7 @@ const App = (props) => {
 
   function drawIcon (json) {
     // GlobalMap.loadImage(json.last_position.properties.image,
-    const imgURL = config.subjects[json.id] !== undefined ? config.subjects[json.id].icon : json.last_position.properties.image
+    const imgURL = json.common_name !== null ? ('public/images/animal_icons/' + json.common_name + '.png') : json.last_position.properties.image
     GlobalMap.loadImage(imgURL,
       function (error, image) {
         if (error) throw error
@@ -250,7 +250,7 @@ const App = (props) => {
           source: 'point' + json.id,
           layout: {
             'icon-image': json.subject_subtype + json.id,
-            'icon-size': config.subjects[json.id] !== undefined ? config.subjects[json.id].icon_size : 1.0
+            'icon-size': json.common_name !== null ? 0.4 : 1.0
           }
         })
 
@@ -357,8 +357,9 @@ const App = (props) => {
       zoom: config.map.zoom === undefined ? 11 : config.map.zoom, // starting zoom
       essential: true,
       pitch: 0,
-      bearing: 0,
+      bearing: 0
     })
+    // toggle off all tracks??
   }
 
   return (

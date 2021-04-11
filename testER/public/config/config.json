@@ -14,8 +14,6 @@
                     "path": "https://www.eurekalert.org/multimedia/pub/web/221627_web.jpg"
                 }
             ],
-            "icon": "/public/images/flat_icons/blue_circle-giraffe.png",
-            "icon_size": 0.6,
             "detail_description": "<font>Detailed description of <b>Najin</b> in simple HTML</font>",
             "more_info_path": "http://georgia-fan-club.org"
         },
@@ -28,8 +26,6 @@
                     "path": "https://assets.nrdc.org/sites/default/files/styles/full_content--retina/public/media-uploads/wlds43_654640_2400.jpg"
                 }
             ],
-            "icon": "/public/images/flat_icons/blue_giraffe.png",
-            "icon_size": 0.7,
             "detail_description": "<font>Detailed description of <b>Horton</b> in simple HTML</font>",
             "more_info_path": "http://georgia-fan-club.org"
         },
@@ -45,8 +41,6 @@
                     "path": "https://www.eurekalert.org/multimedia/pub/web/221627_web.jpg"
                 }
             ],
-            "icon": "/public/images/giraffe_icon_photorealistic.png",
-            "icon_size": 0.4,
             "detail_description": "<font>Detailed description of <b>Fatu</b> in simple HTML</font>",
             "more_info_path": "http://georgia-fan-club.org"
         }

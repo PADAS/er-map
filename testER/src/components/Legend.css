@@ -107,6 +107,8 @@
     display: flex;
     justify-content: left;
     align-items: center;
+    font-size: larger;
+    overflow-wrap: normal;
     /*padding: 10px;*/
 }
 
