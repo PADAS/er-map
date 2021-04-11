@@ -34,11 +34,11 @@ const Animal = ({ animal, configData, animalTrack, animalOnTrackClicked, animalO
           <TrackButton
             subject={animal}
             buttonTrack={animalTrack}
-            buttonOnTrackClicked={animalOnTrackClicked}
+            handleOnLocButtonClicked={animalOnTrackClicked}
           />
           <LocButton
             subject={animal}
-            buttonOnLocClicked={animalOnLocClicked}
+            handleOnLocButtonClicked={animalOnLocClicked}
           />
         </div>
 

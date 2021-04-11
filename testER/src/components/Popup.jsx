@@ -5,23 +5,24 @@ import TrackButton from './TrackButton.jsx'
 
 /* eslint-disable react/prop-types */
 const SubjectPopup = (props) => {
-  // TODO: toggle tracks button
-  // TODO: scroll popup if too long
-  // TODO: make sure popup stays within screen
   // TODO: detailed handling of missing data fields
   // Qs: dateTime format (dateTime is download time, same for all -> needed?)? lat/long format? subject name in JSON? how to format multiple images?
   // add: position in lat/long?, common name
-  // TODO: styling
   const data = props.subjectData
   const subject = props.subject
 
   const sex = subject.sex.charAt(0).toUpperCase() + subject.sex.slice(1)
-  const species = subject.subject_subtype.charAt(0).toUpperCase() + subject.subject_subtype.slice(1)
+  let species
+  if (subject.common_name == null) {
+    species = subject.subject_subtype.replace(/\b\w/g, l => l.toUpperCase())
+  } else {
+    species = subject.common_name.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())
+  }
   let date = subject.last_position.properties.DateTime
   date = date.substring(5, 10) + '-' + date.substring(2, 4) + ' ' + date.substring(11, 16)
 
   function returnImage () {
-    if (data != undefined && data.pictures.length > 0) {
+    if (data !== undefined && data.pictures.length > 0) {
       return <img className='pop-up-image' src={data.pictures[0].path} alt='picture' />
     }
   }
@@ -45,10 +46,10 @@ const SubjectPopup = (props) => {
         <TrackButton
           subject={subject}
           buttonTrack={props.track}
-          buttonOnTrackClicked={props.onTrackClick}
-          buttonOnLocClicked={props.popupOnLocClicked}
+          onTrackButtonClicked={props.onTrackClick}
+          handleOnLocButtonClicked={props.popupOnLocClicked}
         />
-        <p id='story' className='hover' onClick={() => props.onStoryClick([subject, data])}>View my story</p>
+        <img width='30' id='story' className='hover' src='/public/images/button_icons/story-gray.png' onClick={() => props.onStoryClick([subject, data])} />
       </div>
 
       {/* <div id='pop-up-header'>

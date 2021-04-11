@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './Legend.css'
 
 /* eslint-disable react/prop-types */
-const LocButton = ({ subject, buttonOnLocClicked }) => {
+const LocButton = ({ subject, handleOnLocButtonClicked }) => {
   function flyTo () {
-    buttonOnLocClicked(subject.last_position.geometry.coordinates)
+    handleOnLocButtonClicked(subject.last_position.geometry.coordinates)
   }
 
   return (
     <>
-      <img src='./public/images/marker-feed.svg' id='subject-location-button' onClick={() => flyTo()} />
+      <img width='30' src='/public/images/button_icons/map_pin-gray.png' id='subject-location-button' onClick={() => flyTo()} />
     </>
   )
 }

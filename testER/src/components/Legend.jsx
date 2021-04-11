@@ -23,7 +23,7 @@ const Legend = ({ subs, track, subjectData, onTrackClick, onLocClick, legSub, on
         <div id='legend-content'>
           <div className='title'>
             {/* <h1>Legend</h1> */}
-            <a href='https://earthranger.com/' className='earthranger-logo' >
+            <a href='https://earthranger.com/' className='earthranger-logo'>
               <img src='./public/images/LogoEarthRanger.png' />
             </a>
           </div>
@@ -52,9 +52,9 @@ const Legend = ({ subs, track, subjectData, onTrackClick, onLocClick, legSub, on
             <div className='title'>
               {/* <h1>Legend</h1> */}
               {/* <div> */}
-                <a href='https://earthranger.com/' className='earthranger-logo'>
-                  <img src='./public/images/LogoEarthRanger.png'/>
-                </a>
+              <a href='https://earthranger.com/' className='earthranger-logo'>
+                <img src='./public/images/LogoEarthRanger.png' />
+              </a>
               {/* </div> */}
 
             </div>
