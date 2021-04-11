@@ -110,15 +110,6 @@
     /*padding: 10px;*/
 }
 
-.animal-name:hover {
-    cursor: pointer;
-    background-color: red;
-}
-
-.animal-name {
-    background-color: orange;
-}
-
 .fit-content {
     width: fit-content;
 }
@@ -260,7 +251,11 @@
 }
 
 .hover {
-    cursor: pointer;
+    cursor: pointer !important;
+}
+
+.default {
+    cursor: default;
 }
 
 #pop-up > p {
@@ -286,10 +281,6 @@
     border-bottom: solid dimgray 0.5px;
 }
 
-#return:hover {
-    cursor: pointer;
-}
-
 .sub-image {
     /* border: solid red; */
     width: 100%;
@@ -303,4 +294,9 @@
     align-items: center;
     justify-content: center;
     padding: 15px;
+}
+
+#animal-name-p {
+    /*margin: auto;*/
+    margin-top: 25px;
 }

@@ -6,18 +6,29 @@ import './Legend.css'
 /* eslint-disable react/prop-types */
 const Animal = ({ animal, configData, animalTrack, animalOnTrackClicked, animalOnLocClicked, onNameClick }) => {
   const backgroundColor = { backgroundColor: animal.color }
+  const animalId = animal.id + " animal"
+  let hover = 'hover'
+  let animalName = 'animal-name '
+
+  if (configData === undefined) {
+    hover = 'default'
+    animalName = ''
+  }
+
   return (
     <>
       <div id='animal-legend-content'>
         <div id='animal-color' style={backgroundColor} />
-        <div className='animal-name' className='fit-content' onClick={() => {
-              //onLocClick(s.last_position.geometry.coordinates)
-              /*if (this.classList.contains('animal-name')) {
+        <div className={'fit-content ' + animalName + hover} id={animalId} onClick={() => {
+              let name = document.getElementById(animalId)
+
+              if (name.classList.contains('animal-name')) {
                 onNameClick([animal, configData.subjects[animal.id]])
+                name.classList.toggle('animal-name')
+                name.classList.toggle('hover')
               }
-              this.classList.toggle('animal-name')*/
             }}>
-          <p>{animal.name}</p>
+          <p className={hover} id='animal-name-p'>{animal.name}</p>
         </div>
         <div id='track-buttons'>
           <TrackButton
@@ -29,8 +40,6 @@ const Animal = ({ animal, configData, animalTrack, animalOnTrackClicked, animalO
             subject={animal}
             buttonOnLocClicked={animalOnLocClicked}
           />
-          {// Add another icon to take to legend description of subject!!
-          /* <img id='arrow' className='hover' src='public/images/arrow.svg'/> */}
         </div>
 
       </div>
