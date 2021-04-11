@@ -17,11 +17,11 @@ const Animal = ({ animal, animalTrack, animalOnTrackClicked, animalOnLocClicked 
           <TrackButton
             subject={animal}
             buttonTrack={animalTrack}
-            buttonOnTrackClicked={animalOnTrackClicked}
+            handleOnLocButtonClicked={animalOnTrackClicked}
           />
           <LocButton
             subject={animal}
-            buttonOnLocClicked={animalOnLocClicked}
+            handleOnLocButtonClicked={animalOnLocClicked}
           />
           {// Add another icon to take to legend description of subject!!
           /* <img id='arrow' className='hover' src='public/images/arrow.svg'/> */}

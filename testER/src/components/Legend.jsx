@@ -23,18 +23,18 @@ const Legend = ({ subs, track, onTrackClick, onLocClick, legSub, onReturnClick }
         <div id='legend-content'>
           <div className='title'>
             {/* <h1>Legend</h1> */}
-            <a href='https://earthranger.com/' className='earthranger-logo' >
+            <a href='https://earthranger.com/' className='earthranger-logo'>
               <img src='./public/images/LogoEarthRanger.png' />
             </a>
           </div>
-          <div id="subs">
-          {/* // map all content  */}
-          {subs === undefined ? <div />
-            : subs.map((s) => (
-              <div id='subject-div'>
-                <Animal animal={s} animalTrack={track} animalOnTrackClicked={onTrackClick} key={s.id} animalOnLocClicked={onLocClick} />
-              </div>
-            ))}
+          <div id='subs'>
+            {/* // map all content  */}
+            {subs === undefined ? <div />
+              : subs.map((s) => (
+                <div key={s.id} id='subject-div'>
+                  <Animal animal={s} animalTrack={track} animalOnTrackClicked={onTrackClick} animalOnLocClicked={onLocClick} />
+                </div>
+              ))}
           </div>
         </div>
       )
@@ -50,11 +50,11 @@ const Legend = ({ subs, track, onTrackClick, onLocClick, legSub, onReturnClick }
             <div className='title'>
               {/* <h1>Legend</h1> */}
               {/* <div> */}
-                <a href='https://earthranger.com/' className='earthranger-logo'>
-                  <img src='./public/images/LogoEarthRanger.png'/>
-                </a>
+              <a href='https://earthranger.com/' className='earthranger-logo'>
+                <img src='./public/images/LogoEarthRanger.png' />
+              </a>
               {/* </div> */}
-              
+
             </div>
             <div onClick={() => onReturnClick(undefined)} id='return'>&#171; View all Tracked Animals</div>
             <div id='subject-div'>
