@@ -3,7 +3,7 @@ import './Legend.css'
 import Animal from './Animal.jsx'
 
 /* eslint-disable react/prop-types */
-const Legend = ({ subs, track, onTrackClick, onLocClick, legSub, onReturnClick }) => {
+const Legend = ({ subs, track, subjectData, onTrackClick, onLocClick, legSub, onReturnClick, onStoryClick }) => {
   var [leg, setLeg] = useState(true)
   var l = document.getElementById('legend')
 
@@ -27,14 +27,16 @@ const Legend = ({ subs, track, onTrackClick, onLocClick, legSub, onReturnClick }
               <img src='./public/images/LogoEarthRanger.png' />
             </a>
           </div>
-          <div id='subs'>
-            {/* // map all content  */}
-            {subs === undefined ? <div />
-              : subs.map((s) => (
-                <div key={s.id} id='subject-div'>
-                  <Animal animal={s} animalTrack={track} animalOnTrackClicked={onTrackClick} animalOnLocClicked={onLocClick} />
-                </div>
-              ))}
+          <div id="subs">
+          {/* // map all content  */}
+          {subs === undefined ? <div />
+            : subs.map((s) => (
+              <div id='subject-div'>
+                <Animal animal={s} configData={subjectData} animalTrack={track}
+                animalOnTrackClicked={onTrackClick} key={s.id}
+                animalOnLocClicked={onLocClick} onNameClick={onStoryClick}/>
+              </div>
+            ))}
           </div>
         </div>
       )
@@ -56,7 +58,7 @@ const Legend = ({ subs, track, onTrackClick, onLocClick, legSub, onReturnClick }
               {/* </div> */}
 
             </div>
-            <div onClick={() => onReturnClick(undefined)} id='return'>&#171; View all Tracked Animals</div>
+            <div onClick={() => onReturnClick(undefined)} id='return' className='hover'>&#171; View all Tracked Animals</div>
             <div id='subject-div'>
               <Animal animal={legSub[0]} animalTrack={track} animalOnTrackClicked={onTrackClick} key={legSub[0].id} animalOnLocClicked={onLocClick} />
             </div>
@@ -64,7 +66,7 @@ const Legend = ({ subs, track, onTrackClick, onLocClick, legSub, onReturnClick }
             {legSub[1].pictures.map((pic) => {
               return <img className='sub-image' key={pic} src={pic.path} height={200} width={200} alt='picture' />
             })}
-            <div id='sub-content'>
+            <div id='sub-content' className='default'>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam nisi in porro quia quae.
               Aspernatur labore nobis veniam. Quisquam optio ipsam laudantium alias, dolorum amet qui.
               Adipisci obcaecati veniam libero? Lorem ipsum dolor sit amet, consectetur adipisicing elit.

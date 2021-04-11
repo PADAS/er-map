@@ -112,8 +112,8 @@
     /*padding: 10px;*/
 }
 
-#animal-name:hover {
-    cursor: pointer;
+.fit-content {
+    width: fit-content;
 }
 
 #track-buttons {
@@ -253,7 +253,11 @@
 }
 
 .hover {
-    cursor: pointer;
+    cursor: pointer !important;
+}
+
+.default {
+    cursor: default;
 }
 
 #pop-up > p {
@@ -279,10 +283,6 @@
     border-bottom: solid dimgray 0.5px;
 }
 
-#return:hover {
-    cursor: pointer;
-}
-
 .sub-image {
     /* border: solid red; */
     width: 100%;
@@ -296,4 +296,9 @@
     align-items: center;
     justify-content: center;
     padding: 15px;
+}
+
+#animal-name-p {
+    /*margin: auto;*/
+    margin-top: 25px;
 }
