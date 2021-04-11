@@ -21,6 +21,16 @@
   cursor: pointer;
 }
 
+#reset {
+  z-index: 1;
+  top: 90px;
+  left: 10px;
+  position: absolute;
+  color: white;
+}
+
+#reset:hover { cursor: pointer; }
+
 /* LEGEND CSS */
 #legend {
   z-index: 1;
