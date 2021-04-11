@@ -74,6 +74,7 @@ const App = (props) => {
         })
         .then(resp => resp.json()) // returns a json object
         .then(resp => {
+          console.log(resp)
           resp.data.data.map((subject) => { // setTracks(tracks[subject.id] = false)
             if (subject.last_position !== undefined) {
               drawIcon(subject)
@@ -270,7 +271,8 @@ const App = (props) => {
             <SubjectPopup
               subject={json} subjectData={config.subjects[json.id]}
               track={tracks} onTrackClick={(updatedTrack) => {
-                const newState = tracks
+                //const newState = tracks
+                const newState = Object.assign({}, tracks)
                 newState[updatedTrack[0]] = updatedTrack[1]
                 setTracks(newState)
                 displayTracks(updatedTrack)
@@ -372,7 +374,9 @@ const App = (props) => {
           subs={subjects}
           track={tracks}
           onTrackClick={(updatedTrack) => {
-            const newState = tracks
+            //const newState = tracks
+            const newState = Object.assign({}, tracks)
+            console.log(tracks)
             newState[updatedTrack[0]] = updatedTrack[1]
             setTracks(newState)
             displayTracks(updatedTrack)
