@@ -19,6 +19,7 @@ const App = (props) => {
   var [tracks, setTracks] = useState({})
   var [subjectColor, setSubjectColor] = useState({})
   var [legSub, setLegSub] = useState(undefined)
+  var [legSubAvailable, setLegSubAvailable] = useState({})
 
   // TODO: detailed handling of missing config info
   function initMap () {
@@ -74,7 +75,6 @@ const App = (props) => {
         })
         .then(resp => resp.json()) // returns a json object
         .then(resp => {
-          console.log(resp)
           resp.data.data.map((subject) => { // setTracks(tracks[subject.id] = false)
             if (subject.last_position !== undefined) {
               drawIcon(subject)
@@ -82,7 +82,22 @@ const App = (props) => {
             const oldSubjectColorState = subjectColor
             oldSubjectColorState[subject.id] = subject.color
             setSubjectColor(oldSubjectColorState)
+
           }) // looping through array of subjects
+
+          // Sets a display_story to be true iff subject has images or description
+          //   associated with it (more info to show in legend story)
+          for (let i = 0; i < resp.data.data.length; i++) {
+            let id = resp.data.data[i].id;
+            if (config.subjects[id] != undefined
+              && (config.subjects[id].pictures != undefined
+                || config.subjects[id].detail_description != undefined)) {
+              resp.data.data[i].display_story = true;
+            } else {
+              resp.data.data[i].display_story = false;
+            }
+          }
+
           setSubjects(resp.data.data)
         })
         .catch(console.error)

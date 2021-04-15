@@ -4,15 +4,18 @@ import LocButton from './LocButton.jsx'
 import './Legend.css'
 
 /* eslint-disable react/prop-types */
-const Animal = ({ animal, configData, animalTrack, animalOnTrackClicked, animalOnLocClicked, onNameClick }) => {
+const Animal = ({ animal, configData, animalTrack, animalOnTrackClicked,
+                  animalOnLocClicked, onNameClick, displayStory }) => {
   const backgroundColor = { backgroundColor: animal.color }
   const animalId = animal.id + " animal"
   let hover = 'hover'
   let animalName = 'animal-name '
+  let display = {display: 'block'}
 
-  if (configData === undefined) {
+  if (configData === undefined || !displayStory) {
     hover = 'default'
     animalName = ''
+    display = {display: 'none'}
   }
 
   return (
@@ -40,6 +43,8 @@ const Animal = ({ animal, configData, animalTrack, animalOnTrackClicked, animalO
             subject={animal}
             handleOnLocButtonClicked={animalOnLocClicked}
           />
+          <img id='track-buttons' style={display} src='/public/images/button_icons/story-f.png'
+          onClick={() => {onNameClick([animal, configData.subjects[animal.id]])}}/>
         </div>
 
       </div>
