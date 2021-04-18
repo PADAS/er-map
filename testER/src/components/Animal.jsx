@@ -37,7 +37,7 @@ const Animal = ({ animal, configData, animalTrack, animalOnTrackClicked,
           <TrackButton
             subject={animal}
             buttonTrack={animalTrack}
-            handleOnLocButtonClicked={animalOnTrackClicked}
+            handleOnTrackButtonClicked={animalOnTrackClicked}
           />
           <LocButton
             subject={animal}
