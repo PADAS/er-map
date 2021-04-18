@@ -12,6 +12,7 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 mapboxgl.accessToken = 'pk.eyJ1IjoidmpvZWxtIiwiYSI6ImNra2hiZXNpMzA1bTcybnA3OXlycnN2ZjcifQ.gH6Nls61WTMVutUH57jMJQ' // development token
 let GlobalMap
 let config
+const keymap = {} // alt, r
 
 /* eslint-disable react/prop-types */
 const App = (props) => {
@@ -34,7 +35,7 @@ const App = (props) => {
       zoom: config.map.zoom === undefined ? 11 : config.map.zoom // starting zoom
     })
 
-    var nav = new mapboxgl.NavigationControl()
+    var nav = new mapboxgl.NavigationControl({ visualizePitch: true })
     GlobalMap.addControl(nav, 'top-left')
 
     GlobalMap.on('load', function () {
@@ -251,7 +252,22 @@ const App = (props) => {
           source: 'point' + json.id,
           layout: {
             'icon-image': json.subject_subtype + json.id,
-            'icon-size': json.common_name !== null ? 0.4 : 1.0
+            'icon-size': json.common_name !== null ? 0.4 : 1.0,
+            'icon-anchor': 'bottom' // TODO: test if this worked (no floating over water)
+          }
+        })
+        GlobalMap.addLayer({
+          id: 'name-labels' + json.id,
+          type: 'symbol',
+          source: 'point' + json.id,
+          layout: {
+            'text-field': json.last_position.properties.title,
+            'text-size': 15,
+            'text-offset': [0, 0.3],
+            'text-anchor': 'top'
+          },
+          paint: {
+            'text-color': 'white'
           }
         })
 
@@ -271,7 +287,7 @@ const App = (props) => {
             <SubjectPopup
               subject={json} subjectData={config.subjects[json.id]}
               track={tracks} onTrackClick={(updatedTrack) => {
-                //const newState = tracks
+                // const newState = tracks
                 const newState = Object.assign({}, tracks)
                 newState[updatedTrack[0]] = updatedTrack[1]
                 setTracks(newState)
@@ -353,6 +369,17 @@ const App = (props) => {
     })
   }
 
+  // hot key to reset map (alt + r)
+  const logKey = (e) => {
+    console.log(e.keyCode)
+    if (e.keyCode === 82 || e.keyCode === 18) { // 'r' = 82, alt = 18
+      keymap[e.keyCode] = (e.type === 'keydown')
+      if (keymap[82] && keymap[18]) {
+        resetMap()
+      }
+    }
+  }
+
   const resetMap = () => {
     GlobalMap.flyTo({
       center: config.map.center === undefined ? [-109.3666652, -27.1166662] : config.map.center, // starting position [lng, lat]
@@ -366,7 +393,7 @@ const App = (props) => {
 
   return (
     <>
-      <div id='map-container'>
+      <div id='map-container' onKeyDown={logKey} onKeyUp={logKey}>
         {/* <a href='https://earthranger.com/'>
           <img src='./public/images/LogoEarthRanger.png' id='earth-ranger-logo' />
         </a> */}
@@ -375,7 +402,7 @@ const App = (props) => {
           track={tracks}
           subjectData={config}
           onTrackClick={(updatedTrack) => {
-            //const newState = tracks
+            // const newState = tracks
             const newState = Object.assign({}, tracks)
             console.log(tracks)
             newState[updatedTrack[0]] = updatedTrack[1]
@@ -387,7 +414,7 @@ const App = (props) => {
           onReturnClick={(subject) => setLegSub(subject)}
           onStoryClick={(subject) => setLegSub(subject)}
         />
-        <p id='reset' onClick={resetMap}>RESET</p>
+        {/* <p id='reset' onClick={resetMap}>RESET</p> */}
       </div>
     </>
   )
