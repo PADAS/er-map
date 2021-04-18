@@ -419,7 +419,6 @@ const App = (props) => {
           onTrackClick={(updatedTrack) => {
             // const newState = tracks
             const newState = Object.assign({}, tracks)
-            console.log(tracks)
             newState[updatedTrack[0]] = updatedTrack[1]
             setTracks(newState)
             displayTracks(updatedTrack)
