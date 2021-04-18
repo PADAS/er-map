@@ -54,7 +54,7 @@ const SubjectPopup = (props) => {
           handleOnTrackButtonClicked={props.onTrackClick}
           handleOnLocButtonClicked={props.popupOnLocClicked}
         />
-        <img width='30' id='story' style={display} className='hover' src='/public/images/button_icons/story-gray.png' onClick={() => props.onStoryClick([subject, data])} />
+        <img width='30' id='story' style={display} className='hover' src='/public/images/button_icons/story-f.png' onClick={() => props.onStoryClick([subject, data])} />
       </div>
 
       {/* <div id='pop-up-header'>
