@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './Legend.css'
 
 /* eslint-disable react/prop-types */
-const TrackButton = ({ subject, buttonTrack, onTrackButtonClicked }) => {
+const TrackButton = ({ subject, buttonTrack, handleOnTrackButtonClicked }) => {
   var startingPoint = (buttonTrack[subject.id]) ? '/public/images/button_icons/pin_tracks-green.png' : '/public/images/button_icons/pin_tracks-gray.png'
 
   var [tracks, setTracks] = useState(startingPoint)
@@ -12,7 +12,7 @@ const TrackButton = ({ subject, buttonTrack, onTrackButtonClicked }) => {
     setVis(!vis)
     startingPoint = vis ? '/public/images/button_icons/pin_tracks-gray.png' : '/public/images/button_icons/pin_tracks-green.png'
     setTracks(startingPoint)
-    onTrackButtonClicked([subject.id, !vis])
+    handleOnTrackButtonClicked([subject.id, !vis])
   }
 
   return (
