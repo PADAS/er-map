@@ -34,7 +34,8 @@ const Legend = ({ subs, track, subjectData, onTrackClick, onLocClick, legSub, on
               <div id='subject-div'>
                 <Animal animal={s} configData={subjectData} animalTrack={track}
                 animalOnTrackClicked={onTrackClick} key={s.id}
-                animalOnLocClicked={onLocClick} onNameClick={onStoryClick}/>
+                animalOnLocClicked={onLocClick} onNameClick={onStoryClick}
+                displayStory={s.display_story}/>
               </div>
             ))}
           </div>
