@@ -21,6 +21,11 @@ const SubjectPopup = (props) => {
   let date = subject.last_position.properties.DateTime
   date = date.substring(5, 10) + '-' + date.substring(2, 4) + ' ' + date.substring(11, 16)
 
+  let display = {display: 'block'}
+  if (!subject.display_story) {
+    display = {display: 'none'}
+  }
+
   function returnImage () {
     if (data !== undefined && data.pictures.length > 0) {
       return <img className='pop-up-image' src={data.pictures[0].path} alt='picture' />
@@ -49,7 +54,7 @@ const SubjectPopup = (props) => {
           onTrackButtonClicked={props.onTrackClick}
           handleOnLocButtonClicked={props.popupOnLocClicked}
         />
-        <img width='30' id='story' className='hover' src='/public/images/button_icons/story-gray.png' onClick={() => props.onStoryClick([subject, data])} />
+        <img width='30' id='story' style={display} className='hover' src='/public/images/button_icons/story-gray.png' onClick={() => props.onStoryClick([subject, data])} />
       </div>
 
       {/* <div id='pop-up-header'>

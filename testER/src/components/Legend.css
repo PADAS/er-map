@@ -127,6 +127,10 @@
     padding: 10px;
 }
 
+#story-button {
+    width: 30px;
+}
+
 #track-buttons img {
     /* border: solid; */
     cursor: pointer;

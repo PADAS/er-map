@@ -43,7 +43,7 @@ const Animal = ({ animal, configData, animalTrack, animalOnTrackClicked,
             subject={animal}
             handleOnLocButtonClicked={animalOnLocClicked}
           />
-          <img id='track-buttons' style={display} src='/public/images/button_icons/story-f.png'
+          <img id='story-button' style={display} src='/public/images/button_icons/story-f.png'
           onClick={() => {onNameClick([animal, configData.subjects[animal.id]])}}/>
         </div>
 
