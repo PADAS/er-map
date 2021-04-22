@@ -27,17 +27,19 @@ const Legend = ({ subs, track, subjectData, onTrackClick, onLocClick, legSub, on
               <img src='./public/images/LogoEarthRanger.png' />
             </a>
           </div>
-          <div id="subs">
-          {/* // map all content  */}
-          {subs === undefined ? <div />
-            : subs.map((s) => (
-              <div id='subject-div'>
-                <Animal animal={s} configData={subjectData} animalTrack={track}
-                animalOnTrackClicked={onTrackClick} key={s.id}
-                animalOnLocClicked={onLocClick} onNameClick={onStoryClick}
-                displayStory={s.display_story}/>
-              </div>
-            ))}
+          <div id='subs'>
+            {/* // map all content  */}
+            {subs === undefined ? <div />
+              : subs.map((s) => (
+                <div id='subject-div'>
+                  <Animal
+                    animal={s} configData={subjectData} animalTrack={track}
+                    animalOnTrackClicked={onTrackClick} key={s.id}
+                    animalOnLocClicked={onLocClick} onNameClick={onStoryClick}
+                    displayStory={s.display_story}
+                  />
+                </div>
+              ))}
           </div>
         </div>
       )

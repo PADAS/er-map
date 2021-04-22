@@ -176,8 +176,8 @@
 .mapboxgl-popup-content {
     /*background: red;*/
     /* border: solid red; */
-    margin: 0;
-    padding: 0;
+    /* margin: 0;
+    padding: 0; */
 }
 
 .mapboxgl-popup-close-button {
@@ -186,15 +186,15 @@
 }
 
 .mapboxgl-popup-content div {
-    padding: 0;
+    /* padding: 0; */
     /* border: solid purple; */
-    margin: 0px;
+    /* margin: 0px; */
 }
 
 .mapboxgl-popup-content-wrapper {
     /* border: solid green; */
     /* padding: 100px; */
-    margin: 0;
+    /* margin: 0; */
 }
 
 /* .popup-track {  */
