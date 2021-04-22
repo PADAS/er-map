@@ -89,9 +89,9 @@ const App = (props) => {
           //   associated with it (more info to show in legend story)
           for (let i = 0; i < resp.data.data.length; i++) {
             const id = resp.data.data[i].id
-            if (config.subjects[id] != undefined &&
-              (config.subjects[id].pictures != undefined ||
-                config.subjects[id].detail_description != undefined)) {
+            if (config.subjects[id] !== undefined &&
+              (config.subjects[id].pictures !== undefined ||
+                config.subjects[id].detail_description !== undefined)) {
               resp.data.data[i].display_story = true
             } else {
               resp.data.data[i].display_story = false
@@ -267,7 +267,8 @@ const App = (props) => {
           layout: {
             'icon-image': json.subject_subtype + json.id,
             'icon-size': json.common_name !== null ? 0.4 : 1.0,
-            'icon-anchor': 'bottom' // TODO: test if this worked (no floating over water)
+            'icon-anchor': 'bottom'
+            // 'icon-padding': 2
           }
         })
         GlobalMap.addLayer({
@@ -309,68 +310,19 @@ const App = (props) => {
               }}
               onStoryClick={(subject) => setLegSub(subject)}
             />, placeholder)
-          new mapboxgl.Popup()
+          new mapboxgl.Popup({ offset: 25 })
             .setDOMContent(placeholder)
             .setLngLat(coordinates)
             .addTo(GlobalMap)
         })
 
-        // popup on hover
-        var popup = new mapboxgl.Popup({
-          closeButton: false,
-          closeOnClick: false
-        })
-
-        GlobalMap.on('mouseenter', 'points' + json.id, (e) => {
-          var coordinates = e.features[0].geometry.coordinates.slice()
+        // change mouse when hovering over a subject
+        GlobalMap.on('mouseenter', 'points' + json.id, () => {
           GlobalMap.getCanvas().style.cursor = 'pointer'
-
-          // Ensure that if the map is zoomed out such that multiple
-          // copies of the feature are visible, the popup appears
-          // over the copy being pointed to.
-          while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
-          }
-
-          const placeholder = document.createElement('div')
-          ReactDOM.render(
-            <SubjectPopup
-              subject={json} subjectData={config.subjects[json.id]}
-              track={tracks} onTrackClick={(updatedTrack) => {
-                const newState = tracks
-                newState[updatedTrack[0]] = updatedTrack[1]
-                setTracks(newState)
-                displayTracks(updatedTrack)
-              }}
-              onStoryClick={(subject) => setLegSub(subject)}
-            />, placeholder)
-
-          popup.setDOMContent(placeholder).setLngLat(coordinates).addTo(GlobalMap)
         })
-
         GlobalMap.on('mouseleave', 'points' + json.id, () => {
           GlobalMap.getCanvas().style.cursor = ''
-          popup.remove()
         })
-
-        /* const placeholder = document.createElement('div')
-        const name = document.createElement('p')
-        name.textContent = json.name
-        placeholder.appendChild(name);
-        placeholder.classList.add('name')
-        ReactDOM.render(<p className='name'>{json.name}</p>, placeholder)
-        new mapboxgl.Popup({closeButton: false, offset: {bottom: [0, 50]}, className:'namePopup', closeOnClick: false})
-          .setDOMContent(placeholder)
-          .setLngLat(json.last_position.geometry.coordinates)
-          .addTo(GlobalMap) */
-
-        // change mouse when hovering over a subject
-        // GlobalMap.on('mouseenter', 'points' + json.id, () => {
-        //   GlobalMap.getCanvas().style.cursor = 'pointer'
-        // })
-        // GlobalMap.on('mouseleave', 'points' + json.id, () => {
-        //   GlobalMap.getCanvas().style.cursor = ''
-        // })
       }
     )
   }

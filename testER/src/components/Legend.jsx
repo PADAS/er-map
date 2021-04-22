@@ -31,7 +31,7 @@ const Legend = ({ subs, track, subjectData, onTrackClick, onLocClick, legSub, on
             {/* // map all content  */}
             {subs === undefined ? <div />
               : subs.map((s) => (
-                <div id='subject-div'>
+                <div key={s.id} id='subject-div'>
                   <Animal
                     animal={s} configData={subjectData} animalTrack={track}
                     animalOnTrackClicked={onTrackClick} key={s.id}
