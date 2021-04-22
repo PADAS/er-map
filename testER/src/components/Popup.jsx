@@ -21,9 +21,9 @@ const SubjectPopup = (props) => {
   let date = subject.last_position.properties.DateTime
   date = date.substring(5, 10) + '-' + date.substring(2, 4) + ' ' + date.substring(11, 16)
 
-  let display = {display: 'block'}
+  let display = { display: 'block' }
   if (!subject.display_story) {
-    display = {display: 'none'}
+    display = { display: 'none' }
   }
 
   function returnImage () {
