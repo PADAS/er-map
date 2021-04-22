@@ -1,25 +1,25 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
+import { TrackContext } from '../App'
 import './Legend.css'
 
 /* eslint-disable react/prop-types */
-const TrackButton = ({ subject, buttonTrack, handleOnTrackButtonClicked }) => {
-  var startingPoint = (buttonTrack[subject.id]) ? '/public/images/button_icons/pin_tracks-green.png' : '/public/images/button_icons/pin_tracks-gray.png'
+const TrackButton = ({ subject }) => {
 
-  var [tracks, setTracks] = useState(startingPoint)
-  var [vis, setVis] = useState(buttonTrack[subject.id])
+  const { displayTracks, setTracks, tracks } = useContext(TrackContext)
 
-  function toggleTracks () {
-    setVis(!vis)
-    startingPoint = vis ? '/public/images/button_icons/pin_tracks-gray.png' : '/public/images/button_icons/pin_tracks-green.png'
-    setTracks(startingPoint)
-    handleOnTrackButtonClicked([subject.id, !vis])
-  }
+  const vis = !!tracks[subject.id]
+  const imgSrc = vis ? '/public/images/button_icons/pin_tracks-green.png' : '/public/images/button_icons/pin_tracks-gray.png'
 
-  return (
-    <>
-      <img width='30' className='hover' src={tracks} id='subject-track-button' onClick={() => toggleTracks()} />
-    </>
-  )
+  const onTrackButtonClick = () => {
+    const update = [subject.id, !vis]
+    const newState = Object.assign({}, tracks)
+    newState[update[0]] = update[1]
+    setTracks(newState)
+
+    displayTracks(update)
+  };
+
+  return <img width='30' className='hover' src={imgSrc} id='subject-track-button' onClick={onTrackButtonClick} />
 }
 
 export default TrackButton

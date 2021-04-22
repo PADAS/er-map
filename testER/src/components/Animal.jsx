@@ -5,7 +5,7 @@ import './Legend.css'
 
 /* eslint-disable react/prop-types */
 const Animal = ({
-  animal, configData, animalTrack, animalOnTrackClicked,
+  animal, configData,
   animalOnLocClicked, onNameClick, displayStory
 }) => {
   const backgroundColor = { backgroundColor: animal.color }
@@ -40,8 +40,6 @@ const Animal = ({
         <div id='track-buttons'>
           <TrackButton
             subject={animal}
-            buttonTrack={animalTrack}
-            handleOnTrackButtonClicked={animalOnTrackClicked}
           />
           <LocButton
             subject={animal}
