@@ -5,7 +5,7 @@
   "proxy": "http://localhost:5000",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open --host 0.0.0.0",
+    "start": "webpack-dev-server --mode development --open --host localhost",
     "build": "webpack --mode production",
     "lint": "eslint --cache --format codeframe --ext mjs,jsx,js src"
   },

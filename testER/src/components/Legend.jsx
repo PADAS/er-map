@@ -31,7 +31,7 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
             {/* // map all content  */}
             {subs === undefined ? <div />
               : subs.map((s) => (
-                <div id='subject-div'>
+                <div key={s.id} id='subject-div'>
                   <Animal
                     animal={s} configData={subjectData}
                     key={s.id}

@@ -2,7 +2,6 @@ import React from 'react'
 import './Popup.css'
 import './Legend.css'
 import TrackButton from './TrackButton.jsx'
-import { TrackContext } from '../App';
 
 /* eslint-disable react/prop-types */
 const SubjectPopup = (props) => {

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react' // eslint-disable-line no-unused-vars
 import ReactDOM from 'react-dom'
 import mapboxgl from 'mapbox-gl'
 
@@ -7,9 +7,11 @@ const Popup = ({ children, coordinates, onClose }) => {
   const popup = useRef(new mapboxgl.Popup())
 
   useEffect(() => {
-    popup.current.addTo(window.GlobalMap)
+    const currentPopupRefValue = popup.current
 
-    return () => popup.current.remove()
+    currentPopupRefValue.addTo(window.GlobalMap)
+
+    return () => currentPopupRefValue.remove()
   }, [])
 
   useEffect(() => {
@@ -17,9 +19,11 @@ const Popup = ({ children, coordinates, onClose }) => {
   }, [popup, coordinates])
 
   useEffect(() => {
-    popup.current.on('close', onClose)
+    const currentPopupRefValue = popup.current
 
-    return () => popup.current.off('close', onClose)
+    currentPopupRefValue.on('close', onClose)
+
+    return () => currentPopupRefValue.off('close', onClose)
   }, [popup, onClose])
 
   useEffect(() => {
@@ -30,7 +34,6 @@ const Popup = ({ children, coordinates, onClose }) => {
   }, [popup, children])
 
   return null
-
 }
 
 export default Popup

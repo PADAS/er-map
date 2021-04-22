@@ -4,7 +4,6 @@ import './Legend.css'
 
 /* eslint-disable react/prop-types */
 const TrackButton = ({ subject }) => {
-
   const { displayTracks, setTracks, tracks } = useContext(TrackContext)
 
   const vis = !!tracks[subject.id]
@@ -17,7 +16,7 @@ const TrackButton = ({ subject }) => {
     setTracks(newState)
 
     displayTracks(update)
-  };
+  }
 
   return <img width='30' className='hover' src={imgSrc} id='subject-track-button' onClick={onTrackButtonClick} />
 }

@@ -1,7 +1,6 @@
-import React, { createContext, useCallback, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import ReactGA from 'react-ga'
 import mapboxgl from 'mapbox-gl'
-import ReactDOM from 'react-dom'
 import SubjectPopupContent from './components/SubjectPopupContent'
 import Popup from './components/Popup'
 import Legend from './components/Legend'
@@ -15,9 +14,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoidmpvZWxtIiwiYSI6ImNra2hiZXNpMzA1bTcybnA3OXlyc
 let config
 const keymap = {} // alt, r
 
-
 window.GlobalMap = null
-
 
 export const TrackContext = createContext({})
 
@@ -27,8 +24,7 @@ const App = (props) => {
   var [tracks, setTracks] = useState({})
   var [subjectColor, setSubjectColor] = useState({})
   var [legSub, setLegSub] = useState(undefined)
-  var [legSubAvailable, setLegSubAvailable] = useState({})
-  const [subjectPopups, setSubjectPopups] = useState([]);
+  const [subjectPopups, setSubjectPopups] = useState([])
 
   // TODO: detailed handling of missing config info
   function initMap () {
@@ -97,9 +93,9 @@ const App = (props) => {
           //   associated with it (more info to show in legend story)
           for (let i = 0; i < resp.data.data.length; i++) {
             const id = resp.data.data[i].id
-            if (config.subjects[id] != undefined &&
-              (config.subjects[id].pictures != undefined ||
-                config.subjects[id].detail_description != undefined)) {
+            if (config.subjects[id] !== undefined &&
+              (config.subjects[id].pictures !== undefined ||
+                config.subjects[id].detail_description !== undefined)) {
               resp.data.data[i].display_story = true
             } else {
               resp.data.data[i].display_story = false
@@ -200,7 +196,7 @@ const App = (props) => {
     return function cleanup () {
       isSubscribed = false
     }
-  }, [])
+  }, []) /* eslint-disable-line react-hooks/exhaustive-deps */
 
   function displayTracks (updatedTrack) {
     const id = updatedTrack[0]
@@ -218,7 +214,6 @@ const App = (props) => {
       window.GlobalMap.setLayoutProperty('LineString ' + id, 'visibility', 'none') // turn off visibility
     }
   }
-
 
   // Draw tracks and add button component to display tracks
   function fetchTrack (subjectId) {
@@ -276,7 +271,8 @@ const App = (props) => {
           layout: {
             'icon-image': json.subject_subtype + json.id,
             'icon-size': json.common_name !== null ? 0.4 : 1.0,
-            'icon-anchor': 'bottom' // TODO: test if this worked (no floating over water)
+            'icon-anchor': 'bottom'
+            // 'icon-padding': 2
           }
         })
         window.GlobalMap.addLayer({
@@ -308,35 +304,10 @@ const App = (props) => {
           setSubjectPopups(
             [...subjectPopups, {
               geometry: e.features[0].geometry,
-              properties: json,
+              properties: json
             }]
           )
         })
-
-        // popup on hover
-        var popup = new mapboxgl.Popup({
-          closeButton: false,
-          closeOnClick: false
-        })
-
-        /* const placeholder = document.createElement('div')
-        const name = document.createElement('p')
-        name.textContent = json.name
-        placeholder.appendChild(name);
-        placeholder.classList.add('name')
-        ReactDOM.render(<p className='name'>{json.name}</p>, placeholder)
-        new mapboxgl.Popup({closeButton: false, offset: {bottom: [0, 50]}, className:'namePopup', closeOnClick: false})
-          .setDOMContent(placeholder)
-          .setLngLat(json.last_position.geometry.coordinates)
-          .addTo(window.GlobalMap) */
-
-        // change mouse when hovering over a subject
-        // window.GlobalMap.on('mouseenter', 'points' + json.id, () => {
-        //   window.GlobalMap.getCanvas().style.cursor = 'pointer'
-        // })
-        // window.GlobalMap.on('mouseleave', 'points' + json.id, () => {
-        //   window.GlobalMap.getCanvas().style.cursor = ''
-        // })
       }
     )
   }
@@ -372,38 +343,39 @@ const App = (props) => {
   }
 
   return <TrackContext.Provider value={{ displayTracks, setTracks, tracks }}>
-      <div id='map-container' onKeyDown={logKey} onKeyUp={logKey}>
-        {/* <a href='https://earthranger.com/'>
+    <div id='map-container' onKeyDown={logKey} onKeyUp={logKey}>
+      {/* <a href='https://earthranger.com/'>
           <img src='./public/images/LogoEarthRanger.png' id='earth-ranger-logo' />
         </a> */}
-        <Legend
-          subs={subjects}
-          subjectData={config}
-          onLocClick={(coords) => goToLoc(coords)}
-          legSub={legSub}
-          onReturnClick={(subject) => setLegSub(subject)}
-          onStoryClick={(subject) => setLegSub(subject)}
-        />
-        {/* <p id='reset' onClick={resetMap}>RESET</p> */}
-      </div>
-      {subjectPopups.map(({ properties, geometry }) => 
-        <Popup
-          key={`${properties.id}-popup`}
-          onClose={() => {
-            setSubjectPopups(
-              subjectPopups
-                .filter(({ properties: { id } }) =>
-                  id !== properties.id
+      <Legend
+        subs={subjects}
+        subjectData={config}
+        onLocClick={(coords) => goToLoc(coords)}
+        legSub={legSub}
+        onReturnClick={(subject) => setLegSub(subject)}
+        onStoryClick={(subject) => setLegSub(subject)}
+      />
+      {/* <p id='reset' onClick={resetMap}>RESET</p> */}
+    </div>
+    {subjectPopups.map(({ properties, geometry }) =>
+      <Popup
+        key={`${properties.id}-popup`}
+        onClose={() => {
+          setSubjectPopups(
+            subjectPopups
+              .filter(({ properties: { id } }) =>
+                id !== properties.id
               )
-            )
-          }}
-          coordinates={geometry.coordinates.slice()} >
-            <TrackContext.Provider value={{ displayTracks, setTracks, tracks }}>
-              <SubjectPopupContent subject={properties} subjectData={config.subjects[properties.id]} onStoryClick={(subject) => setLegSub(subject)} {...props}  />
-            </TrackContext.Provider>
-          </Popup>
-      )}
-    </TrackContext.Provider>
+          )
+        }}
+        coordinates={geometry.coordinates.slice()}
+      >
+        <TrackContext.Provider value={{ displayTracks, setTracks, tracks }}>
+          <SubjectPopupContent subject={properties} subjectData={config.subjects[properties.id]} onStoryClick={(subject) => setLegSub(subject)} {...props} />
+        </TrackContext.Provider>
+      </Popup>
+    )}
+  </TrackContext.Provider> /* eslint-disable-line react/jsx-closing-tag-location */
 }
 
 export default App
