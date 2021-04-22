@@ -308,6 +308,13 @@ const App = (props) => {
             }]
           )
         })
+
+        window.GlobalMap.on('mouseenter', 'points' + json.id, () => {
+          window.GlobalMap.getCanvas().style.cursor = 'pointer'
+        })
+        window.GlobalMap.on('mouseleave', 'points' + json.id, () => {
+          window.GlobalMap.getCanvas().style.cursor = ''
+        })
       }
     )
   }
