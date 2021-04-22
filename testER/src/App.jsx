@@ -397,8 +397,7 @@ const App = (props) => {
               )
             )
           }}
-          coordinates={geometry.coordinates.slice()}
-          >
+          coordinates={geometry.coordinates.slice()} >
             <TrackContext.Provider value={{ displayTracks, setTracks, tracks }}>
               <SubjectPopupContent subject={properties} subjectData={config.subjects[properties.id]} onStoryClick={(subject) => setLegSub(subject)} {...props}  />
             </TrackContext.Provider>

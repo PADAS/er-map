@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef } from 'react';
+import React, { Fragment, useEffect, useRef } from 'react'
 import ReactDOM from 'react-dom'
 import mapboxgl from 'mapbox-gl'
 
@@ -10,7 +10,7 @@ const Popup = ({ children, coordinates, onClose }) => {
     popup.current.addTo(window.GlobalMap)
 
     return () => popup.current.remove()
-  }, []);
+  }, [])
 
   useEffect(() => {
     popup.current.setLngLat(coordinates)
@@ -26,9 +26,7 @@ const Popup = ({ children, coordinates, onClose }) => {
     const container = document.createElement('div')
 
     ReactDOM.render(children, container)
-
-    popup.current.setDOMContent(container);
-
+    popup.current.setDOMContent(container)
   }, [popup, children])
 
   return null
