@@ -1,18 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import ReactGA from 'react-ga'
 import mapboxgl from 'mapbox-gl'
-import ReactDOM from 'react-dom'
-import SubjectPopup from './components/Popup'
-import Legend from './components/Legend.jsx'
+import SubjectPopupContent from './components/SubjectPopupContent'
+import Popup from './components/Popup'
+import Legend from './components/Legend'
 
 import './App.css'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
 // instantiate the Map
 mapboxgl.accessToken = 'pk.eyJ1IjoidmpvZWxtIiwiYSI6ImNra2hiZXNpMzA1bTcybnA3OXlycnN2ZjcifQ.gH6Nls61WTMVutUH57jMJQ' // development token
-let GlobalMap
+
 let config
 const keymap = {} // alt, r
+
+window.GlobalMap = null
+
+export const TrackContext = createContext({})
 
 /* eslint-disable react/prop-types */
 const App = (props) => {
@@ -20,7 +24,7 @@ const App = (props) => {
   var [tracks, setTracks] = useState({})
   var [subjectColor, setSubjectColor] = useState({})
   var [legSub, setLegSub] = useState(undefined)
-  var [legSubAvailable, setLegSubAvailable] = useState({})
+  const [subjectPopups, setSubjectPopups] = useState([])
 
   // TODO: detailed handling of missing config info
   function initMap () {
@@ -29,7 +33,7 @@ const App = (props) => {
     ReactGA.initialize(trackingId)
     ReactGA.pageview(window.location.pathname + window.location.search)
 
-    GlobalMap = new mapboxgl.Map({
+    window.GlobalMap = new mapboxgl.Map({
       container: 'map-container', // container ID
       style: 'mapbox://styles/mapbox/satellite-v9',
       center: config.map.center === undefined ? [-109.3666652, -27.1166662] : config.map.center, // starting position [lng, lat]
@@ -37,11 +41,11 @@ const App = (props) => {
     })
 
     var nav = new mapboxgl.NavigationControl({ visualizePitch: true })
-    GlobalMap.addControl(nav, 'top-left')
+    window.GlobalMap.addControl(nav, 'top-left')
 
-    GlobalMap.on('load', function () {
+    window.GlobalMap.on('load', function () {
       // add the 3D terrain source
-      GlobalMap.addSource('mapbox-dem', {
+      window.GlobalMap.addSource('mapbox-dem', {
         type: 'raster-dem',
         url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
         tileSize: 512,
@@ -49,7 +53,7 @@ const App = (props) => {
       })
 
       // add a sky layer that will show when the map is highly pitched
-      GlobalMap.addLayer({
+      window.GlobalMap.addLayer({
         id: 'sky',
         type: 'sky',
         paint: {
@@ -60,9 +64,9 @@ const App = (props) => {
       })
 
       // add 3D terrain
-      GlobalMap.on('render', function () {
+      window.GlobalMap.on('render', function () {
         // add the DEM source as a terrain layer with exaggerated height
-        GlobalMap.setTerrain({ source: 'mapbox-dem', exaggeration: 3 })
+        window.GlobalMap.setTerrain({ source: 'mapbox-dem', exaggeration: 3 })
       })
 
       // fetch call for subjects
@@ -103,7 +107,7 @@ const App = (props) => {
         .catch(console.error)
 
       // Cluster attempt
-      // GlobalMap.addSource('wildlife', {
+      // window.GlobalMap.addSource('wildlife', {
       //   type: 'geojson',
       //   data: subjects,
       //   cluster: true,
@@ -111,7 +115,7 @@ const App = (props) => {
       //   clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
       // });
 
-      // GlobalMap.addLayer({
+      // window.GlobalMap.addLayer({
       //   id: 'clusters',
       //   type: 'circle',
       //   source: 'wildlife',
@@ -143,7 +147,7 @@ const App = (props) => {
       //   }
       //   });
 
-      // GlobalMap.addLayer({
+      // window.GlobalMap.addLayer({
       //   id: 'cluster-count',
       //   type: 'symbol',
       //   source: 'wildlife',
@@ -155,7 +159,7 @@ const App = (props) => {
       //   }
       //   });
 
-      //   GlobalMap.addLayer({
+      //   window.GlobalMap.addLayer({
       //   id: 'unclustered-point',
       //   type: 'circle',
       //   source: 'wildlife',
@@ -192,22 +196,22 @@ const App = (props) => {
     return function cleanup () {
       isSubscribed = false
     }
-  }, [])
+  }, []) /* eslint-disable-line react-hooks/exhaustive-deps */
 
   function displayTracks (updatedTrack) {
     const id = updatedTrack[0]
     const displayed = updatedTrack[1]
 
-    const layer = GlobalMap.getLayer('LineString ' + id)
+    const layer = window.GlobalMap.getLayer('LineString ' + id)
 
     if (displayed) {
       if (layer === undefined) {
         fetchTrack(id)
       } else {
-        GlobalMap.setLayoutProperty('LineString ' + id, 'visibility', 'visible') // turn on visibility
+        window.GlobalMap.setLayoutProperty('LineString ' + id, 'visibility', 'visible') // turn on visibility
       }
     } else {
-      GlobalMap.setLayoutProperty('LineString ' + id, 'visibility', 'none') // turn off visibility
+      window.GlobalMap.setLayoutProperty('LineString ' + id, 'visibility', 'none') // turn off visibility
     }
   }
 
@@ -229,12 +233,12 @@ const App = (props) => {
   }
 
   function drawTrack (json, subjectId) {
-    GlobalMap.addSource(json.features[0].geometry.type + ' ' + json.features[0].properties.id, {
+    window.GlobalMap.addSource(json.features[0].geometry.type + ' ' + json.features[0].properties.id, {
       type: 'geojson',
       data: json
     })
 
-    GlobalMap.addLayer({
+    window.GlobalMap.addLayer({
       id: json.features[0].geometry.type + ' ' + json.features[0].properties.id,
       type: 'line',
       source: json.features[0].geometry.type + ' ' + json.features[0].properties.id,
@@ -250,17 +254,17 @@ const App = (props) => {
   }
 
   function drawIcon (json) {
-    // GlobalMap.loadImage(json.last_position.properties.image,
+    // window.GlobalMap.loadImage(json.last_position.properties.image,
     const imgURL = json.common_name !== null ? ('public/images/animal_icons/' + json.common_name + '.png') : json.last_position.properties.image
-    GlobalMap.loadImage(imgURL,
+    window.GlobalMap.loadImage(imgURL,
       function (error, image) {
         if (error) throw error
-        GlobalMap.addImage(json.subject_subtype + json.id, image)
-        GlobalMap.addSource('point' + json.id, {
+        window.GlobalMap.addImage(json.subject_subtype + json.id, image)
+        window.GlobalMap.addSource('point' + json.id, {
           type: 'geojson',
           data: json.last_position
         })
-        GlobalMap.addLayer({
+        window.GlobalMap.addLayer({
           id: 'points' + json.id,
           type: 'symbol',
           source: 'point' + json.id,
@@ -271,7 +275,7 @@ const App = (props) => {
             // 'icon-padding': 2
           }
         })
-        GlobalMap.addLayer({
+        window.GlobalMap.addLayer({
           id: 'name-labels' + json.id,
           type: 'symbol',
           source: 'point' + json.id,
@@ -287,7 +291,7 @@ const App = (props) => {
         })
 
         // bind popup to subject
-        GlobalMap.on('click', 'points' + json.id, (e) => {
+        window.GlobalMap.on('click', 'points' + json.id, (e) => {
           var coordinates = e.features[0].geometry.coordinates.slice()
 
           // Ensure that if the map is zoomed out such that multiple
@@ -297,38 +301,26 @@ const App = (props) => {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
           }
 
-          const placeholder = document.createElement('div')
-          ReactDOM.render(
-            <SubjectPopup
-              subject={json} subjectData={config.subjects[json.id]}
-              track={tracks} onTrackClick={(updatedTrack) => {
-                // const newState = tracks
-                const newState = Object.assign({}, tracks)
-                newState[updatedTrack[0]] = updatedTrack[1]
-                setTracks(newState)
-                displayTracks(updatedTrack)
-              }}
-              onStoryClick={(subject) => setLegSub(subject)}
-            />, placeholder)
-          new mapboxgl.Popup({ offset: 25 })
-            .setDOMContent(placeholder)
-            .setLngLat(coordinates)
-            .addTo(GlobalMap)
+          setSubjectPopups(
+            [...subjectPopups, {
+              geometry: e.features[0].geometry,
+              properties: json
+            }]
+          )
         })
 
-        // change mouse when hovering over a subject
-        GlobalMap.on('mouseenter', 'points' + json.id, () => {
-          GlobalMap.getCanvas().style.cursor = 'pointer'
+        window.GlobalMap.on('mouseenter', 'points' + json.id, () => {
+          window.GlobalMap.getCanvas().style.cursor = 'pointer'
         })
-        GlobalMap.on('mouseleave', 'points' + json.id, () => {
-          GlobalMap.getCanvas().style.cursor = ''
+        window.GlobalMap.on('mouseleave', 'points' + json.id, () => {
+          window.GlobalMap.getCanvas().style.cursor = ''
         })
       }
     )
   }
 
   function goToLoc (coords) {
-    GlobalMap.flyTo({
+    window.GlobalMap.flyTo({
       center: coords,
       zoom: 15,
       essential: true
@@ -347,7 +339,7 @@ const App = (props) => {
   }
 
   const resetMap = () => {
-    GlobalMap.flyTo({
+    window.GlobalMap.flyTo({
       center: config.map.center === undefined ? [-109.3666652, -27.1166662] : config.map.center, // starting position [lng, lat]
       zoom: config.map.zoom === undefined ? 11 : config.map.zoom, // starting zoom
       essential: true,
@@ -357,32 +349,40 @@ const App = (props) => {
     // toggle off all tracks??
   }
 
-  return (
-    <>
-      <div id='map-container' onKeyDown={logKey} onKeyUp={logKey}>
-        {/* <a href='https://earthranger.com/'>
+  return <TrackContext.Provider value={{ displayTracks, setTracks, tracks }}>
+    <div id='map-container' onKeyDown={logKey} onKeyUp={logKey}>
+      {/* <a href='https://earthranger.com/'>
           <img src='./public/images/LogoEarthRanger.png' id='earth-ranger-logo' />
         </a> */}
-        <Legend
-          subs={subjects}
-          track={tracks}
-          subjectData={config}
-          onTrackClick={(updatedTrack) => {
-            // const newState = tracks
-            const newState = Object.assign({}, tracks)
-            newState[updatedTrack[0]] = updatedTrack[1]
-            setTracks(newState)
-            displayTracks(updatedTrack)
-          }}
-          onLocClick={(coords) => goToLoc(coords)}
-          legSub={legSub}
-          onReturnClick={(subject) => setLegSub(subject)}
-          onStoryClick={(subject) => setLegSub(subject)}
-        />
-        {/* <p id='reset' onClick={resetMap}>RESET</p> */}
-      </div>
-    </>
-  )
+      <Legend
+        subs={subjects}
+        subjectData={config}
+        onLocClick={(coords) => goToLoc(coords)}
+        legSub={legSub}
+        onReturnClick={(subject) => setLegSub(subject)}
+        onStoryClick={(subject) => setLegSub(subject)}
+      />
+      {/* <p id='reset' onClick={resetMap}>RESET</p> */}
+    </div>
+    {subjectPopups.map(({ properties, geometry }) =>
+      <Popup
+        key={`${properties.id}-popup`}
+        onClose={() => {
+          setSubjectPopups(
+            subjectPopups
+              .filter(({ properties: { id } }) =>
+                id !== properties.id
+              )
+          )
+        }}
+        coordinates={geometry.coordinates.slice()}
+      >
+        <TrackContext.Provider value={{ displayTracks, setTracks, tracks }}>
+          <SubjectPopupContent subject={properties} subjectData={config.subjects[properties.id]} onStoryClick={(subject) => setLegSub(subject)} {...props} />
+        </TrackContext.Provider>
+      </Popup>
+    )}
+  </TrackContext.Provider> /* eslint-disable-line react/jsx-closing-tag-location */
 }
 
 export default App

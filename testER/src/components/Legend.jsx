@@ -3,7 +3,7 @@ import './Legend.css'
 import Animal from './Animal.jsx'
 
 /* eslint-disable react/prop-types */
-const Legend = ({ subs, track, subjectData, onTrackClick, onLocClick, legSub, onReturnClick, onStoryClick }) => {
+const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryClick }) => {
   var [leg, setLeg] = useState(true)
   var l = document.getElementById('legend')
 
@@ -33,8 +33,8 @@ const Legend = ({ subs, track, subjectData, onTrackClick, onLocClick, legSub, on
               : subs.map((s) => (
                 <div key={s.id} id='subject-div'>
                   <Animal
-                    animal={s} configData={subjectData} animalTrack={track}
-                    animalOnTrackClicked={onTrackClick} key={s.id}
+                    animal={s} configData={subjectData}
+                    key={s.id}
                     animalOnLocClicked={onLocClick} onNameClick={onStoryClick}
                     displayStory={s.display_story}
                   />
@@ -63,7 +63,7 @@ const Legend = ({ subs, track, subjectData, onTrackClick, onLocClick, legSub, on
             </div>
             <div onClick={() => onReturnClick(undefined)} id='return' className='hover'>&#171; View all Tracked Animals</div>
             <div id='subject-div'>
-              <Animal animal={legSub[0]} animalTrack={track} animalOnTrackClicked={onTrackClick} key={legSub[0].id} animalOnLocClicked={onLocClick} />
+              <Animal animal={legSub[0]} key={legSub[0].id} animalOnLocClicked={onLocClick} />
             </div>
             {/* <h2>{legSub[0].name}</h2> */}
             {legSub[1].pictures.map((pic) => {
