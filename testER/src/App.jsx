@@ -66,7 +66,7 @@ const App = (props) => {
       })
 
       // fetch call for subjects
-      const url = 'https://ermap-server-sandbox.pamdas.org/api/v1.0/subjects'
+      const url = `https://${config.server}/api/v1.0/subjects`
       fetch(url)
         .then(resp => {
           if (resp.ok) {
@@ -78,6 +78,10 @@ const App = (props) => {
         .then(resp => {
           resp.data.data.map((subject) => { // setTracks(tracks[subject.id] = false)
             if (subject.last_position !== undefined) {
+              // override subject name if provided in config
+              if (config.subjects[subject.id] && config.subjects[subject.id].name) {
+                subject.name = config.subjects[subject.id].name;
+              }
               drawIcon(subject)
             }
             const oldSubjectColorState = subjectColor
@@ -89,15 +93,8 @@ const App = (props) => {
           //   associated with it (more info to show in legend story)
           for (let i = 0; i < resp.data.data.length; i++) {
             const id = resp.data.data[i].id
-            if (config.subjects[id] !== undefined &&
-              (config.subjects[id].pictures !== undefined ||
-                config.subjects[id].detail_description !== undefined)) {
-              resp.data.data[i].display_story = true
-            } else {
-              resp.data.data[i].display_story = false
-            }
+            resp.data.data[i].display_story = config.subjects[id] && (config.subjects[id].pictures || config.subjects[id].detail_description)
           }
-
           setSubjects(resp.data.data)
         })
         .catch(console.error)
@@ -213,7 +210,7 @@ const App = (props) => {
 
   // Draw tracks and add button component to display tracks
   function fetchTrack (subjectId) {
-    const url = 'https://ermap-server-sandbox.pamdas.org/api/v1.0/subject/' + subjectId + '/tracks'
+    const url = `https://${config.server}/api/v1.0/subject/` + subjectId + '/tracks'
     fetch(url)
       .then(resp => {
         if (resp.ok) {
@@ -271,20 +268,22 @@ const App = (props) => {
             // 'icon-padding': 2
           }
         })
-        GlobalMap.addLayer({
-          id: 'name-labels' + json.id,
-          type: 'symbol',
-          source: 'point' + json.id,
-          layout: {
-            'text-field': json.last_position.properties.title,
-            'text-size': 15,
-            'text-offset': [0, 0.3],
-            'text-anchor': 'top'
-          },
-          paint: {
-            'text-color': 'white'
-          }
-        })
+        if (config.map.subject_names) {
+          GlobalMap.addLayer({
+            id: 'name-labels' + json.id,
+            type: 'symbol',
+            source: 'point' + json.id,
+            layout: {
+              'text-field': json.name,
+              'text-size': 15,
+              'text-offset': [0, 0.3],
+              'text-anchor': 'top'
+            },
+            paint: {
+              'text-color': 'white'
+            }
+          })
+        }
 
         // bind popup to subject
         GlobalMap.on('click', 'points' + json.id, (e) => {
