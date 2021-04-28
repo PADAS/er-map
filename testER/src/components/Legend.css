@@ -5,7 +5,7 @@
 /* LEGEND BUTTON */
 #legend {
     /* border: solid red; */
-    height: 100%;
+    height: 97%;
     /* width: 260px; */
     width: 325px;
     /* background-color: white; */
@@ -18,6 +18,8 @@
 
 #legend-open-button {
     /* border: solid blue; */
+    opacity: 0.9;
+    border-radius: 10px 0 0 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,6 +32,7 @@
     height: 100px;
     background-color: white;
 }
+
 
 #legend-content{
     /* border: solid purple; */
@@ -46,7 +49,8 @@
 
 
 .title {
-    background-color: black;
+    background-color: #5D4B3F;
+    opacity: 0.95;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,9 +70,11 @@
 
 .earthranger-logo img {
     width: 100%;
+    /* width: 90px; */
     margin: auto;
     padding: 10px 0 10px 0;
     /* border: solid blue; */
+    opacity: 0.5;
 }
 
 #animal-color {
@@ -77,7 +83,7 @@
 }
 
 /* ANIMAL LEGEND CONTENT */
-#animal-legend-content {
+.animal-legend-content {
     /* border: solid green; */
     width: 100%;
     height: 70px;
@@ -85,6 +91,8 @@
     display: grid;
     /* grid-template-columns: 14% 45% 41%; */
     grid-template-columns: 40.9px 131.6px 120px;
+    background-color: rgba(255,255,255,.95);
+    /* border-bottom: solid 1pt rgba(0,0,0,.15) */
 }
 
 #track-buttons {
@@ -93,6 +101,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    /* border: solid black; */
 }
 
 #animal-img {
@@ -244,7 +253,7 @@
 } */
 
 #subject-div {
-    border-bottom: solid 1pt grey;
+    border-bottom: solid 1pt rgba(0,0,0,.15);
 }
 
 #story {

@@ -271,15 +271,7 @@ const App = (props) => {
           layout: {
             'icon-image': json.subject_subtype + json.id,
             'icon-size': json.common_name !== null ? 0.4 : 1.0,
-            'icon-anchor': 'bottom'
-            // 'icon-padding': 2
-          }
-        })
-        window.GlobalMap.addLayer({
-          id: 'name-labels' + json.id,
-          type: 'symbol',
-          source: 'point' + json.id,
-          layout: {
+            'icon-anchor': 'bottom',
             'text-field': json.last_position.properties.title,
             'text-size': 15,
             'text-offset': [0, 0.3],
@@ -289,6 +281,20 @@ const App = (props) => {
             'text-color': 'white'
           }
         })
+        // window.GlobalMap.addLayer({
+        //   id: 'name-labels' + json.id,
+        //   type: 'symbol',
+        //   source: 'point' + json.id,
+        //   layout: {
+        //     'text-field': json.last_position.properties.title,
+        //     'text-size': 15,
+        //     'text-offset': [0, 0.3],
+        //     'text-anchor': 'top'
+        //   },
+        //   paint: {
+        //     'text-color': 'white'
+        //   }
+        // })
 
         // bind popup to subject
         window.GlobalMap.on('click', 'points' + json.id, (e) => {

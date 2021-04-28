@@ -6,13 +6,16 @@ import Animal from './Animal.jsx'
 const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryClick }) => {
   var [leg, setLeg] = useState(true)
   var l = document.getElementById('legend')
+  var [legImage, setLegImage] = useState("./public/images/button_icons/double_caret-right.png");
 
   function toggleLegend () {
     setLeg(!leg)
     if (leg) {
       l.style.width = '32.5px'
+      setLegImage("./public/images/button_icons/double_caret-left.png")
     } else {
       l.style.width = '325px'
+      setLegImage("./public/images/button_icons/double_caret-right.png")
     }
   }
 
@@ -61,7 +64,10 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
               {/* </div> */}
 
             </div>
-            <div onClick={() => onReturnClick(undefined)} id='return' className='hover'>&#171; View all Tracked Animals</div>
+            <div onClick={() => onReturnClick(undefined)} id='return' className='hover'>
+              <img src="./public/images/button_icons/view-animals-caret-left.png"/>
+              View all Tracked Animals
+            </div>
             <div id='subject-div'>
               <Animal animal={legSub[0]} key={legSub[0].id} animalOnLocClicked={onLocClick} />
             </div>
@@ -98,21 +104,9 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
     <>
       <div id='legend'>
         <div id='legend-open-button' onClick={() => toggleLegend()}>
-          <p>LEGEND</p>
+          <img src={legImage}/>
         </div>
-        {/* <div id='earthranger-title'> */}
-        {/* <img src='./public/images/LogoEarthRanger.png' /> */}
-        {/* <p>Hi</p>
-            </div> */}
         {display()}
-
-        {/* <div id='legend-content'> */}
-        {/* // map all content  */}
-        {/* {subs === undefined ? <div />
-            : subs.map((s) => (
-              <Animal animal={s} animalTrack={track} animalOnTrackClicked={onTrackClick} key={s.id} animalOnLocClicked={onLocClick} />
-            ))}
-        </div> */}
       </div>
     </>
   )

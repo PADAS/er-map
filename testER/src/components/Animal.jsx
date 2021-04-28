@@ -22,7 +22,7 @@ const Animal = ({
 
   return (
     <>
-      <div id='animal-legend-content'>
+      <div class='animal-legend-content'>
         <div id='animal-color' style={backgroundColor} />
         <div
           className={'fit-content ' + animalName + hover} id={animalId} onClick={() => {
@@ -50,8 +50,7 @@ const Animal = ({
             onClick={() => { onNameClick([animal, configData.subjects[animal.id]]) }}
           />
         </div>
-
-      </div>
+        </div>
     </>
   )
 }
