@@ -3,7 +3,8 @@ import './Legend.css'
 
 /* eslint-disable react/prop-types */
 const HelpButton = () => {
-  const imgSrc = '/public/images/button_icons/tips-gray.png';
+  const imgSrc = '/public/images/button_icons/tips-gray.png'
+  const closeIconSrc = '/public/images/button_icons/close-icon.png'
 
   return (
   <div id='tips-container'>
@@ -14,7 +15,13 @@ const HelpButton = () => {
       <img id='help-button' src={imgSrc}/>
     </div>
     <div id='tips' className='hidden'>
-      <h2>Helpful Tips</h2>
+      <div>
+        <h2>Helpful Tips</h2>
+        <img id='close-icon' src={closeIconSrc} onClick={() => {
+          let tips = document.getElementById('tips')
+          tips.classList.add('hidden')
+        }}/>
+      </div>
       <ul>
         <li>To tilt the map, press the control key (Mac) or ?? key (Windows)</li>
         <li>To set the map back... etc</li>

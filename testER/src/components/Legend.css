@@ -338,10 +338,11 @@
     border-radius: 3px;
     width: 250px;
     background-color: white;
+    margin-top: 15px;
 }
 
 #tips h2 {
-    padding-top: 10px;
+    /*padding-top: 10px;*/
     padding-left: 10px;
 }
 
@@ -351,4 +352,17 @@
 
 .hidden {
     display: none;
+}
+
+#close-icon {
+    width: 12px;
+    height: 12px;
+    padding: 10px;
+    opacity: 90%;
+    cursor: pointer;
+}
+
+#tips div {
+    display: flex;
+    justify-content: space-between;
 }
