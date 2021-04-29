@@ -4,25 +4,23 @@ import './Legend.css'
 /* eslint-disable react/prop-types */
 const HelpButton = () => {
   const imgSrc = '/public/images/button_icons/tips-gray.png';
-  /*const { displayTracks, setTracks, tracks } = useContext(TrackContext)
-
-  const vis = !!tracks[subject.id]
-  const imgSrc = vis ? '/public/images/button_icons/pin_tracks-green.png' : '/public/images/button_icons/pin_tracks-gray.png'
-
-  const onTrackButtonClick = () => {
-    const update = [subject.id, !vis]
-    const newState = Object.assign({}, tracks)
-    newState[update[0]] = update[1]
-    setTracks(newState)
-
-    displayTracks(update)
-  }*/
 
   return (
-    <div id='test' className='hover' onClick={() => {
-      console.log("clicked help button!")
+  <div id='tips-container'>
+    <div id='tips-button-container' className='hover' onClick={() => {
+      let tips = document.getElementById('tips')
+      tips.classList.toggle('hidden')
     }}>
       <img id='help-button' src={imgSrc}/>
+    </div>
+    <div id='tips' className='hidden'>
+      <h2>Helpful Tips</h2>
+      <ul>
+        <li>To tilt the map, press the control key (Mac) or ?? key (Windows)</li>
+        <li>To set the map back... etc</li>
+        <li>Other helpful tips here</li>
+      </ul>
+    </div>
   </div>
 )}
 

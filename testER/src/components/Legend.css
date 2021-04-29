@@ -318,14 +318,37 @@
     width: 12px;
 }
 
-#test {
-    padding-top: 5px;
-    padding-left: 8px;
-    padding-right: 8.5px;
-    background-color: white;
+#tips-container {
     position: absolute;
     z-index: 1;
     top: 105px;
     left: 10px;
+}
+
+#tips-button-container {
+    padding-top: 5px;
+    padding-left: 8px;
+    padding-right: 8.5px;
+    background-color: white;
     border-radius: 3px;
+    width: fit-content;
+}
+
+#tips {
+    border-radius: 3px;
+    width: 250px;
+    background-color: white;
+}
+
+#tips h2 {
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+#tips ul {
+    padding-bottom: 10px;
+}
+
+.hidden {
+    display: none;
 }
