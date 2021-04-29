@@ -306,3 +306,26 @@
     /*margin: auto;*/
     margin-top: 25px;
 }
+
+#help-button {
+    /*position: fixed;
+    top: 50;
+    /*bottom: 500;
+    left: 50;
+    margin: 50px;
+    border: solid 5px red;
+    background-color: red;*/
+    width: 12px;
+}
+
+#test {
+    padding-top: 5px;
+    padding-left: 8px;
+    padding-right: 8.5px;
+    background-color: white;
+    position: absolute;
+    z-index: 1;
+    top: 105px;
+    left: 10px;
+    border-radius: 3px;
+}
