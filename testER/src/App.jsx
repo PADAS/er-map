@@ -248,7 +248,15 @@ const App = (props) => {
 
   function drawIcon (json) {
     // GlobalMap.loadImage(json.last_position.properties.image,
-    const imgURL = json.common_name !== null ? ('public/images/animal_icons/' + json.common_name + '.png') : json.last_position.properties.image
+    let imgURL
+    if (config.subjects[json.id] && config.subjects[json.id].icon) {
+      console.log(json.name + " config")
+      imgURL = config.subjects[json.id].icon
+    } else if (json.common_name !== null) {
+      imgURL = 'public/images/animal_icons/' + json.common_name + '.png'
+    } else {
+      imgURL = json.last_position.properties.image
+    }
     GlobalMap.loadImage(imgURL,
       function (error, image) {
         if (error) throw error
