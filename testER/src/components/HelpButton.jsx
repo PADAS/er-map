@@ -26,13 +26,15 @@ const HelpButton = () => {
         <h2>Helpful Tips</h2>
         <img id='close-icon' src={closeIconSrc} onClick={() => {
           if (iconSrc === imgOffSrc) {
-            setIconSrc(imgOnSrc);
+            setIconSrc(imgOnSrc)
           } else {
-            setIconSrc(imgOffSrc);
+            setIconSrc(imgOffSrc)
           }
 
-          let tips = document.getElementById('tips')
-          tips.classList.add('hidden')
+          setTimeout(function() {
+            let tips = document.getElementById('tips')
+            tips.classList.add('hidden')
+            }, 500)
         }}/>
       </div>
       <ul>
