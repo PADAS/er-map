@@ -9,33 +9,34 @@ const Animal = ({
   animalOnLocClicked, onNameClick, displayStory
 }) => {
   const backgroundColor = { backgroundColor: animal.color }
+  const bulletColor = { color: animal.color }
   const animalId = animal.id + ' animal'
   let hover = 'hover'
   let animalName = 'animal-name '
-  let display = { display: 'block' }
+  let display = { }
 
   if (configData === undefined || !displayStory) {
     hover = 'default'
     animalName = ''
-    display = { display: 'none' }
+    display = { visibility: 'hidden' }
   }
 
   return (
     <>
-      <div id='animal-legend-content'>
-        <div id='animal-color' /*style={backgroundColor}*/ />
-        <div
-          className={'fit-content ' + animalName + hover} id={animalId} onClick={() => {
-            const name = document.getElementById(animalId)
+      <div id='animal-legend-content' className={hover} onClick={() => {
+        const name = document.getElementById(animalId)
 
-            if (name.classList.contains('animal-name')) {
-              onNameClick([animal, configData.subjects[animal.id]])
-              name.classList.toggle('animal-name')
-              name.classList.toggle('hover')
-            }
-          }}
-        >
-          <p className={hover} id='animal-name-p'>{animal.name}</p>
+        if (name.classList.contains('animal-name')) {
+          onNameClick([animal, configData.subjects[animal.id]])
+          name.classList.toggle('animal-name')
+          name.classList.toggle('hover')
+        }
+      }}>
+        <div id='animal-color' /*style={backgroundColor}*/ />
+        <div className={'animal-name-bullet ' + animalName + hover} id={animalId}>
+          <ul id='ul-list'>
+          <li id="animal-bullet" style={bulletColor}><p className={hover} id='animal-name-p'>{animal.name}</p></li>
+          </ul>
         </div>
         <div id='track-buttons'>
           <TrackButton
@@ -45,11 +46,8 @@ const Animal = ({
             subject={animal}
             handleOnLocButtonClicked={animalOnLocClicked}
           />
-          <img
-            id='story-button' style={display} src='/public/images/button_icons/story-f.png'
-            onClick={() => { onNameClick([animal, configData.subjects[animal.id]]) }}
-          />
         </div>
+        <img id='story-button' style={display} src='/public/images/button_icons/story-f.png'/>
 
       </div>
     </>
