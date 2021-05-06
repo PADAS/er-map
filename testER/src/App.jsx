@@ -280,7 +280,7 @@ const App = (props) => {
             'icon-image': json.subject_subtype + json.id,
             'icon-size': json.common_name !== null ? 0.4 : 1.0,
             'icon-anchor': 'bottom',
-            'text-field': json.last_position.properties.title,
+            'text-field': json.name,
             'text-size': 15,
             'text-offset': [0, 0.3],
             'text-anchor': 'top'
