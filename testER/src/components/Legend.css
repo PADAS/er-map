@@ -72,7 +72,7 @@
 }
 
 #animal-color {
-    background-color: pink;
+    /*border-right: solid grey 1px;*/
     width: 55%;
 }
 
@@ -305,6 +305,7 @@
 #animal-name-p {
     /*margin: auto;*/
     margin-top: 25px;
+    font-size: 14px;
 }
 
 #help-button {
@@ -365,4 +366,8 @@
 #tips div {
     display: flex;
     justify-content: space-between;
+}
+
+.mapboxgl-popup-close-button {
+    display: none;
 }

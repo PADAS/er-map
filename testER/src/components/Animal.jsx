@@ -23,7 +23,7 @@ const Animal = ({
   return (
     <>
       <div id='animal-legend-content'>
-        <div id='animal-color' style={backgroundColor} />
+        <div id='animal-color' /*style={backgroundColor}*/ />
         <div
           className={'fit-content ' + animalName + hover} id={animalId} onClick={() => {
             const name = document.getElementById(animalId)
