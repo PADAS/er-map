@@ -4,6 +4,7 @@ import mapboxgl from 'mapbox-gl'
 import SubjectPopupContent from './components/SubjectPopupContent'
 import Popup from './components/Popup'
 import Legend from './components/Legend'
+import HelpButton from './components/HelpButton'
 
 import './App.css'
 import 'mapbox-gl/dist/mapbox-gl.css'
@@ -341,8 +342,11 @@ const App = (props) => {
     // toggle off all tracks??
   }
 
-  return <TrackContext.Provider value={{ displayTracks, setTracks, tracks }}>
+  return (
+  <>
+  <TrackContext.Provider value={{ displayTracks, setTracks, tracks }}>
     <div id='map-container' onKeyDown={logKey} onKeyUp={logKey}>
+      <HelpButton/>
       {/* <a href='https://earthranger.com/'>
           <img src='./public/images/LogoEarthRanger.png' id='earth-ranger-logo' />
         </a> */}
@@ -375,6 +379,7 @@ const App = (props) => {
       </Popup>
     )}
   </TrackContext.Provider> /* eslint-disable-line react/jsx-closing-tag-location */
-}
+  </>
+  )}
 
 export default App
