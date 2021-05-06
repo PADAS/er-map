@@ -253,6 +253,7 @@ const App = (props) => {
       console.log(json.name + " config")
       imgURL = config.subjects[json.id].icon
     } else if (json.common_name !== null) {
+      // todo: handle when no image in library for common name
       imgURL = 'public/images/animal_icons/' + json.common_name + '.png'
     } else {
       imgURL = json.last_position.properties.image
