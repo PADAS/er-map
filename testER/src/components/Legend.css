@@ -115,7 +115,8 @@
 
 
 #animal-color {
-    background-color: pink;
+    /*border-right: solid grey 1px;*/
+    display: none;
     width: 55%;
 }
 
@@ -124,21 +125,10 @@
     /* border: solid green; */
     width: 100%;
     height: 70px;
-
-    display: grid;
-    /* grid-template-columns: 14% 45% 41%; */
-    grid-template-columns: 40.9px 131.6px 120px;
-    background-color: rgba(255,255,255,.95);
-    /* border-bottom: solid 1pt rgba(0,0,0,.15) */
-}
-
-#track-buttons {
-    /* border: solid; */
+    /*display: grid;
+    grid-template-columns: 40.9px 131.6px 120px;*/
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    /* border: solid black; */
+    justify-content: space-between;
 }
 
 #animal-img {
@@ -146,6 +136,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#animal-bullet {
+    font-size: 28px;
 }
 
 #animal-name {
@@ -158,29 +152,27 @@
     /*padding: 10px;*/
 }
 
+.animal-name-bullet {
+    width: 150px;
+}
+
 .fit-content {
     width: fit-content;
 }
 
 #track-buttons {
-    /* border: solid; */
-    /* width: 100%; */
     width: 70px;
-    margin: auto;
     display: flex;
-    justify-content: flex-end;
-    margin: auto;
     padding: 10px;
 }
 
-#story-button {
-    width: 30px;
-}
-
-#track-buttons img {
+#animal-legend-content img {
     /* border: solid; */
+    width: 30px;
+    height: 30px;
     cursor: pointer;
     padding: 7px;
+    margin: auto;
 }
 
 /* POP-UP STYLING */
@@ -350,4 +342,74 @@
 #animal-name-p {
     /*margin: auto;*/
     margin-top: 25px;
+    font-size: 15px;
+    color: black;
+}
+
+#ul-list {
+    margin: none;
+}
+
+#help-button {
+    /*position: fixed;
+    top: 50;
+    /*bottom: 500;
+    left: 50;
+    margin: 50px;
+    border: solid 5px red;
+    background-color: red;*/
+    width: 12px;
+}
+
+#tips-container {
+    position: absolute;
+    z-index: 1;
+    top: 105px;
+    left: 10px;
+}
+
+#tips-button-container {
+    padding-top: 5px;
+    padding-left: 8px;
+    padding-right: 8.5px;
+    background-color: white;
+    border-radius: 3px;
+    width: fit-content;
+}
+
+#tips {
+    border-radius: 3px;
+    width: 250px;
+    background-color: white;
+    margin-top: 15px;
+}
+
+#tips h2 {
+    /*padding-top: 10px;*/
+    padding-left: 10px;
+}
+
+#tips ul {
+    padding-bottom: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+#close-icon {
+    width: 12px;
+    height: 12px;
+    padding: 10px;
+    opacity: 90%;
+    cursor: pointer;
+}
+
+#tips div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mapboxgl-popup-close-button {
+    display: none;
 }

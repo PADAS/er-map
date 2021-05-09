@@ -74,7 +74,7 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
             {legSub[1].pictures.map((pic) => {
               return <img className='sub-image' key={pic} src={pic.path} height={200} width={200} alt='picture' />
             })}
-            <div id='sub-content' className='default'>
+            {/* <div id='sub-content' className='default'>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam nisi in porro quia quae.
               Aspernatur labore nobis veniam. Quisquam optio ipsam laudantium alias, dolorum amet qui.
               Adipisci obcaecati veniam libero? Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -90,8 +90,8 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
               Adipisci obcaecati veniam libero? Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               Recusandae libero molestias vero reprehenderit, harum quaerat placeat dignissimos sunt inventore
               voluptatibus esse repellat adipisci dolore. Tenetur quis consequatur et corporis nam?
-            </div>
-            {/* <div dangerouslySetInnerHTML={{ __html: legSub[1].detail_description }} /> */}
+            </div> */}
+            <div id='sub-content' className='default' dangerouslySetInnerHTML={{ __html: legSub[1].detail_description }} />
             {/* <div>Donate Now</div> */}
           </div>
         </>

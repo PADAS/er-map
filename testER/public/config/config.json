@@ -1,37 +1,39 @@
 {
+    "server": "ermap-server-sandbox.pamdas.org",
     "map": {
         "center": [-109.3666652, -27.1166662],
-        "zoom": 11
+        "zoom": 11,
+        "subject_names": true
     },
     "subjects":
     {
         "d98cad8d-f6cb-4e62-a3fe-5fe38e69a347":
         {    
             "name": "Najin",
+            "icon": "/public/images/animal_icons/great_white_shark_5.png", 
             "pictures":
             [
                 {
                     "path": "https://www.eurekalert.org/multimedia/pub/web/221627_web.jpg"
                 }
             ],
-            "detail_description": "<font>Detailed description of <b>Najin</b> in simple HTML</font>",
+            "detail_description": "<p>Detailed description of <b>Najin</b> in simple HTML<br><br>Lorem ipsum dolor, <i>sit amet consectetur adipisicing elit. Totam nisi in </i>porro quia quae. Aspernatur labore <b>nobis veniam. Quisquam optio ipsam laudantium alias, dolorum</b> amet qui. Adipisci obcaecati veniam libero? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae libero molestias vero reprehenderit, harum quaerat placeat dignissimos sunt inventore voluptatibus esse repellat adipisci dolore. Tenetur quis consequatur et corporis nam? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam nisi in porro quia quae. Aspernatur labore nobis veniam. Quisquam optio ipsam laudantium alias, dolorum amet qui. Adipisci obcaecati veniam libero? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae libero molestias vero reprehenderit, harum quaerat placeat dignissimos sunt inventore voluptatibus esse repellat adipisci dolore. Tenetur quis consequatur et corporis nam? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam nisi in porro quia quae. Aspernatur labore nobis veniam. Quisquam optio ipsam laudantium alias, dolorum amet qui. Adipisci obcaecati veniam libero? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae libero molestias vero reprehenderit, harum quaerat placeat dignissimos sunt inventore voluptatibus esse repellat adipisci dolore. Tenetur quis consequatur et corporis nam?</p>",
             "more_info_path": "http://georgia-fan-club.org"
         },
         "f6b20ca9-9f72-44ed-adf7-41e84f3d2407":
         {   
-            "name": "Horton", 
             "pictures":
             [
                 {
                     "path": "https://assets.nrdc.org/sites/default/files/styles/full_content--retina/public/media-uploads/wlds43_654640_2400.jpg"
                 }
             ],
-            "detail_description": "<font>Detailed description of <b>Horton</b> in simple HTML</font>",
+            "detail_description": "<p>Detailed description of <b>Horton</b> in simple HTML<br><br>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam nisi in porro quia quae. Aspernatur labore nobis veniam. Quisquam optio ipsam laudantium alias, dolorum amet qui. Adipisci obcaecati veniam libero? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae libero molestias vero reprehenderit, harum quaerat placeat dignissimos sunt inventore voluptatibus esse repellat adipisci dolore. Tenetur quis consequatur et corporis nam? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam nisi in porro quia quae. Aspernatur labore nobis veniam. Quisquam optio ipsam laudantium alias, dolorum amet qui. Adipisci obcaecati veniam libero? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae libero molestias vero reprehenderit, harum quaerat placeat dignissimos sunt inventore voluptatibus esse repellat adipisci dolore. Tenetur quis consequatur et corporis nam? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam nisi in porro quia quae. Aspernatur labore nobis veniam. Quisquam optio ipsam laudantium alias, dolorum amet qui. Adipisci obcaecati veniam libero? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae libero molestias vero reprehenderit, harum quaerat placeat dignissimos sunt inventore voluptatibus esse repellat adipisci dolore. Tenetur quis consequatur et corporis nam?</p>",
             "more_info_path": "http://georgia-fan-club.org"
         },
         "b12007c0-955f-4b15-9a9f-d335b9413aa4":
         {   
-            "name": "Fatu", 
+            "name": "Fatu V2", 
             "pictures":
             [
                 {
@@ -41,7 +43,7 @@
                     "path": "https://www.eurekalert.org/multimedia/pub/web/221627_web.jpg"
                 }
             ],
-            "detail_description": "<font>Detailed description of <b>Fatu</b> in simple HTML</font>",
+            "detail_description": "<p>Detailed description of <b>Fatu</b> in simple HTML<br><br>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam nisi in porro quia quae. Aspernatur labore nobis veniam. Quisquam optio ipsam laudantium alias, dolorum amet qui. Adipisci obcaecati veniam libero? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae libero molestias vero reprehenderit, harum quaerat placeat dignissimos sunt inventore voluptatibus esse repellat adipisci dolore. Tenetur quis consequatur et corporis nam? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam nisi in porro quia quae. Aspernatur labore nobis veniam. Quisquam optio ipsam laudantium alias, dolorum amet qui. Adipisci obcaecati veniam libero? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae libero molestias vero reprehenderit, harum quaerat placeat dignissimos sunt inventore voluptatibus esse repellat adipisci dolore. Tenetur quis consequatur et corporis nam? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam nisi in porro quia quae. Aspernatur labore nobis veniam. Quisquam optio ipsam laudantium alias, dolorum amet qui. Adipisci obcaecati veniam libero? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae libero molestias vero reprehenderit, harum quaerat placeat dignissimos sunt inventore voluptatibus esse repellat adipisci dolore. Tenetur quis consequatur et corporis nam?</p>",
             "more_info_path": "http://georgia-fan-club.org"
         }
     }
