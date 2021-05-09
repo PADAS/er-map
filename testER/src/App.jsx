@@ -32,7 +32,6 @@ const App = (props) => {
     setLegendOpen(!legendOpen)
   }
 
-  // TODO: detailed handling of missing config info
   function initMap () {
     // set up google analytics
     const trackingId = 'UA-128569083-10' // Google Analytics tracking ID
@@ -86,11 +85,11 @@ const App = (props) => {
         })
         .then(resp => resp.json()) // returns a json object
         .then(resp => {
-          resp.data.data.map((subject) => { // setTracks(tracks[subject.id] = false)
+          resp.data.data.map((subject) => {
             if (subject.last_position !== undefined) {
               // override subject name if provided in config
               if (config.subjects[subject.id] && config.subjects[subject.id].name) {
-                subject.name = config.subjects[subject.id].name;
+                subject.name = config.subjects[subject.id].name
               }
               drawIcon(subject)
             }
@@ -108,72 +107,6 @@ const App = (props) => {
           setSubjects(resp.data.data)
         })
         .catch(console.error)
-
-      // Cluster attempt
-      // window.GlobalMap.addSource('wildlife', {
-      //   type: 'geojson',
-      //   data: subjects,
-      //   cluster: true,
-      //   clusterMaxZoom: 14, // Max zoom to cluster points on
-      //   clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
-      // });
-
-      // window.GlobalMap.addLayer({
-      //   id: 'clusters',
-      //   type: 'circle',
-      //   source: 'wildlife',
-      //   filter: ['has', 'point_count'],
-      //   paint: {
-      //   // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
-      //   // with three steps to implement three types of circles:
-      //   //   * Blue, 20px circles when point count is less than 100
-      //   //   * Yellow, 30px circles when point count is between 100 and 750
-      //   //   * Pink, 40px circles when point count is greater than or equal to 750
-      //   'circle-color': [
-      //   'step',
-      //   ['get', 'point_count'],
-      //   '#51bbd6',
-      //   100,
-      //   '#f1f075',
-      //   750,
-      //   '#f28cb1'
-      //   ],
-      //   'circle-radius': [
-      //   'step',
-      //   ['get', 'point_count'],
-      //   20,
-      //   100,
-      //   30,
-      //   750,
-      //   40
-      //   ]
-      //   }
-      //   });
-
-      // window.GlobalMap.addLayer({
-      //   id: 'cluster-count',
-      //   type: 'symbol',
-      //   source: 'wildlife',
-      //   filter: ['has', 'point_count'],
-      //   layout: {
-      //   'text-field': '{point_count_abbreviated}',
-      //   'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-      //   'text-size': 12
-      //   }
-      //   });
-
-      //   window.GlobalMap.addLayer({
-      //   id: 'unclustered-point',
-      //   type: 'circle',
-      //   source: 'wildlife',
-      //   filter: ['!', ['has', 'point_count']],
-      //   paint: {
-      //   'circle-color': '#11b4da',
-      //   'circle-radius': 4,
-      //   'circle-stroke-width': 1,
-      //   'circle-stroke-color': '#fff'
-      //   }
-      //   });
     })
   }
 
@@ -257,10 +190,9 @@ const App = (props) => {
   }
 
   function drawIcon (json) {
-    // window.GlobalMap.loadImage(json.last_position.properties.image,
     let imgURL
     if (config.subjects[json.id] && config.subjects[json.id].icon) {
-      console.log(json.name + " config")
+      console.log(json.name + ' config')
       imgURL = config.subjects[json.id].icon
     } else if (json.common_name !== null) {
       // todo: handle when no image in library for common name
@@ -356,45 +288,42 @@ const App = (props) => {
   }
 
   return (
-  <>
-  <TrackContext.Provider value={{ displayTracks, setTracks, tracks }}>
-    <div id='map-container' onKeyDown={logKey} onKeyUp={logKey}>
-      <HelpButton/>
-      {/* <a href='https://earthranger.com/'>
-          <img src='./public/images/LogoEarthRanger.png' id='earth-ranger-logo' />
-        </a> */}
-      <Legend
-        subs={subjects}
-        subjectData={config}
-        onLocClick={(coords) => goToLoc(coords)}
-        legendOpen={legendOpen}
-        onLegendStateToggle={toggleLegendState}
-        legSub={legSub}
-        onReturnClick={(subject) => setLegSub(subject)}
-        onStoryClick={(subject) => setLegSub(subject)}
-      />
-      {/* <p id='reset' onClick={resetMap}>RESET</p> */}
-    </div>
-    {subjectPopups.map(({ properties, geometry }) =>
-      <Popup
-        key={`${properties.id}-popup`}
-        onClose={() => {
-          setSubjectPopups(
-            subjectPopups
-              .filter(({ properties: { id } }) =>
-                id !== properties.id
+    <>
+      <TrackContext.Provider value={{ displayTracks, setTracks, tracks }}>
+        <div id='map-container' onKeyDown={logKey} onKeyUp={logKey}>
+          <HelpButton />
+          <Legend
+            subs={subjects}
+            subjectData={config}
+            onLocClick={(coords) => goToLoc(coords)}
+            legendOpen={legendOpen}
+            onLegendStateToggle={toggleLegendState}
+            legSub={legSub}
+            onReturnClick={(subject) => setLegSub(subject)}
+            onStoryClick={(subject) => setLegSub(subject)}
+          />
+        </div>
+        {subjectPopups.map(({ properties, geometry }) =>
+          <Popup
+            key={`${properties.id}-popup`}
+            onClose={() => {
+              setSubjectPopups(
+                subjectPopups
+                  .filter(({ properties: { id } }) =>
+                    id !== properties.id
+                  )
               )
-          )
-        }}
-        coordinates={geometry.coordinates.slice()}
-      >
-        <TrackContext.Provider value={{ displayTracks, setTracks, tracks }}>
-          <SubjectPopupContent subject={properties} subjectData={config.subjects[properties.id]} onStoryClick={(subject) => setLegSub(subject)} legendOpen={legendOpen} onLegendStateToggle={toggleLegendState} {...props} />
-        </TrackContext.Provider>
-      </Popup>
-    )}
-  </TrackContext.Provider> /* eslint-disable-line react/jsx-closing-tag-location */
-  </>
-  )}
+            }}
+            coordinates={geometry.coordinates.slice()}
+          >
+            <TrackContext.Provider value={{ displayTracks, setTracks, tracks }}>
+              <SubjectPopupContent subject={properties} subjectData={config.subjects[properties.id]} onStoryClick={(subject) => setLegSub(subject)} legendOpen={legendOpen} onLegendStateToggle={toggleLegendState} {...props} />
+            </TrackContext.Provider>
+          </Popup>
+        )}
+      </TrackContext.Provider> {/* eslint-disable-line react/jsx-closing-tag-location */}
+    </>
+  )
+}
 
 export default App

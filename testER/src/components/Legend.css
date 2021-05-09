@@ -5,11 +5,7 @@
 /* LEGEND BUTTON */
 #legend {
     height: 97%;
-    /* width: 260px; */
-    /* background-color: white; */
     display: grid;
-    /* border: solid green; */
-    /* grid-template-columns: 10% 90%; */
     grid-template-columns: 32.5px 292.5px;
     transition: width 1s;
 }
@@ -27,63 +23,33 @@
 }
 
 #legend-open-button {
-    /* border: solid blue; */
     opacity: 0.9;
     border-radius: 10px 0 0 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     writing-mode: vertical-rl;
-    /* text-orientation: upright; */
     font-size: 13px;
-    /* word-spacing: 1px; */
     font-family: 'Baloo 2', cursive;
     cursor: pointer;
-    /* height: 100px; */
     height: 70px;
     background-color: white;
 }
 
 
 #legend-content{
-    /* overflow: auto; */
     background-color: white;
-    /* border: solid red; */
-    /* overflow: auto; */
-    /* border-right-style: black solid 20px; */
 }
-
-#subs {
-    /* border: solid yellow; */
-    /* position: relative; */
-    /* overflow: auto; */
-}
-
 
 .title {
     background-color: #5D4B3F;
     opacity: 0.95;
-    /* display: flex; */
-    /* border: solid blue; */
-    /* justify-content: left;
-    align-items: center; */
-    /* border: solid blue; */
-    /* flex-direction: row; */
     display: grid;
     height: 70px;
     grid-template-rows: 30px 40px;
-    /* flex-direction: column; */
-    /* justify-content: center; */
-    /* padding: 20px; */
-    /* border: solid red; */
-}
-
-.title div {
-    /* border: solid blue; */
 }
 
 #tracker p {
-    /* border: solid green; */
     margin: 5px 0 0 15px;
     padding: 0;
     font-size: 22pt;
@@ -91,31 +57,26 @@
 }
 
 #earthranger-logo {
-    /* border: solid pink; */
     display: flex;
     justify-content: left;
     align-items: flex-end;
 }
 
 #earthranger-logo a {
-    /* border: solid red; */
     margin: 0;
     padding: 0;
     display: flex;
-    /* justify-content: left; */
     align-items: flex-end;
     margin: 0 0 5px 15px;
 }
 
 #earthranger-logo img {
     width: 90px;
-    /* border: solid black; */
     opacity: 0.5;
 }
 
 
 #animal-color {
-    /*border-right: solid grey 1px;*/
     display: none;
     width: 55%;
 }
@@ -129,17 +90,13 @@
 
 /* ANIMAL LEGEND CONTENT */
 .animal-legend-content {
-    /* border: solid green; */
     width: 100%;
     height: 70px;
-    /*display: grid;
-    grid-template-columns: 40.9px 131.6px 120px;*/
     display: flex;
     justify-content: space-between;
 }
 
 #animal-img {
-    /* border: solid; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -150,13 +107,11 @@
 }
 
 #animal-name {
-    /* border: solid; */
     display: flex;
     justify-content: left;
     align-items: center;
     font-size: larger;
     overflow-wrap: normal;
-    /*padding: 10px;*/
 }
 
 .animal-name-bullet {
@@ -176,7 +131,6 @@
 }
 
 #animal-legend-content img {
-    /* border: solid; */
     width: 30px;
     height: 30px;
     cursor: pointer;
@@ -186,7 +140,6 @@
 
 /* POP-UP STYLING */
 #pop-up {
-    /* height: 300px; */
     width: 200px;
     overflow: auto;
 }
@@ -211,83 +164,9 @@
     align-items: center;
 }
 
-.mapboxgl-popup-tip {
-    /* background: green; */
-  }
-
-
-  .mapboxgl-popup {
-    /* border: solid orange; */
-  }
-
-.mapboxgl-popup-content {
-    /*background: red;*/
-    /* border: solid red; */
-    /* margin: 0;
-    padding: 0; */
-}
-
-.mapboxgl-popup-close-button {
-    display: none;
-}
-
-.mapboxgl-popup-content div {
-    /* padding: 0; */
-    /* border: solid purple; */
-    /* margin: 0px; */
-}
-
-.mapboxgl-popup-content-wrapper {
-    /* border: solid green; */
-    /* padding: 100px; */
-    /* margin: 0; */
-}
-
-/* .popup-track {  */
-    /* border: solid; */
-    /* margin: auto;
-}
-
-#pop-up-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 10px 0 10px 0;
-} */
-/*
-#pop-up-info p {
-    display: flex;
-    margin: 2px;
-    text-align: center;
-}
-
-#pop-up-image {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-#pop-up-image p {
-    margin: 3px 0 0 0;
-    text-align: center;
-} */
-
 #name-container {
     padding: 15px;
 }
-
-/* #pop-up-url {
-    border:solid;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#pop-up-url p {
-
-} */
 
 #subject-div {
     border-bottom: solid 1pt rgba(0,0,0,.15);
@@ -296,9 +175,7 @@
 #story {
     color: orangered;
     background-color: white;
-    /* border: solid 1pt rgb(150, 149, 149); */
     padding: 5px;
-    /*margin-left: 1px;*/
     border-radius: 7px;
 }
 
@@ -324,7 +201,6 @@
 }
 
 #return {
-    /* border: solid; */
     display: flex;
     align-items: center;
     padding: 10px;
@@ -334,14 +210,10 @@
 }
 
 .sub-image {
-    /* border: solid red; */
     width: 100%;
 }
 
 #sub-content {
-    /* border: solid; */
-    /* background-color: red; */
-    /* overflow: scroll; */
     display:flex;
     align-items: center;
     justify-content: center;
@@ -359,13 +231,6 @@
 }
 
 #help-button {
-    /*position: fixed;
-    top: 50;
-    /*bottom: 500;
-    left: 50;
-    margin: 50px;
-    border: solid 5px red;
-    background-color: red;*/
     width: 12px;
 }
 
@@ -393,7 +258,6 @@
 }
 
 #tips h2 {
-    /*padding-top: 10px;*/
     padding-left: 10px;
 }
 
