@@ -35,8 +35,8 @@ const Animal = ({
           name.classList.toggle('animal-name')
           name.classList.toggle('hover')
         }
-      }}>
-        <div id='animal-color' /*style={backgroundColor}*/ />
+      }}/>
+        <div id='animal-color'/>
         <div className={'animal-name-bullet ' + animalName + hover} id={animalId}>
           <ul id='ul-list'>
           <li id="animal-bullet" style={bulletColor}><p className={hover} id='animal-name-p'>{animal.name}</p></li>

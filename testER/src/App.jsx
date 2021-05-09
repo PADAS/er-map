@@ -284,7 +284,7 @@ const App = (props) => {
           layout: {
             'icon-image': json.subject_subtype + json.id,
             'icon-size': json.common_name !== null ? 0.4 : 1.0,
-            'icon-anchor': 'bottom'
+            'icon-anchor': 'bottom',
             'text-field': json.last_position.properties.title,
 
             'text-size': 15,
