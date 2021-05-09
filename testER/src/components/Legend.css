@@ -120,6 +120,13 @@
     width: 55%;
 }
 
+#story-button {
+    width: 15px;
+    height: 15px;
+    margin-top: 27.5px;
+    margin-right: 12px;
+}
+
 /* ANIMAL LEGEND CONTENT */
 .animal-legend-content {
     /* border: solid green; */
@@ -139,7 +146,7 @@
 }
 
 #animal-bullet {
-    font-size: 28px;
+    font-size: 32px;
 }
 
 #animal-name {
@@ -154,6 +161,7 @@
 
 .animal-name-bullet {
     width: 150px;
+    padding-left: 3px;
 }
 
 .fit-content {
@@ -161,9 +169,10 @@
 }
 
 #track-buttons {
-    width: 70px;
+    width: 90px;
     display: flex;
-    padding: 10px;
+    justify-content: space-evenly;
+    margin-top: 20px;
 }
 
 #animal-legend-content img {
@@ -340,9 +349,8 @@
 }
 
 #animal-name-p {
-    /*margin: auto;*/
-    margin-top: 25px;
-    font-size: 15px;
+    margin-top: 23px;
+    font-size: 14px;
     color: black;
 }
 
