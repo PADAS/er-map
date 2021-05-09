@@ -10,6 +10,7 @@ const SubjectPopup = (props) => {
   // add: position in lat/long?, common name
   const data = props.subjectData
   const subject = props.subject
+  const { legendOpen, onLegendStateToggle } = props
 
   const sex = subject.sex.charAt(0).toUpperCase() + subject.sex.slice(1)
   let species
@@ -32,6 +33,13 @@ const SubjectPopup = (props) => {
     }
   }
 
+  const handleStoryClick = () => {
+    props.onStoryClick([subject, data])
+    if (!legendOpen) {
+      onLegendStateToggle()
+    } 
+  }
+
   return (
     <div id='pop-up'>
 
@@ -51,7 +59,7 @@ const SubjectPopup = (props) => {
         <TrackButton
           subject={subject}
         />
-        <img width='30' id='story' style={display} className='hover' src='/public/images/button_icons/story-f.png' onClick={() => props.onStoryClick([subject, data])} />
+        <img width='30' id='story' style={display} className='hover' src='/public/images/button_icons/story-f.png' onClick={handleStoryClick} />
       </div>
 
       {/* <div id='pop-up-header'>

@@ -26,6 +26,11 @@ const App = (props) => {
   var [subjectColor, setSubjectColor] = useState({})
   var [legSub, setLegSub] = useState(undefined)
   const [subjectPopups, setSubjectPopups] = useState([])
+  const [legendOpen, setLegendOpen] = useState(true)
+
+  const toggleLegendState = () => {
+    setLegendOpen(!legendOpen)
+  }
 
   // TODO: detailed handling of missing config info
   function initMap () {
@@ -279,8 +284,9 @@ const App = (props) => {
           layout: {
             'icon-image': json.subject_subtype + json.id,
             'icon-size': json.common_name !== null ? 0.4 : 1.0,
-            'icon-anchor': 'bottom',
-            'text-field': json.name,
+            'icon-anchor': 'bottom'
+            'text-field': json.last_position.properties.title,
+
             'text-size': 15,
             'text-offset': [0, 0.3],
             'text-anchor': 'top'
@@ -361,6 +367,8 @@ const App = (props) => {
         subs={subjects}
         subjectData={config}
         onLocClick={(coords) => goToLoc(coords)}
+        legendOpen={legendOpen}
+        onLegendStateToggle={toggleLegendState}
         legSub={legSub}
         onReturnClick={(subject) => setLegSub(subject)}
         onStoryClick={(subject) => setLegSub(subject)}
@@ -381,7 +389,7 @@ const App = (props) => {
         coordinates={geometry.coordinates.slice()}
       >
         <TrackContext.Provider value={{ displayTracks, setTracks, tracks }}>
-          <SubjectPopupContent subject={properties} subjectData={config.subjects[properties.id]} onStoryClick={(subject) => setLegSub(subject)} {...props} />
+          <SubjectPopupContent subject={properties} subjectData={config.subjects[properties.id]} onStoryClick={(subject) => setLegSub(subject)} legendOpen={legendOpen} onLegendStateToggle={toggleLegendState} {...props} />
         </TrackContext.Provider>
       </Popup>
     )}

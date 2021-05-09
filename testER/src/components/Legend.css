@@ -4,10 +4,8 @@
 
 /* LEGEND BUTTON */
 #legend {
-    /* border: solid red; */
-    height: 100%;
+    height: 97%;
     /* width: 260px; */
-    width: 325px;
     /* background-color: white; */
     display: grid;
     /* border: solid green; */
@@ -16,8 +14,22 @@
     transition: width 1s;
 }
 
+.legend-open {
+    width: 325px;
+}
+
+.legend-close {
+    width: 32.5px;
+}
+
+#legend-open-button img {
+    width: 35%;
+}
+
 #legend-open-button {
     /* border: solid blue; */
+    opacity: 0.9;
+    border-radius: 10px 0 0 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,49 +39,80 @@
     /* word-spacing: 1px; */
     font-family: 'Baloo 2', cursive;
     cursor: pointer;
-    height: 100px;
+    /* height: 100px; */
+    height: 70px;
     background-color: white;
 }
 
+
 #legend-content{
-    /* border: solid purple; */
-    overflow: auto;
+    /* overflow: auto; */
     background-color: white;
+    /* border: solid red; */
+    /* overflow: auto; */
     /* border-right-style: black solid 20px; */
 }
 
 #subs {
-    /* border: solid blue; */
+    /* border: solid yellow; */
     /* position: relative; */
-    overflow: visible;
+    /* overflow: auto; */
 }
 
 
 .title {
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* display: flex;
-    justify-content: center; */
+    background-color: #5D4B3F;
+    opacity: 0.95;
+    /* display: flex; */
+    /* border: solid blue; */
+    /* justify-content: left;
+    align-items: center; */
+    /* border: solid blue; */
+    /* flex-direction: row; */
+    display: grid;
+    height: 70px;
+    grid-template-rows: 30px 40px;
+    /* flex-direction: column; */
+    /* justify-content: center; */
     /* padding: 20px; */
     /* border: solid red; */
 }
 
-.earthranger-logo {
-    width: 80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* border: solid green; */
-}
-
-.earthranger-logo img {
-    width: 100%;
-    margin: auto;
-    padding: 10px 0 10px 0;
+.title div {
     /* border: solid blue; */
 }
+
+#tracker p {
+    /* border: solid green; */
+    margin: 5px 0 0 15px;
+    padding: 0;
+    font-size: 22pt;
+    color: white;
+}
+
+#earthranger-logo {
+    /* border: solid pink; */
+    display: flex;
+    justify-content: left;
+    align-items: flex-end;
+}
+
+#earthranger-logo a {
+    /* border: solid red; */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    /* justify-content: left; */
+    align-items: flex-end;
+    margin: 0 0 5px 15px;
+}
+
+#earthranger-logo img {
+    width: 90px;
+    /* border: solid black; */
+    opacity: 0.5;
+}
+
 
 #animal-color {
     /*border-right: solid grey 1px;*/
@@ -78,11 +121,10 @@
 }
 
 /* ANIMAL LEGEND CONTENT */
-#animal-legend-content {
+.animal-legend-content {
     /* border: solid green; */
     width: 100%;
     height: 70px;
-
     /*display: grid;
     grid-template-columns: 40.9px 131.6px 120px;*/
     display: flex;
@@ -177,8 +219,7 @@
 }
 
 .mapboxgl-popup-close-button {
-    /* border: none; */
-    /* display: none; */
+    display: none;
 }
 
 .mapboxgl-popup-content div {
@@ -240,7 +281,7 @@
 } */
 
 #subject-div {
-    border-bottom: solid 1pt grey;
+    border-bottom: solid 1pt rgba(0,0,0,.15);
 }
 
 #story {

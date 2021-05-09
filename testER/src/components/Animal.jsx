@@ -23,8 +23,12 @@ const Animal = ({
 
   return (
     <>
-      <div id='animal-legend-content' className={hover} onClick={() => {
-        const name = document.getElementById(animalId)
+      <div class='animal-legend-content'>
+        <div id='animal-color' style={backgroundColor} />
+        <div
+          className={'fit-content ' + animalName + hover} id={animalId} onClick={() => {
+            const name = document.getElementById(animalId)
+
 
         if (name.classList.contains('animal-name')) {
           onNameClick([animal, configData.subjects[animal.id]])
