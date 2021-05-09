@@ -3,20 +3,12 @@ import './Legend.css'
 import Animal from './Animal.jsx'
 
 /* eslint-disable react/prop-types */
-const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryClick }) => {
-  var [leg, setLeg] = useState(true)
+const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryClick, legendOpen, onLegendStateToggle }) => {
   var l = document.getElementById('legend')
-  var [legImage, setLegImage] = useState("./public/images/button_icons/double_caret-right.png");
+  const legImage = legendOpen ? "./public/images/button_icons/double_caret-right.png" : "/public/images/button_icons/double_caret-left.png";
 
   function toggleLegend () {
-    setLeg(!leg)
-    if (leg) {
-      l.style.width = '32.5px'
-      setLegImage("./public/images/button_icons/double_caret-left.png")
-    } else {
-      l.style.width = '325px'
-      setLegImage("./public/images/button_icons/double_caret-right.png")
-    }
+    onLegendStateToggle()
   }
 
   function display () {
@@ -25,10 +17,15 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
       return (
         <div id='legend-content'>
           <div className='title'>
-            {/* <h1>Legend</h1> */}
-            <a href='https://earthranger.com/' className='earthranger-logo'>
-              <img src='./public/images/LogoEarthRanger.png' />
-            </a>
+              <div id="earthranger-logo">
+                <a href='https://earthranger.com/' className='earthranger-logo'>
+                  <img src='./public/images/LogoEarthRanger.png' />
+                </a>
+              </div>
+              <div id="tracker">
+                {/* <p id="tracker">Animal Tracker</p> */}
+                <p>Animal Tracker</p>
+              </div>
           </div>
           <div id='subs'>
             {/* // map all content  */}
@@ -56,13 +53,15 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
         <>
           <div id='legend-content'>
             <div className='title'>
-              {/* <h1>Legend</h1> */}
-              {/* <div> */}
-              <a href='https://earthranger.com/' className='earthranger-logo'>
-                <img src='./public/images/LogoEarthRanger.png' />
-              </a>
-              {/* </div> */}
-
+                <div id="earthranger-logo">
+                  <a href='https://earthranger.com/' className='earthranger-logo'>
+                    <img src='./public/images/LogoEarthRanger.png' />
+                  </a>
+                </div>
+                <div id="tracker">
+                  {/* <p id="tracker">Animal Tracker</p> */}
+                  <p>Animal Tracker</p>
+                </div>
             </div>
             <div onClick={() => onReturnClick(undefined)} id='return' className='hover'>
               <img src="./public/images/button_icons/view-animals-caret-left.png"/>
@@ -102,7 +101,7 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
 
   return (
     <>
-      <div id='legend'>
+      <div id='legend' className={legendOpen ? "legend-open" : "legend-close"}>
         <div id='legend-open-button' onClick={() => toggleLegend()}>
           <img src={legImage}/>
         </div>
