@@ -23,23 +23,23 @@ const Animal = ({
 
   return (
     <>
-      <div class='animal-legend-content'>
+      <div className='animal-legend-content'>
         <div id='animal-color' style={backgroundColor} />
         <div
           className={'fit-content ' + animalName + hover} id={animalId} onClick={() => {
             const name = document.getElementById(animalId)
 
-
-        if (name.classList.contains('animal-name')) {
-          onNameClick([animal, configData.subjects[animal.id]])
-          name.classList.toggle('animal-name')
-          name.classList.toggle('hover')
-        }
-      }}/>
-        <div id='animal-color'/>
+            if (name.classList.contains('animal-name')) {
+              onNameClick([animal, configData.subjects[animal.id]])
+              name.classList.toggle('animal-name')
+              name.classList.toggle('hover')
+            }
+          }}
+        />
+        <div id='animal-color' />
         <div className={'animal-name-bullet ' + animalName + hover} id={animalId}>
           <ul id='ul-list'>
-          <li id="animal-bullet" style={bulletColor}><p className={hover} id='animal-name-p'>{animal.name}</p></li>
+            <li id='animal-bullet' style={bulletColor}><p className={hover} id='animal-name-p'>{animal.name}</p></li>
           </ul>
         </div>
         <div id='track-buttons'>
@@ -51,7 +51,7 @@ const Animal = ({
             handleOnLocButtonClicked={animalOnLocClicked}
           />
         </div>
-        <img id='story-button' style={display} src='/public/images/button_icons/story-f.png'/>
+        <img id='story-button' style={display} src='/public/images/button_icons/story-f.png' />
 
       </div>
     </>
