@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from 'react' // eslint-disable-line no-unused-vars
+import { useEffect, useRef } from 'react'
 import ReactDOM from 'react-dom'
 import mapboxgl from 'mapbox-gl'
 
 /* renderless wrapper for React-ified mapbox GL popups to ensure content updates stay in sync w/app state */
 const Popup = ({ children, coordinates, onClose }) => {
-  const popup = useRef(new mapboxgl.Popup())
+  const popup = useRef(new mapboxgl.Popup({ closeButton: false }))
 
   useEffect(() => {
     const currentPopupRefValue = popup.current

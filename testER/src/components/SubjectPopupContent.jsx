@@ -37,7 +37,7 @@ const SubjectPopup = (props) => {
     props.onStoryClick([subject, data])
     if (!legendOpen) {
       onLegendStateToggle()
-    } 
+    }
   }
 
   return (
