@@ -160,7 +160,7 @@
 #pop-up-buttons {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: left;
     align-items: center;
 }
 
@@ -172,11 +172,21 @@
     border-bottom: solid 1pt rgba(0,0,0,.15);
 }
 
-#story {
+#view-story-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    width: fit-content;
+}
+
+#view-story-button p {
     color: orangered;
-    background-color: white;
-    padding: 5px;
-    border-radius: 7px;
+    margin: 2px 0 0 0;
+}
+
+#view-story-button img {
+    padding-left: 5px;
 }
 
 .hover {
@@ -193,7 +203,7 @@
 
 #date {
     font-size: 8pt;
-    width: 40%;
+    width: 45%;
 }
 
 #arrow {
@@ -209,6 +219,11 @@
     border-bottom: solid dimgray 0.5px;
 }
 
+#return p {
+    font-size: 14px;;
+    padding-left: 5px;
+}
+
 .sub-image {
     width: 100%;
 }
@@ -220,7 +235,7 @@
     padding: 15px;
 }
 
-#animal-name-p {
+.animal-name-p {
     margin-top: 23px;
     font-size: 14px;
     color: black;
@@ -284,4 +299,8 @@
 
 .mapboxgl-popup-close-button {
     display: none;
+}
+
+.bold {
+    font-weight: bold;
 }

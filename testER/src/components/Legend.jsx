@@ -10,6 +10,8 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
     onLegendStateToggle()
   }
 
+  console.log(subs)
+
   function display () {
     if (legSub === undefined) {
       return (
@@ -58,7 +60,7 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
             </div>
             <div onClick={() => onReturnClick(undefined)} id='return' className='hover'>
               <img src='./public/images/button_icons/view-animals-caret-left.png' />
-              View all Tracked Animals
+              <p>Back</p>
             </div>
             <div id='subject-div'>
               <Animal animal={legSub[0]} key={legSub[0].id} animalOnLocClicked={onLocClick} />
