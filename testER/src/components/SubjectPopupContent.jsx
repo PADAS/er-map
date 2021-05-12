@@ -20,9 +20,9 @@ const SubjectPopup = (props) => {
     species = subject.common_name.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())
   }
   let date = subject.last_position.properties.DateTime
-  date = date.substring(5, 10) + '-' + date.substring(2, 4) + ' ' + date.substring(11, 16)
+  date = date.substring(0, 10) + ' ' + date.substring(11, 16)
 
-  let display = { display: 'block' }
+  let display = { display: 'flex' }
   if (!subject.display_story) {
     display = { display: 'none' }
   }
@@ -54,12 +54,15 @@ const SubjectPopup = (props) => {
       </div>
       <p>{sex} | Adult | {species}</p>
       <p><i>Short, fun fact about {subject.name}</i></p>
+      <div onClick={handleStoryClick} className='hover' style={display} id='view-story-button'>
+        <p>View my story</p>
+        <img height='10' id='story' src='/public/images/button_icons/story-f.png'/>
+      </div>
       <div id='pop-up-buttons'>
         <p id='date'>{date}</p>
         <TrackButton
           subject={subject}
         />
-        <img width='30' id='story' style={display} className='hover' src='/public/images/button_icons/story-f.png' onClick={handleStoryClick} />
       </div>
 
       {/* <div id='pop-up-header'>

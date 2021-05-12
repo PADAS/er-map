@@ -15,6 +15,13 @@ const TrackButton = ({ subject }) => {
     newState[update[0]] = update[1]
     setTracks(newState)
 
+    let pTags = document.querySelectorAll('#' + subject.name);
+    /*let pTag = document.getElementById(subject.name)
+    pTag.classList.toggle("bold")*/
+    for (let i = 0; i < pTags.length; i++) {
+        pTags[i].classList.toggle('bold')
+    }
+
     displayTracks(update)
   }
 
