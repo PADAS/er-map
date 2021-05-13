@@ -4,7 +4,8 @@
 
 /* LEGEND BUTTON */
 #legend {
-    height: 97%;
+    height: 100%;
+    /* height: 200px; */
     display: grid;
     grid-template-columns: 32.5px 292.5px;
     transition: width 1s;
@@ -39,6 +40,22 @@
 
 #legend-content{
     background-color: white;
+    opacity: .95;
+    /* border: solid red;   */
+    /* overflow-y: auto; */
+    /* height: inherit; */
+}
+
+#subs {
+    /* border: solid green; */
+    overflow-y: auto;
+    height: 100%;
+}
+
+#animal-story {
+    /* border: solid pink; */
+    height: 100%;
+    overflow: auto;
 }
 
 .title {
@@ -47,6 +64,7 @@
     display: grid;
     height: 70px;
     grid-template-rows: 30px 40px;
+    /* border: solid blue; */
 }
 
 #tracker p {
@@ -79,19 +97,26 @@
 #animal-color {
     display: none;
     width: 55%;
+    border: solid purple;
 }
 
 #story-button {
-    width: 15px;
-    height: 15px;
-    margin-top: 27.5px;
+    /* width: 15px;
+    height: 15px; */
+    /* margin-top: 27.5px;
+    margin-right: 12px; */
+
+    margin-top: auto;
+    margin-bottom: auto;
     margin-right: 12px;
 }
 
 /* ANIMAL LEGEND CONTENT */
 .animal-legend-content {
     width: 100%;
-    height: 70px;
+    /* height: 70px; */
+    /* height: 60px; */
+    height: 55px;
     display: flex;
     justify-content: space-between;
 }
@@ -104,6 +129,18 @@
 
 #animal-bullet {
     font-size: 32px;
+    /* border: solid brown; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#animal-bullet div {
+    /* border: solid green; */
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: green;
 }
 
 #animal-name {
@@ -114,9 +151,20 @@
     overflow-wrap: normal;
 }
 
+#animal-name-style {
+    /* border: solid black; */
+    display: flex;
+    align-items: center;
+    margin: 0 0 0 7px;
+    font-size: 14px;
+}
+
 .animal-name-bullet {
     width: 150px;
     padding-left: 3px;
+    /* border: solid green; */
+    display: grid;
+    grid-template-columns: 20% 80%;
 }
 
 .fit-content {
@@ -127,7 +175,9 @@
     width: 90px;
     display: flex;
     justify-content: space-evenly;
-    margin-top: 20px;
+    align-items: center;
+    /* margin-top: 20px; */
+    /* border: solid blue; */
 }
 
 #animal-legend-content img {
@@ -214,14 +264,14 @@
     display: flex;
     align-items: center;
     padding: 10px;
-    height: 40px;
+    height: 20px;
     background-color: whitesmoke;
-    border-bottom: solid dimgray 0.5px;
+    border-bottom: solid 1pt rgba(0,0,0,.15);
 }
 
 #return p {
     font-size: 14px;;
-    padding-left: 5px;
+    padding-left: 10px;
 }
 
 .sub-image {
@@ -243,6 +293,7 @@
 
 #ul-list {
     margin: none;
+    /* border: solid green; */
 }
 
 #help-button {

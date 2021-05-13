@@ -58,17 +58,19 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
                 <p>Animal Tracker</p>
               </div>
             </div>
-            <div onClick={() => onReturnClick(undefined)} id='return' className='hover'>
-              <img src='./public/images/button_icons/view-animals-caret-left.png' />
-              <p>Back</p>
+            <div id='animal-story'>
+              <div onClick={() => onReturnClick(undefined)} id='return' className='hover'>
+                <img width="7px" height="10px" src='./public/images/button_icons/view-animals-caret-left.png' />
+                <p>Back</p>
+              </div>
+              <div id='subject-div'>
+                <Animal animal={legSub[0]} key={legSub[0].id} animalOnLocClicked={onLocClick} />
+              </div>
+              {legSub[1].pictures.map((pic) => {
+                return <img className='sub-image' key={pic} src={pic.path} height={200} width={200} alt='picture' />
+              })}
+              <div id='sub-content' className='default' dangerouslySetInnerHTML={{ __html: legSub[1].detail_description }} />
             </div>
-            <div id='subject-div'>
-              <Animal animal={legSub[0]} key={legSub[0].id} animalOnLocClicked={onLocClick} />
-            </div>
-            {legSub[1].pictures.map((pic) => {
-              return <img className='sub-image' key={pic} src={pic.path} height={200} width={200} alt='picture' />
-            })}
-            <div id='sub-content' className='default' dangerouslySetInnerHTML={{ __html: legSub[1].detail_description }} />
           </div>
         </>
       )
