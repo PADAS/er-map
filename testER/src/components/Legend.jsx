@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './Legend.css'
 import Animal from './Animal.jsx'
 
@@ -6,11 +6,15 @@ import Animal from './Animal.jsx'
 const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryClick, legendOpen, onLegendStateToggle }) => {
   const legImage = legendOpen ? './public/images/button_icons/double_caret-right.png' : '/public/images/button_icons/double_caret-left.png'
 
+  const [animalTrackState, setAnimalTrackState] = useState({})
+
   function toggleLegend () {
     onLegendStateToggle()
   }
 
-  console.log(subs)
+  function setTrackState(newState) {
+    setAnimalTrackState(newState)
+  }
 
   function display () {
     if (legSub === undefined) {
@@ -36,6 +40,8 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
                     key={s.id}
                     animalOnLocClicked={onLocClick} onNameClick={onStoryClick}
                     displayStory={s.display_story}
+                    trackState={animalTrackState}
+                    updateTrackState={setTrackState}
                   />
                 </div>
               ))}
@@ -63,7 +69,8 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
               <p>Back</p>
             </div>
             <div id='subject-div'>
-              <Animal animal={legSub[0]} key={legSub[0].id} animalOnLocClicked={onLocClick} />
+              <Animal animal={legSub[0]} key={legSub[0].id} animalOnLocClicked={onLocClick}
+                trackState={animalTrackState} updateTrackState={setTrackState}/>
             </div>
             {legSub[1].pictures.map((pic) => {
               return <img className='sub-image' key={pic} src={pic.path} height={200} width={200} alt='picture' />
