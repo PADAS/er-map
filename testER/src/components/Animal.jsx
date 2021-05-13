@@ -5,8 +5,8 @@ import './Legend.css'
 
 /* eslint-disable react/prop-types */
 const Animal = ({
-  animal, configData,
-  animalOnLocClicked, onNameClick, displayStory
+  animal, configData, animalOnLocClicked, onNameClick, displayStory,
+  trackState, updateTrackState
 }) => {
   const backgroundColor = { backgroundColor: animal.color }
   const bulletColor = { color: animal.color }
@@ -40,12 +40,17 @@ const Animal = ({
         <div id='animal-color'/>
         <div className={'animal-name-bullet ' + animalName + hover} id={animalId}>
           <ul id='ul-list'>
-            <li id='animal-bullet' style={bulletColor}><p className={hover + " animal-name-p"} id={animal.name}>{animal.name}</p></li>
+            <li id='animal-bullet' style={bulletColor}>
+              <p className={hover + trackState[animal.id] + " animal-name-p"}
+                  id={animal.name.replace(' ','-')}>{animal.name}</p>
+            </li>
           </ul>
         </div>
         <div id='track-buttons' className={hover}>
           <TrackButton
             subject={animal}
+            trackState={trackState}
+            setTrackState={updateTrackState}
           />
           <LocButton
             subject={animal}

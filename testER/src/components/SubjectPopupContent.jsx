@@ -56,7 +56,7 @@ const SubjectPopup = (props) => {
       <p><i>Short, fun fact about {subject.name}</i></p>
       <div onClick={handleStoryClick} className='hover' style={display} id='view-story-button'>
         <p>View my story</p>
-        <img height='10' id='story' src='/public/images/button_icons/story-f.png'/>
+        <img height='10' id='story' src='/public/images/button_icons/caret-right-orange.png'/>
       </div>
       <div id='pop-up-buttons'>
         <p id='date'>{date}</p>
