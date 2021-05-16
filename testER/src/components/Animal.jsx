@@ -45,12 +45,12 @@ const Animal = ({
         <div className={'animal-name-bullet ' + animalName + hover} id={animalId}>
           <div id='animal-bullet'><div style={backgroundColor}></div></div>
           <div id='animal-name-style'>{animal.name}</div>
-//           <ul id='ul-list'>
-//             <li id='animal-bullet' style={bulletColor}>
-//               <p className={hover + trackState[animal.id] + " animal-name-p"}
-//                   id={animal.name.replace(' ','-')}>{animal.name}</p>
-//             </li>
-//           </ul>
+           {/*<ul id='ul-list'>
+             <li id='animal-bullet' style={bulletColor}>
+               <p className={hover + trackState[animal.id] + " animal-name-p"}
+                   id={animal.name.replace(' ','-')}>{animal.name}</p>
+             </li>
+      </ul>*/}
         </div>
         <div id='track-buttons' className={hover}>
           <TrackButton
