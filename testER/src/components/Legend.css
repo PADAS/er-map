@@ -155,7 +155,7 @@
     overflow-wrap: normal;
 }
 
-#animal-name-style {
+.animal-name-style {
     /* border: solid black; */
     display: flex;
     align-items: center;
@@ -289,12 +289,6 @@
     padding: 15px;
 }
 
-.animal-name-p {
-    margin-top: 23px;
-    font-size: 14px;
-    color: black;
-}
-
 #ul-list {
     margin: none;
     /* border: solid green; */
@@ -329,6 +323,7 @@
 
 #tips h2 {
     padding-left: 10px;
+    margin-bottom: 0px;
 }
 
 #tips ul {
@@ -358,4 +353,12 @@
 
 .bold {
     font-weight: bold;
+}
+
+.mapboxgl-ctrl.mapboxgl-ctrl-attrib {
+    background-color: rgba(0,0,0,.5) !important;
+}
+
+.mapboxgl-ctrl-attrib a {
+    color: rgba(255,255,255,.8) !important;
 }
