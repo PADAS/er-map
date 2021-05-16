@@ -34,10 +34,8 @@ const HelpButton = () => {
                 setIconSrc(imgOffSrc)
               }
 
-              setTimeout(function () {
-                const tips = document.getElementById('tips')
-                tips.classList.add('hidden')
-              }, 500)
+              const tips = document.getElementById('tips')
+              tips.classList.add('hidden')
             }}
           />
         </div>
