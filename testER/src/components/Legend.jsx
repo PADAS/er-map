@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './Legend.css'
 import Animal from './Animal.jsx'
 
@@ -6,8 +6,14 @@ import Animal from './Animal.jsx'
 const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryClick, legendOpen, onLegendStateToggle, title }) => {
   const legImage = legendOpen ? './public/images/button_icons/double_caret-right.png' : '/public/images/button_icons/double_caret-left.png'
 
+  const [animalTrackState, setAnimalTrackState] = useState({})
+
   function toggleLegend () {
     onLegendStateToggle()
+  }
+
+  function setTrackState(newState) {
+    setAnimalTrackState(newState)
   }
 
   function display () {
@@ -16,7 +22,7 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
         <div id='legend-content'>
           <div className='title'>
             <div id='earthranger-logo'>
-              <a href='https://earthranger.com/' className='earthranger-logo'>
+            <a href='https://earthranger.com/' target="_blank" className='earthranger-logo'>
                 <img src='./public/images/LogoEarthRanger.png' />
               </a>
             </div>
@@ -34,6 +40,8 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
                     key={s.id}
                     animalOnLocClicked={onLocClick} onNameClick={onStoryClick}
                     displayStory={s.display_story}
+                    trackState={animalTrackState}
+                    updateTrackState={setTrackState}
                   />
                 </div>
               ))}
@@ -56,17 +64,28 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
                 <p>Animal Tracker</p>
               </div>
             </div>
-            <div onClick={() => onReturnClick(undefined)} id='return' className='hover'>
-              <img src='./public/images/button_icons/view-animals-caret-left.png' />
-              <p>Back</p>
+            {/* <div id='animal-story'> */}
+              <div onClick={() => onReturnClick(undefined)} id='return' className='hover'>
+                <img width="7px" height="10px" src='./public/images/button_icons/view-animals-caret-left.png' />
+                <p>Back</p>
+              </div>
+            <div id='animal-story'>
+              <div id='subject-div'>
+                <Animal animal={legSub[0]} key={legSub[0].id} animalOnLocClicked={onLocClick} />
+              </div>
+              {legSub[1].pictures.map((pic) => {
+                return <img className='sub-image' key={pic} src={pic.path} height={200} width={200} alt='picture' />
+              })}
+              <div id='sub-content' className='default' dangerouslySetInnerHTML={{ __html: legSub[1].detail_description }} />
+             {/*<div onClick={() => onReturnClick(undefined)} id='return' className='hover'>
+               <img  width="7px" height="10px" src='./public/images/button_icons/view-animals-caret-left.png' />
+               <p>Back</p>
+             </div>
+              <div id='animal-story'>
+             <div id='subject-div'>
+               <Animal animal={legSub[0]} key={legSub[0].id} animalOnLocClicked={onLocClick}
+                   trackState={animalTrackState} updateTrackState={setTrackState}/>*/}
             </div>
-            <div id='subject-div'>
-              <Animal animal={legSub[0]} key={legSub[0].id} animalOnLocClicked={onLocClick} />
-            </div>
-            {legSub[1].pictures.map((pic) => {
-              return <img className='sub-image' key={pic} src={pic.path} height={200} width={200} alt='picture' />
-            })}
-            <div id='sub-content' className='default' dangerouslySetInnerHTML={{ __html: legSub[1].detail_description }} />
           </div>
         </>
       )

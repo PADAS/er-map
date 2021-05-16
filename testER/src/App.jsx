@@ -14,6 +14,10 @@ mapboxgl.accessToken = 'pk.eyJ1IjoidmpvZWxtIiwiYSI6ImNra2hiZXNpMzA1bTcybnA3OXlyc
 
 let config
 const keymap = {} // alt, r
+const aquatic = ['#003744', '#005B70', '#219DB8', '#05C1EA', '#60E1FF',
+ '#2E8E96', '#47C6B1', '#91E8DA']
+const earthtones = ['#511913', '#711E17', '#961F1A', '#DB2222', '#E5632E',
+ '#E67931', '#E69E39', '#D2B541', '#BFBD48']
 
 window.GlobalMap = null
 
@@ -85,6 +89,7 @@ const App = (props) => {
         })
         .then(resp => resp.json()) // returns a json object
         .then(resp => {
+          let index = 0
           resp.data.data.map((subject) => {
             if (subject.last_position !== undefined) {
               // override subject name if provided in config
@@ -93,6 +98,14 @@ const App = (props) => {
               }
               drawIcon(subject)
             }
+
+            subject.color = earthtones[index]
+            if (index == earthtones.length - 1) {
+              index = 0
+            } else {
+              index += 1
+            }
+
             const oldSubjectColorState = subjectColor
             oldSubjectColorState[subject.id] = subject.color
             setSubjectColor(oldSubjectColorState)
@@ -310,7 +323,7 @@ const App = (props) => {
     <>
       <TrackContext.Provider value={{ displayTracks, setTracks, tracks }}>
         <div id='map-container' onKeyDown={logKey} onKeyUp={logKey}>
-          <HelpButton />
+          <HelpButton/>
           <Legend
             title={config !== undefined ? config.map_title : null}
             subs={subjects}

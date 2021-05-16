@@ -5,11 +5,12 @@ import './Legend.css'
 
 /* eslint-disable react/prop-types */
 const Animal = ({
-  animal, configData,
-  animalOnLocClicked, onNameClick, displayStory
+  animal, configData, animalOnLocClicked, onNameClick, displayStory,
+  trackState, updateTrackState
 }) => {
   const backgroundColor = { backgroundColor: animal.color }
-  const bulletColor = { color: animal.color }
+  // const bulletColor = { color: animal.color }
+  // const bulletColor = { background-color: animal.color }
   const animalId = animal.id + ' animal'
   let hover = 'hover'
   let animalName = 'animal-name '
@@ -42,20 +43,27 @@ const Animal = ({
         />
         <div id='animal-color' />
         <div className={'animal-name-bullet ' + animalName + hover} id={animalId}>
-          <ul id='ul-list'>
-            <li id='animal-bullet' style={bulletColor}><p className={hover + ' animal-name-p'} id={animal.name}>{animal.name}</p></li>
-          </ul>
+          <div id='animal-bullet'><div style={backgroundColor}></div></div>
+          <div id='animal-name-style'>{animal.name}</div>
+           {/*<ul id='ul-list'>
+             <li id='animal-bullet' style={bulletColor}>
+               <p className={hover + trackState[animal.id] + " animal-name-p"}
+                   id={animal.name.replace(' ','-')}>{animal.name}</p>
+             </li>
+      </ul>*/}
         </div>
         <div id='track-buttons' className={hover}>
           <TrackButton
             subject={animal}
+            trackState={trackState}
+            setTrackState={updateTrackState}
           />
           <LocButton
             subject={animal}
             handleOnLocButtonClicked={animalOnLocClicked}
           />
         </div>
-        <img id='story-button' className={hover} style={display} src='/public/images/button_icons/story-f.png' />
+        <img id='story-button' className={hover} style={display} width="7px" height="10px" src='/public/images/button_icons/story-f.png' />
 
       </div>
     </>
