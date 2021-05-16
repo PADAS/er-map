@@ -28,7 +28,7 @@ const TrackButton = ({ subject, trackState, setTrackState }) => {
     displayTracks(update)
   }
 
-  return <img width='30' height='30' className='hover' src={imgSrc} id='subject-track-button' onClick={onTrackButtonClick} />
+  return <img width='20' height='20' className='hover' src={imgSrc} id='subject-track-button' onClick={onTrackButtonClick} />
 }
 
 export default TrackButton

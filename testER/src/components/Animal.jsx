@@ -9,7 +9,8 @@ const Animal = ({
   trackState, updateTrackState
 }) => {
   const backgroundColor = { backgroundColor: animal.color }
-  const bulletColor = { color: animal.color }
+  // const bulletColor = { color: animal.color }
+  // const bulletColor = { background-color: animal.color }
   const animalId = animal.id + ' animal'
   let hover = 'hover'
   let animalName = 'animal-name '
@@ -23,28 +24,33 @@ const Animal = ({
 
   return (
     <>
-      <div className='animal-legend-content' onClick={(e) => {
+      <div
+        className='animal-legend-content' onClick={(e) => {
           const name = document.getElementById(animalId)
           const clicked = e.target
 
-        if (name.classList.contains('animal-name') && clicked.id !== 'subject-track-button'
-          && clicked.id !== 'subject-location-button') {
-          onNameClick([animal, configData.subjects[animal.id]])
-          name.classList.toggle('animal-name')
-          name.classList.toggle('hover')
-        }
-      }}>
+          if (name.classList.contains('animal-name') && clicked.id !== 'subject-track-button' &&
+          clicked.id !== 'subject-location-button') {
+            onNameClick([animal, configData.subjects[animal.id]])
+            name.classList.toggle('animal-name')
+            name.classList.toggle('hover')
+          }
+        }}
+      >
         <div id='animal-color' style={backgroundColor} />
         <div
-          className={'fit-content ' + animalName + hover} id={animalId}/>
-        <div id='animal-color'/>
+          className={'fit-content ' + animalName + hover} id={animalId}
+        />
+        <div id='animal-color' />
         <div className={'animal-name-bullet ' + animalName + hover} id={animalId}>
-          <ul id='ul-list'>
-            <li id='animal-bullet' style={bulletColor}>
-              <p className={hover + trackState[animal.id] + " animal-name-p"}
-                  id={animal.name.replace(' ','-')}>{animal.name}</p>
-            </li>
-          </ul>
+          <div id='animal-bullet'><div style={backgroundColor}></div></div>
+          <div id='animal-name-style'>{animal.name}</div>
+//           <ul id='ul-list'>
+//             <li id='animal-bullet' style={bulletColor}>
+//               <p className={hover + trackState[animal.id] + " animal-name-p"}
+//                   id={animal.name.replace(' ','-')}>{animal.name}</p>
+//             </li>
+//           </ul>
         </div>
         <div id='track-buttons' className={hover}>
           <TrackButton
@@ -57,7 +63,7 @@ const Animal = ({
             handleOnLocButtonClicked={animalOnLocClicked}
           />
         </div>
-        <img id='story-button' className={hover} style={display} src='/public/images/button_icons/story-f.png'/>
+        <img id='story-button' className={hover} style={display} width="7px" height="10px" src='/public/images/button_icons/story-f.png' />
 
       </div>
     </>
