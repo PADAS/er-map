@@ -235,8 +235,10 @@
 }
 
 #view-story-button p {
-    color: orangered;
-    margin: 2px 0 0 0;
+    color: #DB580F;
+    font-size: 9pt;
+    font-weight: bold;
+    margin: 0 0 0 0;
 }
 
 #view-story-button img {
