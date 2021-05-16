@@ -58,11 +58,12 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
                 <p>Animal Tracker</p>
               </div>
             </div>
-            <div id='animal-story'>
+            {/* <div id='animal-story'> */}
               <div onClick={() => onReturnClick(undefined)} id='return' className='hover'>
                 <img width="7px" height="10px" src='./public/images/button_icons/view-animals-caret-left.png' />
                 <p>Back</p>
               </div>
+            <div id='animal-story'>
               <div id='subject-div'>
                 <Animal animal={legSub[0]} key={legSub[0].id} animalOnLocClicked={onLocClick} />
               </div>
