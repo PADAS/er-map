@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import './Legend.css'
 import Animal from './Animal.jsx'
 
@@ -12,7 +12,7 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
     onLegendStateToggle()
   }
 
-  function setTrackState(newState) {
+  function setTrackState (newState) {
     setAnimalTrackState(newState)
   }
 
@@ -22,7 +22,7 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
         <div id='legend-content'>
           <div className='title'>
             <div id='earthranger-logo'>
-            <a href='https://earthranger.com/' target="_blank" className='earthranger-logo'>
+              <a href='https://earthranger.com/' rel='noreferrer' target='_blank' className='earthranger-logo'>
                 <img src='./public/images/LogoEarthRanger.png' />
               </a>
             </div>
@@ -65,10 +65,10 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
               </div>
             </div>
             {/* <div id='animal-story'> */}
-              <div onClick={() => onReturnClick(undefined)} id='return' className='hover'>
-                <img width="7px" height="10px" src='./public/images/button_icons/view-animals-caret-left.png' />
-                <p>Back</p>
-              </div>
+            <div onClick={() => onReturnClick(undefined)} id='return' className='hover'>
+              <img width='7px' height='10px' src='./public/images/button_icons/view-animals-caret-left.png' />
+              <p>Back</p>
+            </div>
             <div id='animal-story'>
               <div id='subject-div'>
                 <Animal animal={legSub[0]} key={legSub[0].id} animalOnLocClicked={onLocClick} />
@@ -77,14 +77,14 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
                 return <img className='sub-image' key={pic} src={pic.path} height={200} width={200} alt='picture' />
               })}
               <div id='sub-content' className='default' dangerouslySetInnerHTML={{ __html: legSub[1].detail_description }} />
-             {/*<div onClick={() => onReturnClick(undefined)} id='return' className='hover'>
+              {/* <div onClick={() => onReturnClick(undefined)} id='return' className='hover'>
                <img  width="7px" height="10px" src='./public/images/button_icons/view-animals-caret-left.png' />
                <p>Back</p>
              </div>
               <div id='animal-story'>
              <div id='subject-div'>
                <Animal animal={legSub[0]} key={legSub[0].id} animalOnLocClicked={onLocClick}
-                   trackState={animalTrackState} updateTrackState={setTrackState}/>*/}
+                   trackState={animalTrackState} updateTrackState={setTrackState}/> */}
             </div>
           </div>
         </>

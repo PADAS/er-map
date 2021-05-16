@@ -1,6 +1,7 @@
 {
     "server": "ermap-server-sandbox.pamdas.org",
     "map_title": "Giraffe Tracker",
+    "color_scheme": ["#00374", "#005B70", "#219DB8", "#511913", "#711E17", "#961F1A"],
     "map": {
         "center": [-109.3666652, -27.1166662],
         "zoom": 11,
