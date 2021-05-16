@@ -3,14 +3,12 @@ import './Legend.css'
 import Animal from './Animal.jsx'
 
 /* eslint-disable react/prop-types */
-const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryClick, legendOpen, onLegendStateToggle }) => {
+const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryClick, legendOpen, onLegendStateToggle, title }) => {
   const legImage = legendOpen ? './public/images/button_icons/double_caret-right.png' : '/public/images/button_icons/double_caret-left.png'
 
   function toggleLegend () {
     onLegendStateToggle()
   }
-
-  console.log(subs)
 
   function display () {
     if (legSub === undefined) {
@@ -23,7 +21,7 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
               </a>
             </div>
             <div id='tracker'>
-              <p>Animal Tracker</p>
+              <p>{title !== null ? title : 'Animal Tracker'}</p>
             </div>
           </div>
           <div id='subs'>

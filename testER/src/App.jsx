@@ -189,19 +189,39 @@ const App = (props) => {
     })
   }
 
+  // function fileExists (file) {
+  //   console.log("testing" + file)
+  //   try {
+  //     img = fetch(file)
+  //     console.log("found " + file)
+  //     return true
+  //   } catch (e) {
+  //     console.log("not found " + file)
+  //     return false
+  //   }
+  // }
+
   function drawIcon (json) {
-    let imgURL
+    let imgURL = null
     if (config.subjects[json.id] && config.subjects[json.id].icon) {
-      console.log(json.name + ' config')
       imgURL = config.subjects[json.id].icon
     } else if (json.common_name !== null) {
-      // todo: handle when no image in library for common name
       imgURL = 'public/images/animal_icons/' + json.common_name + '.png'
     } else {
       imgURL = json.last_position.properties.image
     }
-    window.GlobalMap.loadImage(imgURL,
+    addImage(json, imgURL)
 
+    // TODO: async timing issues
+    // try {
+    // addImage(json, imgURL)
+    // } catch(e) {
+    //   addImage(json, json.last_position.properties.image)
+    // }
+  }
+
+  function addImage (json, imgURL) {
+    window.GlobalMap.loadImage(imgURL,
       function (error, image) {
         if (error) throw error
         window.GlobalMap.addImage(json.subject_subtype + json.id, image)
@@ -215,7 +235,7 @@ const App = (props) => {
           source: 'point' + json.id,
           layout: {
             'icon-image': json.subject_subtype + json.id,
-            'icon-size': json.common_name !== null ? 0.4 : 1.0,
+            'icon-size': imgURL !== json.last_position.properties.image ? 0.4 : 1.0,
             'icon-anchor': 'bottom',
             'text-field': json.last_position.properties.title,
 
@@ -267,7 +287,6 @@ const App = (props) => {
 
   // hot key to reset map (alt + r)
   const logKey = (e) => {
-    console.log(e.keyCode)
     if (e.keyCode === 82 || e.keyCode === 18) { // 'r' = 82, alt = 18
       keymap[e.keyCode] = (e.type === 'keydown')
       if (keymap[82] && keymap[18]) {
@@ -293,6 +312,7 @@ const App = (props) => {
         <div id='map-container' onKeyDown={logKey} onKeyUp={logKey}>
           <HelpButton />
           <Legend
+            title={config !== undefined ? config.map_title : null}
             subs={subjects}
             subjectData={config}
             onLocClick={(coords) => goToLoc(coords)}

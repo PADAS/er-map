@@ -1,5 +1,6 @@
 {
     "server": "ermap-server-sandbox.pamdas.org",
+    "map_title": "Giraffe Tracker",
     "map": {
         "center": [-109.3666652, -27.1166662],
         "zoom": 11,
@@ -10,6 +11,7 @@
         "d98cad8d-f6cb-4e62-a3fe-5fe38e69a347":
         {    
             "name": "Najin",
+            "age": "5 years",
             "icon": "/public/images/animal_icons/great_white_shark_5.png", 
             "pictures":
             [
@@ -17,17 +19,20 @@
                     "path": "https://www.eurekalert.org/multimedia/pub/web/221627_web.jpg"
                 }
             ],
+            "fun_fact": "Najin fun fact",
             "detail_description": "<p>Detailed description of <b>Najin</b> in simple HTML<br><br>Lorem ipsum dolor, <i>sit amet consectetur adipisicing elit. Totam nisi in </i>porro quia quae. Aspernatur labore <b>nobis veniam. Quisquam optio ipsam laudantium alias, dolorum</b> amet qui. Adipisci obcaecati veniam libero? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae libero molestias vero reprehenderit, harum quaerat placeat dignissimos sunt inventore voluptatibus esse repellat adipisci dolore. Tenetur quis consequatur et corporis nam? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam nisi in porro quia quae. Aspernatur labore nobis veniam. Quisquam optio ipsam laudantium alias, dolorum amet qui. Adipisci obcaecati veniam libero? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae libero molestias vero reprehenderit, harum quaerat placeat dignissimos sunt inventore voluptatibus esse repellat adipisci dolore. Tenetur quis consequatur et corporis nam? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam nisi in porro quia quae. Aspernatur labore nobis veniam. Quisquam optio ipsam laudantium alias, dolorum amet qui. Adipisci obcaecati veniam libero? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae libero molestias vero reprehenderit, harum quaerat placeat dignissimos sunt inventore voluptatibus esse repellat adipisci dolore. Tenetur quis consequatur et corporis nam?</p>",
             "more_info_path": "http://georgia-fan-club.org"
         },
         "f6b20ca9-9f72-44ed-adf7-41e84f3d2407":
         {   
+            "age": "6 months",
             "pictures":
             [
                 {
                     "path": "https://assets.nrdc.org/sites/default/files/styles/full_content--retina/public/media-uploads/wlds43_654640_2400.jpg"
                 }
             ],
+            "fun_fact": "Horton fun fact",
             "detail_description": "<p>Detailed description of <b>Horton</b> in simple HTML<br><br>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam nisi in porro quia quae. Aspernatur labore nobis veniam. Quisquam optio ipsam laudantium alias, dolorum amet qui. Adipisci obcaecati veniam libero? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae libero molestias vero reprehenderit, harum quaerat placeat dignissimos sunt inventore voluptatibus esse repellat adipisci dolore. Tenetur quis consequatur et corporis nam? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam nisi in porro quia quae. Aspernatur labore nobis veniam. Quisquam optio ipsam laudantium alias, dolorum amet qui. Adipisci obcaecati veniam libero? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae libero molestias vero reprehenderit, harum quaerat placeat dignissimos sunt inventore voluptatibus esse repellat adipisci dolore. Tenetur quis consequatur et corporis nam? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam nisi in porro quia quae. Aspernatur labore nobis veniam. Quisquam optio ipsam laudantium alias, dolorum amet qui. Adipisci obcaecati veniam libero? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae libero molestias vero reprehenderit, harum quaerat placeat dignissimos sunt inventore voluptatibus esse repellat adipisci dolore. Tenetur quis consequatur et corporis nam?</p>",
             "more_info_path": "http://georgia-fan-club.org"
         },
