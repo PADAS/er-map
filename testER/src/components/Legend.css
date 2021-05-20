@@ -155,7 +155,7 @@
     overflow-wrap: normal;
 }
 
-#animal-name-style {
+.animal-name-style {
     /* border: solid black; */
     display: flex;
     align-items: center;
@@ -235,8 +235,10 @@
 }
 
 #view-story-button p {
-    color: orangered;
-    margin: 2px 0 0 0;
+    color: #DB580F;
+    font-size: 9pt;
+    font-weight: bold;
+    margin: 0 0 0 0;
 }
 
 #view-story-button img {
@@ -289,12 +291,6 @@
     padding: 15px;
 }
 
-.animal-name-p {
-    margin-top: 23px;
-    font-size: 14px;
-    color: black;
-}
-
 #ul-list {
     margin: none;
     /* border: solid green; */
@@ -329,6 +325,7 @@
 
 #tips h2 {
     padding-left: 10px;
+    margin-bottom: 0px;
 }
 
 #tips ul {
@@ -358,4 +355,12 @@
 
 .bold {
     font-weight: bold;
+}
+
+.mapboxgl-ctrl.mapboxgl-ctrl-attrib {
+    background-color: rgba(0,0,0,.5) !important;
+}
+
+.mapboxgl-ctrl-attrib a {
+    color: rgba(255,255,255,.8) !important;
 }
