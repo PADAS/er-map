@@ -8,6 +8,8 @@ const HelpButton = () => {
   const closeIconSrc = '/public/images/button_icons/close-icon.png'
   const [iconSrc, setIconSrc] = useState(imgOffSrc)
 
+  const storyStyle = {'padding-left': '7px', 'padding-right': '6.5px'}
+
   return (
     <div id='tips-container'>
       <div
@@ -39,11 +41,36 @@ const HelpButton = () => {
             }}
           />
         </div>
-        <ul>
-          <li>To tilt the map, press the control key (Mac) or ?? key (Windows)</li>
-          <li>To set the map back... etc</li>
-          <li>Other helpful tips here</li>
-        </ul>
+        <div id="actual-tips">
+          <div>
+            <img width='20' height='20' src={'/public/images/button_icons/pin_tracks-green.png'}/>
+            <p>Zoom map in/out</p>
+          </div>
+          <div>
+            <h4 style={storyStyle}>^</h4>
+            <p>(Mac) Hold ^ key and drag with mouse to rotate view</p>
+          </div>
+          <div>
+            <h4>Ctrl</h4>
+            <p>(Windows) Hold Ctrl key and drag with mouse to rotate view</p>
+          </div>
+          <div>
+            <img width='20' height='20' src={'/public/images/button_icons/pin_tracks-green.png'}/>
+            <p>Return map orientation to original view</p>
+          </div>
+          <div>
+            <img width='20' height='20' src='/public/images/button_icons/map_pin-gray.png'/>
+            <p>Jump to a subject's location</p>
+          </div>
+          <div>
+            <img width='20' height='20' src='/public/images/button_icons/pin_tracks-gray.png'/>
+            <p>Display a subject's track</p>
+          </div>
+          <div>
+            <img width='7' height='10' style={storyStyle} src='/public/images/button_icons/story-f.png'/>
+            <p>Display a subject's story</p>
+          </div>
+        </div>
       </div>
     </div>
   )

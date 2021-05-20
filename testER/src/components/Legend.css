@@ -316,7 +316,7 @@
 
 #tips {
     border-radius: 3px;
-    width: 250px;
+    width: 265px;
     background-color: white;
     margin-top: 15px;
 }
@@ -345,6 +345,23 @@
 #tips div {
     display: flex;
     justify-content: space-between;
+}
+
+#actual-tips {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+#actual-tips div {
+    justify-content: left;
+    align-items: flex-start;
+}
+
+#actual-tips p {
+    margin: 1px;
+    margin-bottom: 7px;
+    padding-left: 15px;
 }
 
 .mapboxgl-popup-close-button {
