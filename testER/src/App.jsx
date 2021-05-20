@@ -96,7 +96,7 @@ const App = (props) => {
               if (config.subjects[subject.id] && config.subjects[subject.id].name) {
                 subject.name = config.subjects[subject.id].name
               }
-              drawIcon(subject)
+              drawIcon(subject).then()
             }
 
             let colors = earthtones
@@ -208,24 +208,24 @@ const App = (props) => {
     })
   }
 
-  // function fileExists (file) {
-  //   console.log("testing" + file)
-  //   try {
-  //     img = fetch(file)
-  //     console.log("found " + file)
-  //     return true
-  //   } catch (e) {
-  //     console.log("not found " + file)
-  //     return false
-  //   }
-  // }
+  async function fileExists (file) {
+    try {
+      var img = await fetch(file)
+      if (img.status === 404) {
+        return false
+      }
+      return true
+    } catch (e) {
+      return false
+    }
+  }
 
-  function drawIcon (json) {
+  async function drawIcon (json) {
     let imgURL = null
     if (config.subjects[json.id] && config.subjects[json.id].icon) {
       imgURL = config.subjects[json.id].icon
-    } else if (json.common_name !== null) {
-      imgURL = 'public/images/animal_icons/' + json.common_name + '.png'
+    } else if (json.common_name !== null && await fileExists(`public/images/animal_icons/${json.common_name}.png`)) {
+      imgURL = `public/images/animal_icons/${json.common_name}.png`
     } else {
       imgURL = json.last_position.properties.image
     }
@@ -256,7 +256,7 @@ const App = (props) => {
             'icon-image': json.subject_subtype + json.id,
             'icon-size': imgURL !== json.last_position.properties.image ? 0.4 : 1.0,
             'icon-anchor': 'bottom',
-            'text-field': json.last_position.properties.title,
+            'text-field': json.name,
 
             'text-size': 15,
             'text-offset': [0, 0.3],
