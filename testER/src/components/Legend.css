@@ -4,7 +4,7 @@
 
 /* LEGEND BUTTON */
 #legend {
-    height: 100%;
+    height: calc(100vh - 20px);
     /* height: 200px; */
     display: grid;
     grid-template-columns: 32.5px 292.5px;
@@ -37,7 +37,6 @@
     background-color: white;
 }
 
-
 #legend-content{
     background-color: white;
     opacity: .95;
@@ -52,14 +51,14 @@
     /* overflow-y: auto;
     height: 100%; */
     overflow-y: auto;
-    height: calc(100vh - 70px);
+    height: calc(100vh - 90px);
 }
 
 #animal-story {
     /* border: solid pink; */
     /* height: 100%; */
     overflow-y: auto;
-    height: calc(100vh - 90px);
+    height: calc(100vh - 110px);
 }
 
 .title {
@@ -260,6 +259,7 @@
 #date {
     font-size: 8pt;
     width: 45%;
+    padding-right: 5px;
 }
 
 #arrow {
@@ -318,7 +318,7 @@
 
 #tips {
     border-radius: 3px;
-    width: 250px;
+    width: 265px;
     background-color: white;
     margin-top: 15px;
 }
@@ -347,6 +347,23 @@
 #tips div {
     display: flex;
     justify-content: space-between;
+}
+
+#actual-tips {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+#actual-tips div {
+    justify-content: left;
+    align-items: flex-start;
+}
+
+#actual-tips p {
+    margin: 1px;
+    margin-bottom: 7px;
+    padding-left: 15px;
 }
 
 .mapboxgl-popup-close-button {

@@ -330,6 +330,7 @@ const App = (props) => {
       <TrackContext.Provider value={{ displayTracks, setTracks, tracks }}>
         <div id='map-container' onKeyDown={logKey} onKeyUp={logKey}>
           <HelpButton />
+          
           <Legend
             title={config !== undefined ? config.map_title : null}
             subs={subjects}
@@ -340,6 +341,7 @@ const App = (props) => {
             legSub={legSub}
             onReturnClick={(subject) => setLegSub(subject)}
             onStoryClick={(subject) => setLegSub(subject)}
+            tracks={tracks}
           />
         </div>
         {subjectPopups.map(({ properties, geometry }) =>
@@ -356,7 +358,9 @@ const App = (props) => {
             coordinates={geometry.coordinates.slice()}
           >
             <TrackContext.Provider value={{ displayTracks, setTracks, tracks }}>
-              <SubjectPopupContent subject={properties} subjectData={config.subjects[properties.id]} onStoryClick={(subject) => setLegSub(subject)} legendOpen={legendOpen} onLegendStateToggle={toggleLegendState} {...props} />
+              <SubjectPopupContent subject={properties} subjectData={config.subjects[properties.id]}
+              onStoryClick={(subject) => setLegSub(subject)} legendOpen={legendOpen}
+              onLegendStateToggle={toggleLegendState} {...props} />
             </TrackContext.Provider>
           </Popup>
         )}
