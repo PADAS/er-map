@@ -4,7 +4,7 @@ import Animal from './Animal.jsx'
 
 /* eslint-disable react/prop-types */
 const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryClick, legendOpen, onLegendStateToggle, title }) => {
-  const legImage = legendOpen ? './public/images/button_icons/double_caret-right.png' : '/public/images/button_icons/double_caret-left.png'
+  const legImage = legendOpen ? `${process.env.PUBLIC_URL}/images/button_icons/double_caret-right.png` : `${process.env.PUBLIC_URL}/images/button_icons/double_caret-left.png`
 
   const [animalTrackState, setAnimalTrackState] = useState({})
 
@@ -23,7 +23,7 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
           <div className='title'>
             <div id='earthranger-logo'>
               <a href='https://earthranger.com/' rel='noreferrer' target='_blank' className='earthranger-logo'>
-                <img src='./public/images/LogoEarthRanger.png' />
+                <img src={`${process.env.PUBLIC_URL}/images/LogoEarthRanger.png`} />
               </a>
             </div>
             <div id='tracker'>
@@ -57,7 +57,7 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
             <div className='title'>
               <div id='earthranger-logo'>
                 <a href='https://earthranger.com/' className='earthranger-logo'>
-                  <img src='./public/images/LogoEarthRanger.png' />
+                  <img src={`${process.env.PUBLIC_URL}/images/LogoEarthRanger.png`} />
                 </a>
               </div>
               <div id='tracker'>
@@ -65,13 +65,15 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
               </div>
             </div>
             <div onClick={() => onReturnClick(undefined)} id='return' className='hover'>
-              <img width="7px" height="10px" src='./public/images/button_icons/view-animals-caret-left.png' />
+              <img width='7px' height='10px' src={`${process.env.PUBLIC_URL}/images/button_icons/view-animals-caret-left.png`} />
               <p>Back</p>
             </div>
             <div id='animal-story'>
               <div id='subject-div'>
-                <Animal animal={legSub[0]} key={legSub[0].id} animalOnLocClicked={onLocClick}
-                  trackState={animalTrackState} updateTrackState={setTrackState}/>
+                <Animal
+                  animal={legSub[0]} key={legSub[0].id} animalOnLocClicked={onLocClick}
+                  trackState={animalTrackState} updateTrackState={setTrackState}
+                />
               </div>
               {legSub[1].pictures.map((pic) => {
                 return <img className='sub-image' key={pic} src={pic.path} height={200} width={200} alt='picture' />

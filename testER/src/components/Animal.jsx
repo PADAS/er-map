@@ -43,9 +43,12 @@ const Animal = ({
         />
         <div id='animal-color' />
         <div className={'animal-name-bullet ' + animalName + hover} id={animalId}>
-          <div id='animal-bullet'><div style={backgroundColor}></div></div>
-          <div className={'animal-name-style ' + hover + trackState[animal.id]}
-              id={animal.name.replace(' ','-')}>{animal.name}</div>
+          <div id='animal-bullet'><div style={backgroundColor} /></div>
+          <div
+            className={'animal-name-style ' + hover + trackState[animal.id]}
+            id={animal.name.replace(' ', '-')}
+          >{animal.name}
+          </div>
         </div>
         <div id='track-buttons' className={hover}>
           <TrackButton
@@ -58,7 +61,7 @@ const Animal = ({
             handleOnLocButtonClicked={animalOnLocClicked}
           />
         </div>
-        <img id='story-button' className={hover} style={display} width='7px' height='10px' src='/public/images/button_icons/story-f.png' />
+        <img id='story-button' className={hover} style={display} width='7px' height='10px' src={`${process.env.PUBLIC_URL}/images/button_icons/story-f.png`} />
 
       </div>
     </>

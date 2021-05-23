@@ -7,7 +7,7 @@ const TrackButton = ({ subject, trackState, setTrackState }) => {
   const { displayTracks, setTracks, tracks } = useContext(TrackContext)
 
   const vis = !!tracks[subject.id]
-  const imgSrc = vis ? '/public/images/button_icons/pin_tracks-green.png' : '/public/images/button_icons/pin_tracks-gray.png'
+  const imgSrc = vis ? `${process.env.PUBLIC_URL}/images/button_icons/pin_tracks-green.png` : `${process.env.PUBLIC_URL}/images/button_icons/pin_tracks-gray.png`
 
   const onTrackButtonClick = () => {
     const update = [subject.id, !vis]
