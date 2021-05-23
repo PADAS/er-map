@@ -256,8 +256,7 @@ const App = (props) => {
             'icon-image': json.subject_subtype + json.id,
             'icon-size': imgURL !== json.last_position.properties.image ? 0.4 : 1.0,
             'icon-anchor': 'bottom',
-            'text-field': json.name,
-
+            'text-field': config.map.subject_names ? json.name : "",
             'text-size': 15,
             'text-offset': [0, 0.3],
             'text-anchor': 'top'
