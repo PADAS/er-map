@@ -15,9 +15,9 @@ mapboxgl.accessToken = 'pk.eyJ1IjoidmpvZWxtIiwiYSI6ImNra2hiZXNpMzA1bTcybnA3OXlyc
 let config
 const keymap = {} // alt, r
 const aquatic = ['#003744', '#005B70', '#219DB8', '#05C1EA', '#60E1FF',
- '#2E8E96', '#47C6B1', '#91E8DA']
+  '#2E8E96', '#47C6B1', '#91E8DA']
 const earthtones = ['#511913', '#711E17', '#961F1A', '#DB2222', '#E5632E',
- '#E67931', '#E69E39', '#D2B541', '#BFBD48']
+  '#E67931', '#E69E39', '#D2B541', '#BFBD48']
 
 window.GlobalMap = null
 
@@ -96,15 +96,21 @@ const App = (props) => {
               if (config.subjects[subject.id] && config.subjects[subject.id].name) {
                 subject.name = config.subjects[subject.id].name
               }
-              drawIcon(subject)
+              drawIcon(subject).then()
             }
 
-            subject.color = earthtones[index]
-            if (index == earthtones.length - 1) {
-              index = 0
-            } else {
-              index += 1
+            let colors = earthtones
+            if (config.color_scheme) {
+              if (config.color_scheme === 'earthtones') {
+                colors = earthtones
+              } else if (config.color_scheme === 'aquatic') {
+                colors = aquatic
+              } else {
+                colors = config.color_scheme
+              }
             }
+            subject.color = colors[index % colors.length]
+            index++
 
             const oldSubjectColorState = subjectColor
             oldSubjectColorState[subject.id] = subject.color
@@ -202,19 +208,39 @@ const App = (props) => {
     })
   }
 
-  function drawIcon (json) {
-    let imgURL
+  async function fileExists (file) {
+    try {
+      var img = await fetch(file)
+      if (img.status === 404) {
+        return false
+      }
+      return true
+    } catch (e) {
+      return false
+    }
+  }
+
+  async function drawIcon (json) {
+    let imgURL = null
     if (config.subjects[json.id] && config.subjects[json.id].icon) {
-      console.log(json.name + ' config')
       imgURL = config.subjects[json.id].icon
-    } else if (json.common_name !== null) {
-      // todo: handle when no image in library for common name
-      imgURL = 'public/images/animal_icons/' + json.common_name + '.png'
+    } else if (json.common_name !== null && await fileExists(`public/images/animal_icons/${json.common_name}.png`)) {
+      imgURL = `public/images/animal_icons/${json.common_name}.png`
     } else {
       imgURL = json.last_position.properties.image
     }
-    window.GlobalMap.loadImage(imgURL,
+    addImage(json, imgURL)
 
+    // TODO: async timing issues
+    // try {
+    // addImage(json, imgURL)
+    // } catch(e) {
+    //   addImage(json, json.last_position.properties.image)
+    // }
+  }
+
+  function addImage (json, imgURL) {
+    window.GlobalMap.loadImage(imgURL,
       function (error, image) {
         if (error) throw error
         window.GlobalMap.addImage(json.subject_subtype + json.id, image)
@@ -228,9 +254,9 @@ const App = (props) => {
           source: 'point' + json.id,
           layout: {
             'icon-image': json.subject_subtype + json.id,
-            'icon-size': json.common_name !== null ? 0.4 : 1.0,
+            'icon-size': imgURL !== json.last_position.properties.image ? 0.4 : 1.0,
             'icon-anchor': 'bottom',
-            'text-field': json.last_position.properties.title,
+            'text-field': json.name,
 
             'text-size': 15,
             'text-offset': [0, 0.3],
@@ -280,7 +306,6 @@ const App = (props) => {
 
   // hot key to reset map (alt + r)
   const logKey = (e) => {
-    console.log(e.keyCode)
     if (e.keyCode === 82 || e.keyCode === 18) { // 'r' = 82, alt = 18
       keymap[e.keyCode] = (e.type === 'keydown')
       if (keymap[82] && keymap[18]) {
@@ -304,8 +329,10 @@ const App = (props) => {
     <>
       <TrackContext.Provider value={{ displayTracks, setTracks, tracks }}>
         <div id='map-container' onKeyDown={logKey} onKeyUp={logKey}>
-          <HelpButton/>
+          <HelpButton />
+
           <Legend
+            title={config !== undefined ? config.map_title : null}
             subs={subjects}
             subjectData={config}
             onLocClick={(coords) => goToLoc(coords)}

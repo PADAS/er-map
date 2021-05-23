@@ -1,10 +1,11 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import './Legend.css'
 import Animal from './Animal.jsx'
 
 /* eslint-disable react/prop-types */
 const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryClick,
   legendOpen, onLegendStateToggle, tracks }) => {
+
   const legImage = legendOpen ? './public/images/button_icons/double_caret-right.png' : '/public/images/button_icons/double_caret-left.png'
 
   const [animalTrackState, setAnimalTrackState] = useState({})
@@ -13,7 +14,7 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
     onLegendStateToggle()
   }
 
-  function setTrackState(newState) {
+  function setTrackState (newState) {
     setAnimalTrackState(newState)
   }
 
@@ -23,12 +24,12 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
         <div id='legend-content'>
           <div className='title'>
             <div id='earthranger-logo'>
-            <a href='https://earthranger.com/' target="_blank" className='earthranger-logo'>
+              <a href='https://earthranger.com/' rel='noreferrer' target='_blank' className='earthranger-logo'>
                 <img src='./public/images/LogoEarthRanger.png' />
               </a>
             </div>
             <div id='tracker'>
-              <p>Animal Tracker</p>
+              <p>{title !== null ? title : 'Animal Tracker'}</p>
             </div>
           </div>
           <div id='subs'>

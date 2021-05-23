@@ -3,7 +3,7 @@ import { TrackContext } from '../App'
 import './Legend.css'
 
 /* eslint-disable react/prop-types */
-const TrackButton = ({ subject}) => {
+const TrackButton = ({ subject }) => {
   const { displayTracks, setTracks, tracks } = useContext(TrackContext)
 
   const vis = !!tracks[subject.id]

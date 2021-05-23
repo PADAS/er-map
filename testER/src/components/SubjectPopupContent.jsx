@@ -6,8 +6,6 @@ import TrackButton from './TrackButton.jsx'
 /* eslint-disable react/prop-types */
 const SubjectPopup = (props) => {
   // TODO: detailed handling of missing data fields
-  // Qs: dateTime format (dateTime is download time, same for all -> needed?)? lat/long format? subject name in JSON? how to format multiple images?
-  // add: position in lat/long?, common name
   const data = props.subjectData
   const subject = props.subject
   const { legendOpen, onLegendStateToggle } = props
@@ -20,6 +18,7 @@ const SubjectPopup = (props) => {
     species = subject.common_name.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())
   }
   let date = subject.last_position.properties.DateTime
+  console.log(date)
   date = date.substring(0, 10) + ' ' + date.substring(11, 16)
 
   let display = { display: 'flex' }
@@ -28,7 +27,7 @@ const SubjectPopup = (props) => {
   }
 
   function returnImage () {
-    if (data !== undefined && data.pictures.length > 0) {
+    if (data && data.pictures.length > 0) {
       return <img className='pop-up-image' src={data.pictures[0].path} alt='picture' />
     }
   }
@@ -44,19 +43,16 @@ const SubjectPopup = (props) => {
     <div id='pop-up'>
 
       <div>
-        {/* data.pictures.map((pic) => {
-          return <img className='pop-up-image' key={pic} src={pic.path} alt='picture' />
-        }) */}
         {returnImage()}
       </div>
       <div id='pop-up-header'>
         <h3>{subject.name}</h3>
       </div>
-      <p>{sex} | Adult | {species}</p>
-      <p><i>Short, fun fact about {subject.name}</i></p>
+      <p>{sex} | {data && data.age && data.age + ' |'} {species}</p>
+      {data && data.fun_fact && <p><i>{data.fun_fact}</i></p>}
       <div onClick={handleStoryClick} className='hover' style={display} id='view-story-button'>
         <p>View my story</p>
-        <img height='10' id='story' src='/public/images/button_icons/caret-right-orange.png'/>
+        <img height='10' id='story' src='/public/images/button_icons/caret-right-orange.png' />
       </div>
       <div id='pop-up-buttons'>
         <p id='date'>{date}</p>
