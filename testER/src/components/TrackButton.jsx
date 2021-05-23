@@ -3,7 +3,7 @@ import { TrackContext } from '../App'
 import './Legend.css'
 
 /* eslint-disable react/prop-types */
-const TrackButton = ({ subject, trackState, setTrackState }) => {
+const TrackButton = ({ subject}) => {
   const { displayTracks, setTracks, tracks } = useContext(TrackContext)
 
   const vis = !!tracks[subject.id]
@@ -14,17 +14,6 @@ const TrackButton = ({ subject, trackState, setTrackState }) => {
     let newState = Object.assign({}, tracks)
     newState[update[0]] = update[1]
     setTracks(newState)
-
-    /*if (trackState[subject.id] === " bold ") {
-      newState = Object.assign({}, trackState)
-      newState[subject.id] = ""
-      setTrackState(newState)
-    } else {
-      newState = Object.assign({}, trackState)
-      newState[subject.id] = " bold "
-      setTrackState(newState)
-    }*/
-
     displayTracks(update)
   }
 
