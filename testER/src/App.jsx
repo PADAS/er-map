@@ -314,6 +314,7 @@ const App = (props) => {
             legSub={legSub}
             onReturnClick={(subject) => setLegSub(subject)}
             onStoryClick={(subject) => setLegSub(subject)}
+            tracks={tracks}
           />
         </div>
         {subjectPopups.map(({ properties, geometry }) =>

@@ -5,9 +5,7 @@ import './Legend.css'
 
 /* eslint-disable react/prop-types */
 const Animal = ({
-  animal, configData, animalOnLocClicked, onNameClick, displayStory,
-  trackState, updateTrackState
-}) => {
+  animal, configData, animalOnLocClicked, onNameClick, displayStory, tracks}) => {
   const backgroundColor = { backgroundColor: animal.color }
   // const bulletColor = { color: animal.color }
   // const bulletColor = { background-color: animal.color }
@@ -15,6 +13,16 @@ const Animal = ({
   let hover = 'hover'
   let animalName = 'animal-name '
   let display = { }
+  let truncAnimalName = animal.name
+
+  if (truncAnimalName.length > 15) {
+    truncAnimalName = truncAnimalName.substring(0, 15) + '...'
+  }
+
+  let trackState = ''
+  if (tracks != undefined && tracks) {
+    trackState = ' bold '
+  }
 
   if (configData === undefined || !displayStory) {
     hover = 'default'
@@ -44,21 +52,22 @@ const Animal = ({
         <div id='animal-color' />
         <div className={'animal-name-bullet ' + animalName + hover} id={animalId}>
           <div id='animal-bullet'><div style={backgroundColor}></div></div>
-          <div className={'animal-name-style ' + hover + trackState[animal.id]}
-              id={animal.name.replace(' ','-')}>{animal.name}</div>
+          <div className={'animal-name-style ' + hover + trackState}
+              id={animal.name.replace(' ','-')}>{truncAnimalName}</div>
         </div>
         <div id='track-buttons' className={hover}>
           <TrackButton
             subject={animal}
-            trackState={trackState}
-            setTrackState={updateTrackState}
+            trackState={tracks}
+            /*setTrackState={updateTrackState}*/
           />
           <LocButton
             subject={animal}
             handleOnLocButtonClicked={animalOnLocClicked}
           />
         </div>
-        <img id='story-button' className={hover} style={display} width="7px" height="10px" src='/public/images/button_icons/story-f.png' />
+        <img id='story-button' className={hover} style={display} width="7px"
+          height="10px" src='/public/images/button_icons/story-f.png' />
 
       </div>
     </>

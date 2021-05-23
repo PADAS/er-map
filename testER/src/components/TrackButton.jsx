@@ -15,7 +15,7 @@ const TrackButton = ({ subject, trackState, setTrackState }) => {
     newState[update[0]] = update[1]
     setTracks(newState)
 
-    if (trackState[subject.id] === " bold ") {
+    /*if (trackState[subject.id] === " bold ") {
       newState = Object.assign({}, trackState)
       newState[subject.id] = ""
       setTrackState(newState)
@@ -23,7 +23,7 @@ const TrackButton = ({ subject, trackState, setTrackState }) => {
       newState = Object.assign({}, trackState)
       newState[subject.id] = " bold "
       setTrackState(newState)
-    }
+    }*/
 
     displayTracks(update)
   }
