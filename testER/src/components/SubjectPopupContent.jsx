@@ -10,7 +10,11 @@ const SubjectPopup = (props) => {
   const subject = props.subject
   const { legendOpen, onLegendStateToggle } = props
 
-  const sex = subject.sex.charAt(0).toUpperCase() + subject.sex.slice(1)
+  let sex = ''
+  if (subject.sex != undefined) {
+    sex = subject.sex.charAt(0).toUpperCase() + subject.sex.slice(1) + ' | '
+  }
+
   let species
   if (subject.common_name == null) {
     species = subject.subject_subtype.replace(/\b\w/g, l => l.toUpperCase())
@@ -48,7 +52,7 @@ const SubjectPopup = (props) => {
       <div id='pop-up-header'>
         <h3>{subject.name}</h3>
       </div>
-      <p>{sex} | {data && data.age && data.age + ' |'} {species}</p>
+      <p>{sex}{data && data.age && data.age + ' |'} {species}</p>
       {data && data.fun_fact && <p><i>{data.fun_fact}</i></p>}
       <div onClick={handleStoryClick} className='hover' style={display} id='view-story-button'>
         <p>View my story</p>
