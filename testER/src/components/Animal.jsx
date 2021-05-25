@@ -15,8 +15,8 @@ const Animal = ({
   let display = { }
   let truncAnimalName = animal.name
 
-  if (truncAnimalName.length > 15) {
-    truncAnimalName = truncAnimalName.substring(0, 15) + '...'
+  if (truncAnimalName.length > 13) {
+    truncAnimalName = truncAnimalName.substring(0, 13) + '...'
   }
 
   let trackState = ''
