@@ -4,7 +4,7 @@ import Animal from './Animal.jsx'
 
 /* eslint-disable react/prop-types */
 const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryClick,
-  legendOpen, onLegendStateToggle, tracks }) => {
+  legendOpen, onLegendStateToggle, tracks, title }) => {
 
   const legImage = legendOpen ? './public/images/button_icons/double_caret-right.png' : '/public/images/button_icons/double_caret-left.png'
 
