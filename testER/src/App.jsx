@@ -330,7 +330,7 @@ const App = (props) => {
       <TrackContext.Provider value={{ displayTracks, setTracks, tracks }}>
         <div id='map-container' onKeyDown={logKey} onKeyUp={logKey}>
           <HelpButton />
-          
+
           <Legend
             title={config !== undefined ? config.map_title : null}
             subs={subjects}

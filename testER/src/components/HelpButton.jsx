@@ -8,11 +8,11 @@ const HelpButton = () => {
   const closeIconSrc = '/public/images/button_icons/close-icon.png'
   const [iconSrc, setIconSrc] = useState(imgOffSrc)
 
-  const storyStyle = {'padding-left': '9px', 'padding-right': '8px', 'margin-top': '5px'}
-  const ctrlStyle = {'margin-top': '9px'}
-  const zoomStyle = {'padding-left': '2.5px'}
-  const viewStyle = {'margin-bottom': '2px', 'margin-top': '0px'}
-  const zoomPStyle = {'margin-top': '10px'}
+  const storyStyle = {'paddingLeft': '9px', 'paddingRight': '8px', 'marginTop': '5px'}
+  const ctrlStyle = {'marginTop': '9px'}
+  const zoomStyle = {'paddingLeft': '2.5px'}
+  const viewStyle = {'marginBottom': '2px', 'marginTop': '0px'}
+  const zoomPStyle = {'marginTop': '10px'}
 
   return (
     <div id='tips-container'>
