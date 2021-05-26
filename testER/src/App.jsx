@@ -45,8 +45,9 @@ const App = (props) => {
     window.GlobalMap = new mapboxgl.Map({
       container: 'map-container', // container ID
       style: 'mapbox://styles/mapbox/satellite-v9',
-      center: config.map.center === undefined ? [-109.3666652, -27.1166662] : config.map.center, // starting position [lng, lat]
-      zoom: config.map.zoom === undefined ? 11 : config.map.zoom // starting zoom
+      center: !config.map.center ? [-109.3666652, -27.1166662] : config.map.center, // starting position [lng, lat]
+      zoom: !config.map.zoom ? 11 : config.map.zoom, // starting zoom,
+      pitch: !config.map.pitch ? 75 : config.map.pitch
     })
 
     var nav = new mapboxgl.NavigationControl({ visualizePitch: true })
@@ -58,7 +59,7 @@ const App = (props) => {
         type: 'raster-dem',
         url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
         tileSize: 512,
-        maxzoom: 14
+        maxzoom: 23
       })
 
       // add a sky layer that will show when the map is highly pitched
@@ -316,10 +317,10 @@ const App = (props) => {
 
   const resetMap = () => {
     window.GlobalMap.flyTo({
-      center: config.map.center === undefined ? [-109.3666652, -27.1166662] : config.map.center, // starting position [lng, lat]
-      zoom: config.map.zoom === undefined ? 11 : config.map.zoom, // starting zoom
+      center: !config.map.center ? [-109.3666652, -27.1166662] : config.map.center, // starting position [lng, lat]
+      zoom: !config.map.zoom ? 11 : config.map.zoom, // starting zoom,
+      pitch: !config.map.pitch ? 75 : config.map.pitch,
       essential: true,
-      pitch: 0,
       bearing: 0
     })
     // toggle off all tracks??
@@ -358,9 +359,11 @@ const App = (props) => {
             coordinates={geometry.coordinates.slice()}
           >
             <TrackContext.Provider value={{ displayTracks, setTracks, tracks }}>
-              <SubjectPopupContent subject={properties} subjectData={config.subjects[properties.id]}
-              onStoryClick={(subject) => setLegSub(subject)} legendOpen={legendOpen}
-              onLegendStateToggle={toggleLegendState} {...props} />
+              <SubjectPopupContent
+                subject={properties} subjectData={config.subjects[properties.id]}
+                onStoryClick={(subject) => setLegSub(subject)} legendOpen={legendOpen}
+                onLegendStateToggle={toggleLegendState} {...props}
+              />
             </TrackContext.Provider>
           </Popup>
         )}

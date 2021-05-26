@@ -3,9 +3,10 @@ import './Legend.css'
 import Animal from './Animal.jsx'
 
 /* eslint-disable react/prop-types */
-const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryClick,
-  legendOpen, onLegendStateToggle, tracks, title }) => {
-
+const Legend = ({
+  subs, subjectData, onLocClick, legSub, onReturnClick, onStoryClick,
+  legendOpen, onLegendStateToggle, tracks, title
+}) => {
   const legImage = legendOpen ? './public/images/button_icons/double_caret-right.png' : '/public/images/button_icons/double_caret-left.png'
 
   const [animalTrackState, setAnimalTrackState] = useState({})
@@ -66,12 +67,12 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
               </div>
             </div>
             <div onClick={() => onReturnClick(undefined)} id='return' className='hover'>
-              <img width="7px" height="10px" src='./public/images/button_icons/view-animals-caret-left.png' />
+              <img width='7px' height='10px' src='./public/images/button_icons/view-animals-caret-left.png' />
               <p>Back</p>
             </div>
             <div id='animal-story'>
               <div id='subject-div'>
-                <Animal animal={legSub[0]} key={legSub[0].id} animalOnLocClicked={onLocClick} tracks={tracks[legSub[0].id]}/>
+                <Animal animal={legSub[0]} key={legSub[0].id} animalOnLocClicked={onLocClick} tracks={tracks[legSub[0].id]} />
               </div>
               {legSub[1].pictures.map((pic) => {
                 return <img className='sub-image' key={pic} src={pic.path} height={200} width={200} alt='picture' />

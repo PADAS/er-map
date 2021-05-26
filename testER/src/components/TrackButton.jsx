@@ -11,7 +11,7 @@ const TrackButton = ({ subject }) => {
 
   const onTrackButtonClick = () => {
     const update = [subject.id, !vis]
-    let newState = Object.assign({}, tracks)
+    const newState = Object.assign({}, tracks)
     newState[update[0]] = update[1]
     setTracks(newState)
     displayTracks(update)

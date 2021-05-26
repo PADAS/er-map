@@ -11,7 +11,7 @@ const SubjectPopup = (props) => {
   const { legendOpen, onLegendStateToggle } = props
 
   let sex = ''
-  if (subject.sex != undefined) {
+  if (subject.sex) {
     sex = subject.sex.charAt(0).toUpperCase() + subject.sex.slice(1) + ' | '
   }
 
