@@ -15,6 +15,7 @@ const HelpButton = () => {
   const zoomPStyle = { marginTop: '10px' }
   const orientStyle = { marginTop: '8px' }
 
+
   return (
     <div id='tips-container'>
       <div
@@ -58,7 +59,6 @@ const HelpButton = () => {
           <div>
             <img width='24' height='24' style={ctrlStyle} src='/public/images/button_icons/tip-control_key.png' />
             <p style={viewStyle}>Hold Ctrl / control key and drag with mouse to rotate view</p>
-          </div>
           <div>
             <img width='24' height='24' src='/public/images/button_icons/map_pin-gray.png' />
             <p>Jump to a subject's location</p>
