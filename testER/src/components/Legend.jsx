@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './Legend.css'
 import Animal from './Animal.jsx'
 
@@ -9,14 +9,8 @@ const Legend = ({
 }) => {
   const legImage = legendOpen ? './public/images/button_icons/double_caret-right.png' : '/public/images/button_icons/double_caret-left.png'
 
-  const [animalTrackState, setAnimalTrackState] = useState({})
-
   function toggleLegend () {
     onLegendStateToggle()
-  }
-
-  function setTrackState (newState) {
-    setAnimalTrackState(newState)
   }
 
   function display () {
@@ -34,7 +28,6 @@ const Legend = ({
             </div>
           </div>
           <div id='subs'>
-            {/* // map all content  */}
             {subs === undefined ? <div />
               : subs.map((s) => (
                 <div key={s.id} id='subject-div'>
@@ -51,8 +44,6 @@ const Legend = ({
         </div>
       )
     } else {
-      // should toggle open if legend is closed when click on popup
-
       return (
         <>
           <div id='legend-content'>
@@ -63,7 +54,7 @@ const Legend = ({
                 </a>
               </div>
               <div id='tracker'>
-                <p>Animal Tracker</p>
+                <p>{title !== null ? title : 'Animal Tracker'}</p>
               </div>
             </div>
             <div onClick={() => onReturnClick(undefined)} id='return' className='hover'>

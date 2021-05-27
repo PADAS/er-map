@@ -6,20 +6,18 @@ import './Legend.css'
 /* eslint-disable react/prop-types */
 const Animal = ({ animal, configData, animalOnLocClicked, onNameClick, displayStory, tracks }) => {
   const backgroundColor = { backgroundColor: animal.color }
-  // const bulletColor = { color: animal.color }
-  // const bulletColor = { background-color: animal.color }
   const animalId = animal.id + ' animal'
   let hover = 'hover'
   let animalName = 'animal-name '
   let display = { }
   let truncAnimalName = animal.name
 
-  if (truncAnimalName.length > 13) {
-    truncAnimalName = truncAnimalName.substring(0, 13) + '...'
+  if (truncAnimalName.length > 15) {
+    truncAnimalName = truncAnimalName.substring(0, 15) + '...'
   }
 
   let trackState = ''
-  if (tracks) {
+  if (tracks !== undefined && tracks) {
     trackState = ' bold '
   }
 
@@ -58,11 +56,7 @@ const Animal = ({ animal, configData, animalOnLocClicked, onNameClick, displaySt
           </div>
         </div>
         <div id='track-buttons' className={hover}>
-          <TrackButton
-            subject={animal}
-            trackState={tracks}
-            /* setTrackState={updateTrackState} */
-          />
+          <TrackButton subject={animal} trackState={tracks} />
           <LocButton
             subject={animal}
             handleOnLocButtonClicked={animalOnLocClicked}
