@@ -8,14 +8,8 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
 
   const legImage = legendOpen ? './public/images/button_icons/double_caret-right.png' : '/public/images/button_icons/double_caret-left.png'
 
-  const [animalTrackState, setAnimalTrackState] = useState({})
-
   function toggleLegend () {
     onLegendStateToggle()
-  }
-
-  function setTrackState (newState) {
-    setAnimalTrackState(newState)
   }
 
   function display () {
@@ -62,8 +56,8 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
                 </a>
               </div>
               <div id='tracker'>
-                <p>Animal Tracker</p>
-              </div>
+              <p>{title !== null ? title : 'Animal Tracker'}</p>
+            </div>
             </div>
             <div onClick={() => onReturnClick(undefined)} id='return' className='hover'>
               <img width="7px" height="10px" src='./public/images/button_icons/view-animals-caret-left.png' />
