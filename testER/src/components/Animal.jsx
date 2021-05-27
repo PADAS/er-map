@@ -7,8 +7,6 @@ import './Legend.css'
 const Animal = ({
   animal, configData, animalOnLocClicked, onNameClick, displayStory, tracks}) => {
   const backgroundColor = { backgroundColor: animal.color }
-  // const bulletColor = { color: animal.color }
-  // const bulletColor = { background-color: animal.color }
   const animalId = animal.id + ' animal'
   let hover = 'hover'
   let animalName = 'animal-name '
@@ -56,11 +54,7 @@ const Animal = ({
               id={animal.name.replace(' ','-')}>{truncAnimalName}</div>
         </div>
         <div id='track-buttons' className={hover}>
-          <TrackButton
-            subject={animal}
-            trackState={tracks}
-            /*setTrackState={updateTrackState}*/
-          />
+          <TrackButton subject={animal} trackState={tracks}/>
           <LocButton
             subject={animal}
             handleOnLocButtonClicked={animalOnLocClicked}

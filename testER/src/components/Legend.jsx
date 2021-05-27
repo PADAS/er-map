@@ -27,7 +27,6 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
             </div>
           </div>
           <div id='subs'>
-            {/* // map all content  */}
             {subs === undefined ? <div />
               : subs.map((s) => (
                 <div key={s.id} id='subject-div'>
@@ -44,8 +43,6 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
         </div>
       )
     } else {
-      // should toggle open if legend is closed when click on popup
-
       return (
         <>
           <div id='legend-content'>
