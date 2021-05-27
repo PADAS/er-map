@@ -1,12 +1,24 @@
-# er-map
-ER embeddable map
+# Earth Ranger Embeddable Map
 
-### Configuration File
-#### Structure
+## TODO: the first 3 sections
+
+## Introduction
+- tbd
+
+## Installation
+- download package
+
+## Quick Start
+- embed map
+- make config file, pass as param to map
+- set server
+
+## Configuration File
+### Structure
     {
         "server": <domain>,
         "map_title": <name>,
-        "color_scheme": <"aquatic" | "earthtones" | [array of hex values ex: "#00374"]>,
+        "color_scheme": <"aquatic" | "earthtones" | [array of hex values]>,
         "map": {
             "center": [<longitude>, <latitude>],
             "zoom": <number in range 0-22>,
@@ -31,18 +43,41 @@ ER embeddable map
         }
     }
 
-The only required field is the server domain, all other fields can be deleted. To add more subjects, simply add another \<subject id\> and its associated data.
+### Fields
+\* = required
+- *server: the server we set up for you
+    - e.g.: "ermap-server-sandbox.pamdas.org"
+- map_title: the name of the map that appears in the legend
+    - default: "Animal Tracker"
+- color_scheme: an array of hex colors used for bullets in the legend and displaying the track of the associated subject
+    - presets:
+        - "earthtones": shades of red/orange/brown
+        - "aquatic": shades of blue/green
+    - default: "earthtones"
+    - e.g.: ["#00374", "#005B70", "#219DB8", "#511913", "#711E17", "#961F1A"]
+- map.center: the initial center coordinates displayed on the map, [longitude, latitude]
+    - default: [-109.3666652, -27.1166662] (Easter Island)
+- map.zoom: the initial zoom level of the map in the range 0-22, higher numbers are more zoomed out
+    - default: 11
+- map.subject_names: a boolean for whether or not to diplay subject names below their icons on the map
+    - default: false
+- \<subject id>: the id of a subject in EarthRanger
+- \<subject id>.name: a new name for the subject
+    - default: the subject's name from EarthRanger
+- \<subject id>.age: the subject's age
+    - default: ""
+- \<subject id>.icon: an image to be used as the subject's icon on the map
+    - default: a photorealistic image of the animal based on its common_name from EarthRanger (if we have an associated image), otherwise its icon from EarthRanger
+    - <b>must not be a .svg</b>
+- \<subject id>.pictures.path: an image to be displayed in the subject's legend. The 1st image (if one is provided) is used in the subject's popup
+- \<subject id>.fun_fact: a short fun fact about the subject to be displayed in its popup
+    - default: ""
+- detail_description: simple HTML content wrapped in a string to be displayed as a subject's story
+    - default: ""
 
-#### Default Values
-- map_title: "Animal Tracker"
-- color_scheme: "earthtones"
-- map.center: [-109.3666652, -27.1166662] (Easter Island)
-- map.zoom: 11
-- map.subject_names: false
+### Important Notes
+The only required field is the server domain, all other fields can be deleted or marked as <code>null</code> to use the default value.
 
-- name: the name from EarthRanger
-- age: ""
-- icon: either a realistic image of the animal based on its common_name from EarthRanger (if we have an associated image) or its image from EarthRanger
-- pictures: none
-- fun_fact: ""
-- detail_description: ""
+To add more subjects, simply add another \<subject id\> and its associated data.
+
+In order for a subject to have a story, it must either have picture(s) or a detailed description.
