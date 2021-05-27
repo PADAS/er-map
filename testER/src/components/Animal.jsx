@@ -4,8 +4,7 @@ import LocButton from './LocButton.jsx'
 import './Legend.css'
 
 /* eslint-disable react/prop-types */
-const Animal = ({
-  animal, configData, animalOnLocClicked, onNameClick, displayStory, tracks}) => {
+const Animal = ({ animal, configData, animalOnLocClicked, onNameClick, displayStory, tracks }) => {
   const backgroundColor = { backgroundColor: animal.color }
   const animalId = animal.id + ' animal'
   let hover = 'hover'
@@ -18,7 +17,7 @@ const Animal = ({
   }
 
   let trackState = ''
-  if (tracks != undefined && tracks) {
+  if (tracks !== undefined && tracks) {
     trackState = ' bold '
   }
 
@@ -49,20 +48,25 @@ const Animal = ({
         />
         <div id='animal-color' />
         <div className={'animal-name-bullet ' + animalName + hover} id={animalId}>
-          <div id='animal-bullet'><div style={backgroundColor}></div></div>
-          <div className={'animal-name-style ' + hover + trackState}
-              id={animal.name.replace(' ','-')}>{truncAnimalName}</div>
+          <div id='animal-bullet'><div style={backgroundColor} /></div>
+          <div
+            className={'animal-name-style ' + hover + trackState}
+            id={animal.name.replace(' ', '-')}
+          >{truncAnimalName}
+          </div>
         </div>
         <div id='track-buttons' className={hover}>
-          <TrackButton subject={animal} trackState={tracks}/>
+          <TrackButton subject={animal} trackState={tracks} />
           <LocButton
             subject={animal}
             handleOnLocButtonClicked={animalOnLocClicked}
           />
         </div>
 
-        <img id='story-button' className={hover} style={display} width="7px"
-          height="10px" src='/public/images/button_icons/story-f.png' />
+        <img
+          id='story-button' className={hover} style={display} width='7px'
+          height='10px' src='/public/images/button_icons/story-f.png'
+        />
 
       </div>
     </>
