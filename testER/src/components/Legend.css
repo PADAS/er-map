@@ -49,7 +49,7 @@
 
 #animal-story {
     overflow-y: auto;
-    height: calc(100vh - 110px);
+    height: calc(100vh - 135px);
 }
 
 .title {
