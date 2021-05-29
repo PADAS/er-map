@@ -1,9 +1,17 @@
 # Earth Ranger Embeddable Map
 
-## TODO: the first 3 sections
+## TODO: [Installation](#Installation), [Quick Start](#Quick-Start)
+
+## Table of Contents
+1. [Introduction](#Introduction)
+2. [Installation](#Installation)
+3. [Quick Start](#Quick-Start)
+4. [Configuration](#Configuration)
+5. [Maintainers](#Maintainers)
 
 ## Introduction
-- tbd
+This embeddable map allows clients to customize and configure how they portray animal tracking data.
+The animal tracking data is provided by the client's EarthRanger server and the module constructs a default map described below. Read the [Configuration](#Configuration) section below to learn more about customizing your map.
 
 ## Installation
 - download package
@@ -13,8 +21,8 @@
 - make config file, pass as param to map
 - set server
 
-## Configuration File
-### Structure
+## Configuration
+### File Structure
     {
         "server": <domain>,
         "map_title": <name>,
@@ -81,3 +89,6 @@ The only required field is the server domain, all other fields can be deleted or
 To add more subjects, simply add another \<subject id\> and its associated data.
 
 In order for a subject to have a story, it must either have picture(s) or a detailed description.
+
+## Maintainers
+Manasi Shah, Zage Strassberg-Phillips, Lauren Vreeken
