@@ -29,7 +29,7 @@ const SubjectPopup = (props) => {
   }
 
   function returnImage () {
-    if (data && data.pictures.length > 0) {
+    if (data !== undefined && data.pictures !== undefined && data.pictures.length > 0) {
       return <img className='pop-up-image' src={data.pictures[0].path} alt='picture' />
     }
   }
