@@ -12,7 +12,7 @@ module.exports = {
     ...config.plugins,
     new webpack.DefinePlugin({
       'process.env': {
-        PUBLIC_URL: '"../public"'
+        PUBLIC_URL: '"/public"'
       }
     })
   ]
