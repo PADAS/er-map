@@ -1,0 +1,1 @@
+yarn build && cp -R public build/public
