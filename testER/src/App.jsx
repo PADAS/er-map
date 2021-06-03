@@ -45,9 +45,9 @@ const App = (props) => {
     window.GlobalMap = new mapboxgl.Map({
       container: 'map-container', // container ID
       style: 'mapbox://styles/mapbox/satellite-v9',
-      center: !config.map.center ? [-109.3666652, -27.1166662] : config.map.center, // starting position [lng, lat]
-      zoom: !config.map.zoom ? 11 : config.map.zoom, // starting zoom,
-      pitch: !config.map.pitch ? 75 : config.map.pitch
+      center: !config.map || !config.map.center ? [-109.3666652, -27.1166662] : config.map.center, // starting position [lng, lat]
+      zoom: !config.map || !config.map.zoom ? 11 : config.map.zoom, // starting zoom,
+      pitch: !config.map || !config.map.pitch ? 75 : config.map.pitch
     })
 
     var nav = new mapboxgl.NavigationControl({ visualizePitch: true })
@@ -94,7 +94,7 @@ const App = (props) => {
           resp.data.data.map((subject) => {
             if (subject.last_position !== undefined) {
               // override subject name if provided in config
-              if (config.subjects[subject.id] && config.subjects[subject.id].name) {
+              if (config.subjects && config.subjects[subject.id] && config.subjects[subject.id].name) {
                 subject.name = config.subjects[subject.id].name
               }
               drawIcon(subject).then()
@@ -122,7 +122,7 @@ const App = (props) => {
           //   associated with it (more info to show in legend story)
           for (let i = 0; i < resp.data.data.length; i++) {
             const id = resp.data.data[i].id
-            resp.data.data[i].display_story = config.subjects[id] && (config.subjects[id].pictures || config.subjects[id].detail_description)
+            resp.data.data[i].display_story = config.subjects && config.subjects[id] && (config.subjects[id].pictures || config.subjects[id].detail_description)
           }
           setSubjects(resp.data.data)
         })
@@ -156,7 +156,7 @@ const App = (props) => {
 
   useEffect(() => {
     if (window.GlobalMap) {
-      window.GlobalMap.loadImage('/public/images/med.png', (_error, img) => {
+      window.GlobalMap.loadImage(`${process.env.PUBLIC_URL}/images/med.png`, (_error, img) => {
         window.GlobalMap.addImage('subject-popup-box', img, { sdf: true })
       })
     }
@@ -231,7 +231,7 @@ const App = (props) => {
 
   async function drawIcon (json) {
     let imgURL = null
-    if (config.subjects[json.id] && config.subjects[json.id].icon) {
+    if (config.subjects && config.subjects[json.id] && config.subjects[json.id].icon) {
       imgURL = config.subjects[json.id].icon
     } else if (json.common_name !== null && await fileExists(`${process.env.PUBLIC_URL}/images/animal_icons/${json.common_name}.png`)) {
       imgURL = `${process.env.PUBLIC_URL}/images/animal_icons/${json.common_name}.png`
@@ -345,9 +345,9 @@ const App = (props) => {
 
   const resetMap = () => {
     window.GlobalMap.flyTo({
-      center: !config.map.center ? [-109.3666652, -27.1166662] : config.map.center, // starting position [lng, lat]
-      zoom: !config.map.zoom ? 11 : config.map.zoom, // starting zoom,
-      pitch: !config.map.pitch ? 75 : config.map.pitch,
+      center: !config.map || !config.map.center ? [-109.3666652, -27.1166662] : config.map.center, // starting position [lng, lat]
+      zoom: !config.map || !config.map.zoom ? 11 : config.map.zoom, // starting zoom,
+      pitch: !config.map || !config.map.pitch ? 75 : config.map.pitch,
       essential: true,
       bearing: 0
     })

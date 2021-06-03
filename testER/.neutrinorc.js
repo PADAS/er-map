@@ -18,7 +18,7 @@ module.exports = {
       html: {
         title: 'testER'
       },
-      publicPath: ''
+      // publicPath: ''
     }),
     devServer({
       port: 3000,
