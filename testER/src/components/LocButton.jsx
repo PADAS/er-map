@@ -1,6 +1,8 @@
 import React from 'react'
 import './Legend.css'
 
+import pin from '../../public/images/button_icons/map_pin-gray.png'
+
 /* eslint-disable react/prop-types */
 const LocButton = ({ subject, handleOnLocButtonClicked }) => {
   function flyTo () {
@@ -10,7 +12,7 @@ const LocButton = ({ subject, handleOnLocButtonClicked }) => {
   return (
     <>
       <img
-        width='20' height='20' className='hover' src={`${process.env.PUBLIC_URL}/images/button_icons/map_pin-gray.png`}
+        width='20' height='20' className='hover' src={pin}
         id='subject-location-button' onClick={() => flyTo()}
       />
     </>

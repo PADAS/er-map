@@ -1,11 +1,21 @@
 import React, { useState } from 'react'
 import './Legend.css'
 
+import tipsOn from '../../public/images/button_icons/tips-gray.png'
+import tipsOff from '../../public/images/button_icons/tips-green.png'
+import close from '../../public/images/button_icons/close-icon.png'
+import zoom from '../../public/images/button_icons/tip-zoom.png'
+import reset from '../../public/images/button_icons/tip-reset.png'
+import control from '../../public/images/button_icons/tip-control_key.png'
+import pin from '../../public/images/button_icons/map_pin-gray.png'
+import tracks from '../../public/images/button_icons/pin_tracks-gray.png'
+import story from '../../public/images/button_icons/story-f.png'
+
 /* eslint-disable react/prop-types */
 const HelpButton = () => {
-  const imgOffSrc = `${process.env.PUBLIC_URL}/images/button_icons/tips-gray.png`
-  const imgOnSrc = `${process.env.PUBLIC_URL}/images/button_icons/tips-green.png`
-  const closeIconSrc = `${process.env.PUBLIC_URL}/images/button_icons/close-icon.png`
+  const imgOffSrc = tipsOn
+  const imgOnSrc = tipsOff
+  const closeIconSrc = close
   const [iconSrc, setIconSrc] = useState(imgOffSrc)
 
   const storyStyle = { paddingLeft: '9px', paddingRight: '8px', marginTop: '5px' }
@@ -48,27 +58,27 @@ const HelpButton = () => {
         </div>
         <div id='actual-tips'>
           <div>
-            <img width='20' height='40' style={zoomStyle} src={`${process.env.PUBLIC_URL}/images/button_icons/tip-zoom.png`} />
+            <img width='20' height='40' style={zoomStyle} src={zoom} />
             <p style={zoomPStyle}>Zoom map in/out</p>
           </div>
           <div>
-            <img width='24' style={orientStyle} height='24' src={`${process.env.PUBLIC_URL}/images/button_icons/tip-reset.png`} />
+            <img width='24' style={orientStyle} height='24' src={reset} />
             <p style={viewStyle}>Return map orientation to original view</p>
           </div>
           <div>
-            <img width='24' height='24' style={ctrlStyle} src={`${process.env.PUBLIC_URL}/images/button_icons/tip-control_key.png`} />
+            <img width='24' height='24' style={ctrlStyle} src={control} />
             <p style={viewStyle}>Hold Ctrl / control key and drag with mouse to rotate view</p>
           </div>
           <div>
-            <img width='24' height='24' src={`${process.env.PUBLIC_URL}/images/button_icons/map_pin-gray.png`} />
+            <img width='24' height='24' src={pin} />
             <p>Jump to a subject's location</p>
           </div>
           <div>
-            <img width='24' height='24' src={`${process.env.PUBLIC_URL}/images/button_icons/pin_tracks-gray.png`} />
+            <img width='24' height='24' src={tracks} />
             <p>Display a subject's track</p>
           </div>
           <div>
-            <img width='7' height='10' style={storyStyle} src={`${process.env.PUBLIC_URL}/images/button_icons/story-f.png`} />
+            <img width='7' height='10' style={storyStyle} src={story} />
             <p>Display a subject's story</p>
           </div>
         </div>

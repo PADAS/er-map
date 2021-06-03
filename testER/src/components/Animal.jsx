@@ -3,6 +3,8 @@ import TrackButton from './TrackButton.jsx'
 import LocButton from './LocButton.jsx'
 import './Legend.css'
 
+import storyIcon from '../../public/images/button_icons/story-f.png'
+
 /* eslint-disable react/prop-types */
 const Animal = ({ animal, configData, animalOnLocClicked, onNameClick, displayStory, tracks }) => {
   const backgroundColor = { backgroundColor: animal.color }
@@ -62,7 +64,7 @@ const Animal = ({ animal, configData, animalOnLocClicked, onNameClick, displaySt
             handleOnLocButtonClicked={animalOnLocClicked}
           />
         </div>
-        <img id='story-button' className={hover} style={display} width='7px' height='10px' src={`${process.env.PUBLIC_URL}/images/button_icons/story-f.png`} />
+        <img id='story-button' className={hover} style={display} width='7px' height='10px' src={storyIcon} />
       </div>
     </>
   )

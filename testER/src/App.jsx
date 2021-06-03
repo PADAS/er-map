@@ -9,6 +9,8 @@ import HelpButton from './components/HelpButton'
 import './App.css'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
+import med from '../public/images/med.png'
+
 // instantiate the Map
 mapboxgl.accessToken = 'pk.eyJ1IjoidmpvZWxtIiwiYSI6ImNra2hiZXNpMzA1bTcybnA3OXlycnN2ZjcifQ.gH6Nls61WTMVutUH57jMJQ' // development token
 
@@ -156,7 +158,7 @@ const App = (props) => {
 
   useEffect(() => {
     if (window.GlobalMap) {
-      window.GlobalMap.loadImage(`${process.env.PUBLIC_URL}/images/med.png`, (_error, img) => {
+      window.GlobalMap.loadImage(med, (_error, img) => {
         window.GlobalMap.addImage('subject-popup-box', img, { sdf: true })
       })
     }
@@ -239,13 +241,6 @@ const App = (props) => {
       imgURL = json.last_position.properties.image
     }
     addImage(json, imgURL)
-
-    // TODO: async timing issues
-    // try {
-    // addImage(json, imgURL)
-    // } catch(e) {
-    //   addImage(json, json.last_position.properties.image)
-    // }
   }
 
   function addImage (json, imgURL) {
@@ -259,15 +254,20 @@ const App = (props) => {
         })
 
         // Animal Icon
+        const iconSize = (imgURL !== json.last_position.properties.image) ? 0.4 : 1.0
         window.GlobalMap.addLayer({
           id: 'points' + json.id,
           type: 'symbol',
           source: 'point' + json.id,
           layout: {
             'icon-image': json.subject_subtype + json.id,
-            'icon-size': imgURL !== json.last_position.properties.image ? 0.4 : 1.0,
+            'icon-size': [
+              'interpolate', ['linear'], ['zoom'],
+              7, 0,
+              12, iconSize
+            ],
             'icon-anchor': 'bottom',
-            'icon-allow-overlap': ['step', ['zoom'], false, 10, true]
+            'icon-allow-overlap': true
           }
         })
 
@@ -278,16 +278,16 @@ const App = (props) => {
           source: 'point' + json.id,
           layout: {
             'icon-image': 'subject-popup-box',
-            'icon-size': 1,
+            'icon-size': ['step', ['zoom'], 0, 10, 1],
             'icon-anchor': 'top',
-            'icon-allow-overlap': ['step', ['zoom'], false, 10, true],
+            'icon-allow-overlap': true,
             'icon-text-fit': 'both',
             'icon-text-fit-padding': [3, 3, 3, 3],
             'text-anchor': 'top',
             'text-offset': [0, 0.5],
-            'text-allow-overlap': ['step', ['zoom'], false, 10, true],
+            'text-allow-overlap': true,
             'text-field': json.name,
-            'text-size': 10
+            'text-size': ['step', ['zoom'], 0, 10, 10]
           },
           paint: {
             'text-color': 'black',
