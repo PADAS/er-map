@@ -14,12 +14,15 @@ This embeddable map allows clients to customize and configure how they portray a
 The animal tracking data is provided by the client's EarthRanger server and the module constructs a default map described below. Read the [Configuration](#Configuration) section below to learn more about customizing your map.
 
 ## Installation
-- download package
+1. Go to https://github.com/PADAS/er-map/releases and download the lastest release
+2. Copy the build directory from the download into the public folder of your source code
 
 ## Quick Start
-- embed map
-- make config file, pass as param to map
-- set server
+1. Create an iFrame to embed the map into
+2. Edit public/config/config.json to specify your server name
+4. Run your website and see our map
+
+Next steps: finish personalizing your Earth Ranger Embeddable Map by filling out the remainder of config.json.
 
 ## Configuration
 ### File Structure
