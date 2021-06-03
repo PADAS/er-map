@@ -12,7 +12,7 @@ const LocButton = ({ subject, handleOnLocButtonClicked }) => {
   return (
     <>
       <img
-        width='20' height='20' className='hover' src={pin}
+        width='24' height='24' className='hover' src={pin}
         id='subject-location-button' onClick={() => flyTo()}
       />
     </>
