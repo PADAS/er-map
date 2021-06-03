@@ -7,7 +7,7 @@ const Legend = ({
   subs, subjectData, onLocClick, legSub, onReturnClick, onStoryClick,
   legendOpen, onLegendStateToggle, tracks, title
 }) => {
-const legImage = legendOpen ? `${process.env.PUBLIC_URL}/images/button_icons/double_caret-right.png` : `${process.env.PUBLIC_URL}/images/button_icons/double_caret-left.png`
+  const legImage = legendOpen ? `${process.env.PUBLIC_URL}/images/button_icons/double_caret-right.png` : `${process.env.PUBLIC_URL}/images/button_icons/double_caret-left.png`
 
   function toggleLegend () {
     onLegendStateToggle()
