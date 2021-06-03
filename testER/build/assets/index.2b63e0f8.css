@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2&display=swap');
-
+@import url(https://fonts.googleapis.com/css2?family=Baloo+2&display=swap);
 /* LEGEND CSS  */
 
 /* LEGEND BUTTON */
@@ -357,3 +356,54 @@
 .mapboxgl-ctrl-attrib a {
     color: rgba(255,255,255,.8) !important;
 }
+.App {
+  padding: 20px;
+}
+
+#map-container {
+  position: relative;
+  height: 100vh;
+  padding: 0px;
+  margin: -8px;
+}
+
+#earth-ranger-logo {
+  /* Should this be fixed or not */
+  /* height: 45px; */
+  position: absolute;
+  padding: 10px 15px 10px 15px;
+  top: 0;
+  z-index: 1;
+}
+
+#earth-ranger-logo:hover {
+  cursor: pointer;
+}
+
+#reset {
+  z-index: 1;
+  top: 90px;
+  left: 10px;
+  position: absolute;
+  color: white;
+}
+
+#reset:hover { cursor: pointer; }
+
+/* LEGEND CSS */
+#legend {
+  z-index: 1;
+  right: 0;
+  position: absolute;
+}
+
+.name {
+  height: 0px;
+  margin: 0px;
+}
+
+.namePopup {
+  background-color: white;
+  border-radius: 4px;
+}
+

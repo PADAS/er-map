@@ -4,17 +4,22 @@ import LocButton from './LocButton.jsx'
 import './Legend.css'
 
 /* eslint-disable react/prop-types */
-const Animal = ({
-  animal, configData, animalOnLocClicked, onNameClick, displayStory,
-  trackState, updateTrackState
-}) => {
+const Animal = ({ animal, configData, animalOnLocClicked, onNameClick, displayStory, tracks }) => {
   const backgroundColor = { backgroundColor: animal.color }
-  // const bulletColor = { color: animal.color }
-  // const bulletColor = { background-color: animal.color }
   const animalId = animal.id + ' animal'
   let hover = 'hover'
   let animalName = 'animal-name '
   let display = { }
+  let truncAnimalName = animal.name
+
+  if (truncAnimalName.length > 15) {
+    truncAnimalName = truncAnimalName.substring(0, 15) + '...'
+  }
+
+  let trackState = ''
+  if (tracks !== undefined && tracks) {
+    trackState = ' bold '
+  }
 
   if (configData === undefined || !displayStory) {
     hover = 'default'
@@ -45,24 +50,19 @@ const Animal = ({
         <div className={'animal-name-bullet ' + animalName + hover} id={animalId}>
           <div id='animal-bullet'><div style={backgroundColor} /></div>
           <div
-            className={'animal-name-style ' + hover + trackState[animal.id]}
+            className={'animal-name-style ' + hover + trackState}
             id={animal.name.replace(' ', '-')}
-          >{animal.name}
+          >{truncAnimalName}
           </div>
         </div>
         <div id='track-buttons' className={hover}>
-          <TrackButton
-            subject={animal}
-            trackState={trackState}
-            setTrackState={updateTrackState}
-          />
+          <TrackButton subject={animal} trackState={tracks} />
           <LocButton
             subject={animal}
             handleOnLocButtonClicked={animalOnLocClicked}
           />
         </div>
         <img id='story-button' className={hover} style={display} width='7px' height='10px' src={`${process.env.PUBLIC_URL}/images/button_icons/story-f.png`} />
-
       </div>
     </>
   )
