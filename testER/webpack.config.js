@@ -4,18 +4,20 @@
 const neutrino = require('neutrino');
 const webpack = require('webpack');
 
-const config = neutrino().webpack()
+module.exports = neutrino().webpack()
 
-module.exports = {
-  ...config,
-  plugins: [
-    ...config.plugins,
-    new webpack.DefinePlugin({
-      'process.env': {
-        PUBLIC_URL: '"/public"'
-      }
-    })
-  ]
-}
+// const config = neutrino().webpack()
+
+// module.exports = {
+//   ...config,
+//   plugins: [
+//     ...config.plugins,
+//     new webpack.DefinePlugin({
+//       'process.env': {
+//         PUBLIC_URL: '"/public"'
+//       }
+//     })
+//   ]
+// }
 
 // TODO: how to read NODE_ENV
