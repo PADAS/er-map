@@ -1,19 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './Legend.css'
 import Animal from './Animal.jsx'
 
 /* eslint-disable react/prop-types */
-const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryClick, legendOpen, onLegendStateToggle, title }) => {
-  const legImage = legendOpen ? './public/images/button_icons/double_caret-right.png' : '/public/images/button_icons/double_caret-left.png'
-
-  const [animalTrackState, setAnimalTrackState] = useState({})
+const Legend = ({
+  subs, subjectData, onLocClick, legSub, onReturnClick, onStoryClick,
+  legendOpen, onLegendStateToggle, tracks, title
+}) => {
+const legImage = legendOpen ? `${process.env.PUBLIC_URL}/images/button_icons/double_caret-right.png` : `${process.env.PUBLIC_URL}/images/button_icons/double_caret-left.png`
 
   function toggleLegend () {
     onLegendStateToggle()
-  }
-
-  function setTrackState (newState) {
-    setAnimalTrackState(newState)
   }
 
   function display () {
@@ -23,7 +20,7 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
           <div className='title'>
             <div id='earthranger-logo'>
               <a href='https://earthranger.com/' rel='noreferrer' target='_blank' className='earthranger-logo'>
-                <img src='./public/images/LogoEarthRanger.png' />
+                <img src={`${process.env.PUBLIC_URL}/images/LogoEarthRanger.png`} />
               </a>
             </div>
             <div id='tracker'>
@@ -31,7 +28,6 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
             </div>
           </div>
           <div id='subs'>
-            {/* // map all content  */}
             {subs === undefined ? <div />
               : subs.map((s) => (
                 <div key={s.id} id='subject-div'>
@@ -40,8 +36,7 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
                     key={s.id}
                     animalOnLocClicked={onLocClick} onNameClick={onStoryClick}
                     displayStory={s.display_story}
-                    trackState={animalTrackState}
-                    updateTrackState={setTrackState}
+                    tracks={tracks[s.id]}
                   />
                 </div>
               ))}
@@ -49,29 +44,26 @@ const Legend = ({ subs, subjectData, onLocClick, legSub, onReturnClick, onStoryC
         </div>
       )
     } else {
-      // should toggle open if legend is closed when click on popup
-
       return (
         <>
           <div id='legend-content'>
             <div className='title'>
               <div id='earthranger-logo'>
                 <a href='https://earthranger.com/' className='earthranger-logo'>
-                  <img src='./public/images/LogoEarthRanger.png' />
+                  <img src={`${process.env.PUBLIC_URL}/images/LogoEarthRanger.png`} />
                 </a>
               </div>
               <div id='tracker'>
-                <p>Animal Tracker</p>
+                <p>{title !== null ? title : 'Animal Tracker'}</p>
               </div>
             </div>
             <div onClick={() => onReturnClick(undefined)} id='return' className='hover'>
-              <img width="7px" height="10px" src='./public/images/button_icons/view-animals-caret-left.png' />
+              <img width='7px' height='10px' src={`${process.env.PUBLIC_URL}/images/button_icons/view-animals-caret-left.png`} />
               <p>Back</p>
             </div>
             <div id='animal-story'>
               <div id='subject-div'>
-                <Animal animal={legSub[0]} key={legSub[0].id} animalOnLocClicked={onLocClick}
-                  trackState={animalTrackState} updateTrackState={setTrackState}/>
+                <Animal animal={legSub[0]} key={legSub[0].id} animalOnLocClicked={onLocClick} tracks={tracks[legSub[0].id]} />
               </div>
               {legSub[1].pictures.map((pic) => {
                 return <img className='sub-image' key={pic} src={pic.path} height={200} width={200} alt='picture' />

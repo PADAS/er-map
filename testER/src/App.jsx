@@ -45,8 +45,9 @@ const App = (props) => {
     window.GlobalMap = new mapboxgl.Map({
       container: 'map-container', // container ID
       style: 'mapbox://styles/mapbox/satellite-v9',
-      center: config.map.center === undefined ? [-109.3666652, -27.1166662] : config.map.center, // starting position [lng, lat]
-      zoom: config.map.zoom === undefined ? 11 : config.map.zoom // starting zoom
+      center: !config.map || !config.map.center ? [-109.3666652, -27.1166662] : config.map.center, // starting position [lng, lat]
+      zoom: !config.map || !config.map.zoom ? 11 : config.map.zoom, // starting zoom,
+      pitch: !config.map || !config.map.pitch ? 75 : config.map.pitch
     })
 
     var nav = new mapboxgl.NavigationControl({ visualizePitch: true })
@@ -58,7 +59,7 @@ const App = (props) => {
         type: 'raster-dem',
         url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
         tileSize: 512,
-        maxzoom: 14
+        maxzoom: 23
       })
 
       // add a sky layer that will show when the map is highly pitched
@@ -93,7 +94,7 @@ const App = (props) => {
           resp.data.data.map((subject) => {
             if (subject.last_position !== undefined) {
               // override subject name if provided in config
-              if (config.subjects[subject.id] && config.subjects[subject.id].name) {
+              if (config.subjects && config.subjects[subject.id] && config.subjects[subject.id].name) {
                 subject.name = config.subjects[subject.id].name
               }
               drawIcon(subject).then()
@@ -121,7 +122,7 @@ const App = (props) => {
           //   associated with it (more info to show in legend story)
           for (let i = 0; i < resp.data.data.length; i++) {
             const id = resp.data.data[i].id
-            resp.data.data[i].display_story = config.subjects[id] && (config.subjects[id].pictures || config.subjects[id].detail_description)
+            resp.data.data[i].display_story = config.subjects && config.subjects[id] && (config.subjects[id].pictures || config.subjects[id].detail_description)
           }
           setSubjects(resp.data.data)
         })
@@ -152,6 +153,14 @@ const App = (props) => {
       isSubscribed = false
     }
   }, []) /* eslint-disable-line react-hooks/exhaustive-deps */
+
+  useEffect(() => {
+    if (window.GlobalMap) {
+      window.GlobalMap.loadImage(`${process.env.PUBLIC_URL}/images/med.png`, (_error, img) => {
+        window.GlobalMap.addImage('subject-popup-box', img, { sdf: true })
+      })
+    }
+  }, [window.GlobalMap])
 
   function displayTracks (updatedTrack) {
     const id = updatedTrack[0]
@@ -222,10 +231,10 @@ const App = (props) => {
 
   async function drawIcon (json) {
     let imgURL = null
-    if (config.subjects[json.id] && config.subjects[json.id].icon) {
+    if (config.subjects && config.subjects[json.id] && config.subjects[json.id].icon) {
       imgURL = config.subjects[json.id].icon
-    } else if (json.common_name !== null && await fileExists(`public/images/animal_icons/${json.common_name}.png`)) {
-      imgURL = `public/images/animal_icons/${json.common_name}.png`
+    } else if (json.common_name !== null && await fileExists(`${process.env.PUBLIC_URL}/images/animal_icons/${json.common_name}.png`)) {
+      imgURL = `${process.env.PUBLIC_URL}/images/animal_icons/${json.common_name}.png`
     } else {
       imgURL = json.last_position.properties.image
     }
@@ -248,6 +257,8 @@ const App = (props) => {
           type: 'geojson',
           data: json.last_position
         })
+
+        // Animal Icon
         window.GlobalMap.addLayer({
           id: 'points' + json.id,
           type: 'symbol',
@@ -256,13 +267,32 @@ const App = (props) => {
             'icon-image': json.subject_subtype + json.id,
             'icon-size': imgURL !== json.last_position.properties.image ? 0.4 : 1.0,
             'icon-anchor': 'bottom',
-            'text-field': config.map.subject_names ? json.name : "",
-            'text-size': 15,
-            'text-offset': [0, 0.3],
-            'text-anchor': 'top'
+            'icon-allow-overlap': ['step', ['zoom'], false, 10, true]
+          }
+        })
+
+        // Subject Nametag Icon
+        window.GlobalMap.addLayer({
+          id: 'box' + json.id,
+          type: 'symbol',
+          source: 'point' + json.id,
+          layout: {
+            'icon-image': 'subject-popup-box',
+            'icon-size': 1,
+            'icon-anchor': 'top',
+            'icon-allow-overlap': ['step', ['zoom'], false, 10, true],
+            'icon-text-fit': 'both',
+            'icon-text-fit-padding': [3, 3, 3, 3],
+            'text-anchor': 'top',
+            'text-offset': [0, 0.5],
+            'text-allow-overlap': ['step', ['zoom'], false, 10, true],
+            'text-field': json.name,
+            'text-size': 10
           },
           paint: {
-            'text-color': 'white'
+            'text-color': 'black',
+            'icon-color': 'white',
+            'icon-opacity': 0.65
           }
         })
 
@@ -315,10 +345,10 @@ const App = (props) => {
 
   const resetMap = () => {
     window.GlobalMap.flyTo({
-      center: config.map.center === undefined ? [-109.3666652, -27.1166662] : config.map.center, // starting position [lng, lat]
-      zoom: config.map.zoom === undefined ? 11 : config.map.zoom, // starting zoom
+      center: !config.map || !config.map.center ? [-109.3666652, -27.1166662] : config.map.center, // starting position [lng, lat]
+      zoom: !config.map || !config.map.zoom ? 11 : config.map.zoom, // starting zoom,
+      pitch: !config.map || !config.map.pitch ? 75 : config.map.pitch,
       essential: true,
-      pitch: 0,
       bearing: 0
     })
     // toggle off all tracks??
@@ -329,6 +359,7 @@ const App = (props) => {
       <TrackContext.Provider value={{ displayTracks, setTracks, tracks }}>
         <div id='map-container' onKeyDown={logKey} onKeyUp={logKey}>
           <HelpButton />
+
           <Legend
             title={config !== undefined ? config.map_title : null}
             subs={subjects}
@@ -339,6 +370,7 @@ const App = (props) => {
             legSub={legSub}
             onReturnClick={(subject) => setLegSub(subject)}
             onStoryClick={(subject) => setLegSub(subject)}
+            tracks={tracks}
           />
         </div>
         {subjectPopups.map(({ properties, geometry }) =>
@@ -355,7 +387,11 @@ const App = (props) => {
             coordinates={geometry.coordinates.slice()}
           >
             <TrackContext.Provider value={{ displayTracks, setTracks, tracks }}>
-              <SubjectPopupContent subject={properties} subjectData={config.subjects[properties.id]} onStoryClick={(subject) => setLegSub(subject)} legendOpen={legendOpen} onLegendStateToggle={toggleLegendState} {...props} />
+              <SubjectPopupContent
+                subject={properties} subjectData={config.subjects[properties.id]}
+                onStoryClick={(subject) => setLegSub(subject)} legendOpen={legendOpen}
+                onLegendStateToggle={toggleLegendState} {...props}
+              />
             </TrackContext.Provider>
           </Popup>
         )}

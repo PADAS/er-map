@@ -4,8 +4,7 @@
 
 /* LEGEND BUTTON */
 #legend {
-    height: 100%;
-    /* height: 200px; */
+    height: calc(100vh - 20px);
     display: grid;
     grid-template-columns: 32.5px 292.5px;
     transition: width 1s;
@@ -37,29 +36,20 @@
     background-color: white;
 }
 
-
 #legend-content{
     background-color: white;
     opacity: .95;
-    /* border: solid red;   */
-    /* overflow-y: auto; */
-    /* height: inherit; */
     height: 100%;
 }
 
 #subs {
-    /* border: solid green; */
-    /* overflow-y: auto;
-    height: 100%; */
     overflow-y: auto;
-    height: calc(100vh - 70px);
+    height: calc(100vh - 90px);
 }
 
 #animal-story {
-    /* border: solid pink; */
-    /* height: 100%; */
     overflow-y: auto;
-    height: calc(100vh - 90px);
+    height: calc(100vh - 135px);
 }
 
 .title {
@@ -68,7 +58,6 @@
     display: grid;
     height: 70px;
     grid-template-rows: 30px 40px;
-    /* border: solid blue; */
 }
 
 #tracker p {
@@ -97,7 +86,6 @@
     opacity: 0.5;
 }
 
-
 #animal-color {
     display: none;
     width: 55%;
@@ -105,24 +93,17 @@
 }
 
 #story-button {
-    /* width: 15px;
-    height: 15px; */
-    /* margin-top: 27.5px;
-    margin-right: 12px; */
-
     margin-top: auto;
     margin-bottom: auto;
     margin-right: 12px;
+    margin-left: 9px;
 }
 
 /* ANIMAL LEGEND CONTENT */
 .animal-legend-content {
     width: 100%;
-    /* height: 70px; */
-    /* height: 60px; */
     height: 55px;
     display: flex;
-    justify-content: space-between;
 }
 
 #animal-img {
@@ -133,14 +114,13 @@
 
 #animal-bullet {
     font-size: 32px;
-    /* border: solid brown; */
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-left: 7px;
 }
 
 #animal-bullet div {
-    /* border: solid green; */
     height: 10px;
     width: 10px;
     border-radius: 50%;
@@ -156,17 +136,15 @@
 }
 
 .animal-name-style {
-    /* border: solid black; */
     display: flex;
     align-items: center;
     margin: 0 0 0 7px;
     font-size: 14px;
+    width: 145px;
 }
 
 .animal-name-bullet {
-    width: 150px;
     padding-left: 3px;
-    /* border: solid green; */
     display: grid;
     grid-template-columns: 20% 80%;
 }
@@ -180,8 +158,6 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    /* margin-top: 20px; */
-    /* border: solid blue; */
 }
 
 #animal-legend-content img {
@@ -260,6 +236,7 @@
 #date {
     font-size: 8pt;
     width: 45%;
+    padding-right: 5px;
 }
 
 #arrow {
@@ -293,7 +270,6 @@
 
 #ul-list {
     margin: none;
-    /* border: solid green; */
 }
 
 #help-button {
@@ -318,7 +294,7 @@
 
 #tips {
     border-radius: 3px;
-    width: 250px;
+    width: 265px;
     background-color: white;
     margin-top: 15px;
 }
@@ -347,6 +323,23 @@
 #tips div {
     display: flex;
     justify-content: space-between;
+}
+
+#actual-tips {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+#actual-tips div {
+    justify-content: left;
+    align-items: flex-start;
+}
+
+#actual-tips p {
+    margin: 1px;
+    margin-bottom: 7px;
+    padding-left: 15px;
 }
 
 .mapboxgl-popup-close-button {

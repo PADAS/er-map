@@ -17,7 +17,8 @@ module.exports = {
     react({
       html: {
         title: 'testER'
-      }
+      },
+      // publicPath: ''
     }),
     devServer({
       port: 3000,
