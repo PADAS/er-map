@@ -19,8 +19,8 @@ The animal tracking data is provided by the client's EarthRanger server and the 
 
 ## Quick Start
 1. Create an iFrame to embed the map into
-2. Edit public/config/config.json to specify your server name
-4. Run your website and see our map
+2. Edit public/config/config.json in the build folder to specify your server name
+4. Run your website and see our default map
 
 Next steps: finish personalizing your Earth Ranger Embeddable Map by filling out the remainder of config.json.
 

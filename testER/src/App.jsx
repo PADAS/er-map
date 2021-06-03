@@ -155,6 +155,7 @@ const App = (props) => {
   }, []) /* eslint-disable-line react-hooks/exhaustive-deps */
 
   useEffect(() => {
+    console.log(process.env.PUBLIC_URL)
     if (window.GlobalMap) {
       window.GlobalMap.loadImage(`${process.env.PUBLIC_URL}/images/med.png`, (_error, img) => {
         window.GlobalMap.addImage('subject-popup-box', img, { sdf: true })
