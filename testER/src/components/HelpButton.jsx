@@ -15,7 +15,6 @@ const HelpButton = () => {
   const zoomPStyle = { marginTop: '10px' }
   const orientStyle = { marginTop: '8px' }
 
-
   return (
     <div id='tips-container'>
       <div

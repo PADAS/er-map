@@ -154,6 +154,14 @@ const App = (props) => {
     }
   }, []) /* eslint-disable-line react-hooks/exhaustive-deps */
 
+  useEffect(() => {
+    if (window.GlobalMap) {
+      window.GlobalMap.loadImage('/public/images/med.png', (_error, img) => {
+        window.GlobalMap.addImage('subject-popup-box', img, { sdf: true })
+      })
+    }
+  }, [window.GlobalMap])
+
   function displayTracks (updatedTrack) {
     const id = updatedTrack[0]
     const displayed = updatedTrack[1]
@@ -249,6 +257,8 @@ const App = (props) => {
           type: 'geojson',
           data: json.last_position
         })
+
+        // Animal Icon
         window.GlobalMap.addLayer({
           id: 'points' + json.id,
           type: 'symbol',
@@ -257,14 +267,32 @@ const App = (props) => {
             'icon-image': json.subject_subtype + json.id,
             'icon-size': imgURL !== json.last_position.properties.image ? 0.4 : 1.0,
             'icon-anchor': 'bottom',
-            'text-field': json.name,
+            'icon-allow-overlap': ['step', ['zoom'], false, 10, true]
+          }
+        })
 
-            'text-size': 15,
-            'text-offset': [0, 0.3],
-            'text-anchor': 'top'
+        // Subject Nametag Icon
+        window.GlobalMap.addLayer({
+          id: 'box' + json.id,
+          type: 'symbol',
+          source: 'point' + json.id,
+          layout: {
+            'icon-image': 'subject-popup-box',
+            'icon-size': 1,
+            'icon-anchor': 'top',
+            'icon-allow-overlap': ['step', ['zoom'], false, 10, true],
+            'icon-text-fit': 'both',
+            'icon-text-fit-padding': [3, 3, 3, 3],
+            'text-anchor': 'top',
+            'text-offset': [0, 0.5],
+            'text-allow-overlap': ['step', ['zoom'], false, 10, true],
+            'text-field': json.name,
+            'text-size': 10
           },
           paint: {
-            'text-color': 'white'
+            'text-color': 'black',
+            'icon-color': 'white',
+            'icon-opacity': 0.65
           }
         })
 
