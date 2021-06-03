@@ -7,7 +7,7 @@ const Legend = ({
   subs, subjectData, onLocClick, legSub, onReturnClick, onStoryClick,
   legendOpen, onLegendStateToggle, tracks, title
 }) => {
-  const legImage = legendOpen ? './public/images/button_icons/double_caret-right.png' : '/public/images/button_icons/double_caret-left.png'
+const legImage = legendOpen ? `${process.env.PUBLIC_URL}/images/button_icons/double_caret-right.png` : `${process.env.PUBLIC_URL}/images/button_icons/double_caret-left.png`
 
   function toggleLegend () {
     onLegendStateToggle()
@@ -20,7 +20,7 @@ const Legend = ({
           <div className='title'>
             <div id='earthranger-logo'>
               <a href='https://earthranger.com/' rel='noreferrer' target='_blank' className='earthranger-logo'>
-                <img src='./public/images/LogoEarthRanger.png' />
+                <img src={`${process.env.PUBLIC_URL}/images/LogoEarthRanger.png`} />
               </a>
             </div>
             <div id='tracker'>
@@ -50,7 +50,7 @@ const Legend = ({
             <div className='title'>
               <div id='earthranger-logo'>
                 <a href='https://earthranger.com/' className='earthranger-logo'>
-                  <img src='./public/images/LogoEarthRanger.png' />
+                  <img src={`${process.env.PUBLIC_URL}/images/LogoEarthRanger.png`} />
                 </a>
               </div>
               <div id='tracker'>
@@ -58,7 +58,7 @@ const Legend = ({
               </div>
             </div>
             <div onClick={() => onReturnClick(undefined)} id='return' className='hover'>
-              <img width='7px' height='10px' src='./public/images/button_icons/view-animals-caret-left.png' />
+              <img width='7px' height='10px' src={`${process.env.PUBLIC_URL}/images/button_icons/view-animals-caret-left.png`} />
               <p>Back</p>
             </div>
             <div id='animal-story'>

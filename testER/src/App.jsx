@@ -233,8 +233,8 @@ const App = (props) => {
     let imgURL = null
     if (config.subjects[json.id] && config.subjects[json.id].icon) {
       imgURL = config.subjects[json.id].icon
-    } else if (json.common_name !== null && await fileExists(`public/images/animal_icons/${json.common_name}.png`)) {
-      imgURL = `public/images/animal_icons/${json.common_name}.png`
+    } else if (json.common_name !== null && await fileExists(`${process.env.PUBLIC_URL}/images/animal_icons/${json.common_name}.png`)) {
+      imgURL = `${process.env.PUBLIC_URL}/images/animal_icons/${json.common_name}.png`
     } else {
       imgURL = json.last_position.properties.image
     }

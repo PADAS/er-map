@@ -3,9 +3,9 @@ import './Legend.css'
 
 /* eslint-disable react/prop-types */
 const HelpButton = () => {
-  const imgOffSrc = '/public/images/button_icons/tips-gray.png'
-  const imgOnSrc = '/public/images/button_icons/tips-green.png'
-  const closeIconSrc = '/public/images/button_icons/close-icon.png'
+  const imgOffSrc = `${process.env.PUBLIC_URL}/images/button_icons/tips-gray.png`
+  const imgOnSrc = `${process.env.PUBLIC_URL}/images/button_icons/tips-green.png`
+  const closeIconSrc = `${process.env.PUBLIC_URL}/images/button_icons/close-icon.png`
   const [iconSrc, setIconSrc] = useState(imgOffSrc)
 
   const storyStyle = { paddingLeft: '9px', paddingRight: '8px', marginTop: '5px' }
