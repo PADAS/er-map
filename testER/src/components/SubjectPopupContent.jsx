@@ -2,6 +2,8 @@ import React from 'react'
 import './Legend.css'
 import TrackButton from './TrackButton.jsx'
 
+import story from '../../public/images/button_icons/caret-right-orange.png'
+
 /* eslint-disable react/prop-types */
 const SubjectPopup = (props) => {
   // TODO: detailed handling of missing data fields
@@ -54,7 +56,7 @@ const SubjectPopup = (props) => {
       {data && data.fun_fact && <p><i>{data.fun_fact}</i></p>}
       <div onClick={handleStoryClick} className='hover' style={display} id='view-story-button'>
         <p>View my story</p>
-        <img height='10' id='story' src={`${process.env.PUBLIC_URL}/images/button_icons/caret-right-orange.png`} />
+        <img height='10' id='story' src={story} />
       </div>
       <div id='pop-up-buttons'>
         <p id='date'>{date}</p>

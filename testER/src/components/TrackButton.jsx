@@ -2,12 +2,15 @@ import React, { useContext } from 'react'
 import { TrackContext } from '../App'
 import './Legend.css'
 
+import tracksOn from '../../public/images/button_icons/pin_tracks-green.png'
+import tracksOff from '../../public/images/button_icons/pin_tracks-gray.png'
+
 /* eslint-disable react/prop-types */
 const TrackButton = ({ subject }) => {
   const { displayTracks, setTracks, tracks } = useContext(TrackContext)
 
   const vis = !!tracks[subject.id]
-  const imgSrc = vis ? `${process.env.PUBLIC_URL}/images/button_icons/pin_tracks-green.png` : `${process.env.PUBLIC_URL}/images/button_icons/pin_tracks-gray.png`
+  const imgSrc = vis ? tracksOn : tracksOff
 
   const onTrackButtonClick = () => {
     const update = [subject.id, !vis]

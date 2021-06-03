@@ -2,12 +2,17 @@ import React from 'react'
 import './Legend.css'
 import Animal from './Animal.jsx'
 
+import doubleCaretRight from '../../public/images/button_icons/double_caret-right.png'
+import doubleCaretLeft from '../../public/images/button_icons/double_caret-left.png'
+import logo from '../../public/images/LogoEarthRanger.png'
+import caretLeft from '../../public/images/button_icons/view-animals-caret-left.png'
+
 /* eslint-disable react/prop-types */
 const Legend = ({
   subs, subjectData, onLocClick, legSub, onReturnClick, onStoryClick,
   legendOpen, onLegendStateToggle, tracks, title
 }) => {
-const legImage = legendOpen ? `${process.env.PUBLIC_URL}/images/button_icons/double_caret-right.png` : `${process.env.PUBLIC_URL}/images/button_icons/double_caret-left.png`
+  const legImage = legendOpen ? doubleCaretRight : doubleCaretLeft
 
   function toggleLegend () {
     onLegendStateToggle()
@@ -20,7 +25,7 @@ const legImage = legendOpen ? `${process.env.PUBLIC_URL}/images/button_icons/dou
           <div className='title'>
             <div id='earthranger-logo'>
               <a href='https://earthranger.com/' rel='noreferrer' target='_blank' className='earthranger-logo'>
-                <img src={`${process.env.PUBLIC_URL}/images/LogoEarthRanger.png`} />
+                <img src={logo} />
               </a>
             </div>
             <div id='tracker'>
@@ -50,7 +55,7 @@ const legImage = legendOpen ? `${process.env.PUBLIC_URL}/images/button_icons/dou
             <div className='title'>
               <div id='earthranger-logo'>
                 <a href='https://earthranger.com/' className='earthranger-logo'>
-                  <img src={`${process.env.PUBLIC_URL}/images/LogoEarthRanger.png`} />
+                  <img src={logo} />
                 </a>
               </div>
               <div id='tracker'>
@@ -58,7 +63,7 @@ const legImage = legendOpen ? `${process.env.PUBLIC_URL}/images/button_icons/dou
               </div>
             </div>
             <div onClick={() => onReturnClick(undefined)} id='return' className='hover'>
-              <img width='7px' height='10px' src={`${process.env.PUBLIC_URL}/images/button_icons/view-animals-caret-left.png`} />
+              <img width='7px' height='10px' src={caretLeft} />
               <p>Back</p>
             </div>
             <div id='animal-story'>
