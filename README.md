@@ -20,7 +20,7 @@ The animal tracking data is provided by the client's EarthRanger server and the 
 ## Quick Start
 1. Create an iFrame to embed the map into, letting the src variable be
 ~~~
-src=`${process.env.PUBLIC_URL}/build/index.html`}
+src={`${process.env.PUBLIC_URL}/build/index.html`}
 ~~~
 2. Edit public/config/config.json in the build folder to specify your server name
 4. Run your website and see our default map
