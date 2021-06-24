@@ -12,14 +12,14 @@ jobs:
       - run:
           name: Build Production
           command: |
-            cd testER && yarn add webpack-cli && yarn build
+            cd er && yarn add webpack-cli && yarn build
       - aws-s3/copy:
           arguments: '--recursive'
-          from: testER/build
+          from: er/build
           to: 's3://ermap-sandbox.pamdas.org'
       - aws-s3/copy:
           arguments: '--recursive'
-          from: testER/public
+          from: er/public
           to: 's3://ermap-sandbox.pamdas.org/public'
       - aws-cloudfront/invalidate:
           paths: "/index.html"
