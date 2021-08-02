@@ -82,7 +82,7 @@ const App = (props) => {
       })
 
       // fetch call for subjects
-      const url = `https://${config.server}/api/v1.0/subjects`
+      const url = `https://${config.server}/${config.public_name}/api/v1.0/subjects`
       fetch(url)
         .then(resp => {
           if (resp.ok) {
@@ -184,7 +184,7 @@ const App = (props) => {
 
   // Draw tracks and add button component to display tracks
   function fetchTrack (subjectId) {
-    const url = `https://${config.server}/api/v1.0/subject/` + subjectId + '/tracks'
+    const url = `https://${config.server}/${config.public_name}/api/v1.0/subject/` + subjectId + '/tracks'
     fetch(url)
       .then(resp => {
         if (resp.ok) {

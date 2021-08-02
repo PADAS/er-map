@@ -1,5 +1,6 @@
 {
-    "server": "ermap-server-sandbox.pamdas.org",
+    "server": "ermap-server.pamdas.org",
+    "public_name": "easterisland",
     "map_title": "Giraffe Tracker",
     "color_scheme": ["#00374", "#005B70", "#219DB8", "#511913", "#711E17", "#961F1A"],
     "map": {

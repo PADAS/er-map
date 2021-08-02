@@ -1,13 +1,20 @@
 # Earth Ranger Embeddable Map
 
-## TODO: [Installation](#Installation), [Quick Start](#Quick-Start)
-
 ## Table of Contents
-1. [Introduction](#Introduction)
-2. [Installation](#Installation)
-3. [Quick Start](#Quick-Start)
-4. [Configuration](#Configuration)
-5. [Maintainers](#Maintainers)
+- [Earth Ranger Embeddable Map](#earth-ranger-embeddable-map)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Installation](#installation)
+  - [Quick Start](#quick-start)
+  - [Configuration](#configuration)
+    - [File Structure](#file-structure)
+    - [Fields](#fields)
+    - [Important Notes](#important-notes)
+  - [Development](#development)
+    - [Install dependencies](#install-dependencies)
+    - [Build](#build)
+    - [Run locally](#run-locally)
+  - [Maintainers](#maintainers)
 
 ## Introduction
 This embeddable map allows clients to customize and configure how they portray animal tracking data.
@@ -31,6 +38,7 @@ Next steps: finish personalizing your Earth Ranger Embeddable Map by filling out
 ### File Structure
     {
         "server": <domain>,
+        "public_name": <public_name>,
         "map_title": <name>,
         "color_scheme": <"aquatic" | "earthtones" | [array of hex values]>,
         "map": {
@@ -61,6 +69,7 @@ Next steps: finish personalizing your Earth Ranger Embeddable Map by filling out
 \* = required
 - *server: the server we set up for you
     - e.g.: "ermap-server-sandbox.pamdas.org"
+- *public_name: name of public presentation of data, path on server to movement data
 - map_title: the name of the map that appears in the legend
     - default: "Animal Tracker"
 - color_scheme: an array of hex colors used for bullets in the legend and displaying the track of the associated subject
@@ -90,11 +99,25 @@ Next steps: finish personalizing your Earth Ranger Embeddable Map by filling out
     - default: ""
 
 ### Important Notes
-The only required field is the server domain, all other fields can be deleted or marked as <code>null</code> to use the default value.
+The only required fields are the server domain and public_name, all other fields can be deleted or marked as <code>null</code> to use the default value.
 
 To add more subjects, simply add another \<subject id\> and its associated data.
 
 In order for a subject to have a story, it must either have picture(s) or a detailed description.
 
+## Development
+A few commands for local development
+### Install dependencies
+~~~
+yarn install
+~~~
+### Build
+~~~
+yarn build
+~~~
+### Run locally
+~~~
+yarn start
+~~~
 ## Maintainers
 Manasi Shah, Zage Strassberg-Phillips, Lauren Vreeken
