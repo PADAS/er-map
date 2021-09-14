@@ -32,7 +32,7 @@ const App = (props) => {
   var [subjectColor, setSubjectColor] = useState({})
   var [legSub, setLegSub] = useState(undefined)
   const [subjectPopups, setSubjectPopups] = useState([])
-  const [legendOpen, setLegendOpen] = useState(true)
+  const [legendOpen, setLegendOpen] = useState(false)
 
   const toggleLegendState = () => {
     setLegendOpen(!legendOpen)
@@ -46,7 +46,7 @@ const App = (props) => {
 
     window.GlobalMap = new mapboxgl.Map({
       container: 'map-container', // container ID
-      style: 'mapbox://styles/mapbox/satellite-v9',
+      style: 'mapbox://styles/vjoelm/cktdex96919t117p3rkq7c7yu/draft',
       center: !config.map || !config.map.center ? [-109.3666652, -27.1166662] : config.map.center, // starting position [lng, lat]
       zoom: !config.map || !config.map.zoom ? 11 : config.map.zoom, // starting zoom,
       pitch: !config.map || !config.map.pitch ? 75 : config.map.pitch
@@ -56,31 +56,6 @@ const App = (props) => {
     window.GlobalMap.addControl(nav, 'top-left')
 
     window.GlobalMap.on('load', function () {
-      // add the 3D terrain source
-      window.GlobalMap.addSource('mapbox-dem', {
-        type: 'raster-dem',
-        url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
-        tileSize: 512,
-        maxzoom: 23
-      })
-
-      // add a sky layer that will show when the map is highly pitched
-      window.GlobalMap.addLayer({
-        id: 'sky',
-        type: 'sky',
-        paint: {
-          'sky-type': 'atmosphere',
-          'sky-atmosphere-sun': [0.0, 0.0],
-          'sky-atmosphere-sun-intensity': 15
-        }
-      })
-
-      // add 3D terrain
-      window.GlobalMap.on('render', function () {
-        // add the DEM source as a terrain layer with exaggerated height
-        window.GlobalMap.setTerrain({ source: 'mapbox-dem', exaggeration: 1 })
-      })
-
       // fetch call for subjects
       const url = `https://${config.server}/${config.public_name}/api/v1.0/subjects`
       fetch(url)
@@ -215,7 +190,7 @@ const App = (props) => {
       },
       paint: {
         'line-color': subjectColor[subjectId],
-        'line-width': 3
+        'line-width': 4
       }
     })
   }
@@ -255,31 +230,30 @@ const App = (props) => {
         })
 
         // Animal Icon
-        const iconSize = (imgURL !== json.last_position.properties.image) ? 0.4 : 1.0
+        const iconSize = (imgURL !== json.last_position.properties.image) ? 0.8 : 1.0
+        const iconSizeLayout = !config.map || config.map.simplify_map_data ? ['interpolate', ['linear'], ['zoom'], 1, iconSize/2, 12, iconSize] : iconSize
         window.GlobalMap.addLayer({
           id: 'points' + json.id,
           type: 'symbol',
           source: 'point' + json.id,
           layout: {
             'icon-image': json.subject_subtype + json.id,
-            'icon-size': [
-              'interpolate', ['linear'], ['zoom'],
-              7, 0,
-              12, iconSize
-            ],
+            'icon-size': iconSizeLayout,
             'icon-anchor': 'bottom',
             'icon-allow-overlap': true
           }
         })
 
         // Subject Nametag Icon
+        const iconSizeSubjectNametagIcon = !config.map || config.map.simplify_map_data ? ['step', ['zoom'], 1.1, 10, 1.1] : 1.1
+        const iconSizeSubjectNametagText = !config.map || config.map.simplify_map_data ? ['step', ['zoom'], 10, 10, 15] : 15
         window.GlobalMap.addLayer({
           id: 'box' + json.id,
           type: 'symbol',
           source: 'point' + json.id,
           layout: {
             'icon-image': 'subject-popup-box',
-            'icon-size': ['step', ['zoom'], 0, 10, 1],
+            'icon-size': iconSizeSubjectNametagIcon,
             'icon-anchor': 'top',
             'icon-allow-overlap': true,
             'icon-text-fit': 'both',
@@ -288,7 +262,7 @@ const App = (props) => {
             'text-offset': [0, 0.5],
             'text-allow-overlap': true,
             'text-field': json.name,
-            'text-size': ['step', ['zoom'], 0, 10, 10]
+            'text-size': iconSizeSubjectNametagText
           },
           paint: {
             'text-color': 'black',
