@@ -21,7 +21,43 @@ const aquatic = ['#003744', '#005B70', '#219DB8', '#05C1EA', '#60E1FF',
 const earthtones = ['#511913', '#711E17', '#961F1A', '#DB2222', '#E5632E',
   '#E67931', '#E69E39', '#D2B541', '#BFBD48']
 
+const MAP_ICON_SIZE = 30;
+const MAP_ICON_SCALE = 2;
+
 window.GlobalMap = null
+
+export const imgElFromSrc = (src, width = MAP_ICON_SIZE, height = null) => new Promise((resolve, reject) => {
+  let img = new Image();
+  img.setAttribute('crossorigin', 'anonymous');
+
+  img.addEventListener('load',() => {
+    if (width && height) {
+      img.width = width;
+      img.height = height;
+    } else {
+      const baseUnit = width || height;
+      const { naturalHeight, naturalWidth } = img;
+      const largest = Math.max(naturalHeight, naturalWidth) || baseUnit;
+      const smallest = Math.min(naturalHeight, naturalWidth) || baseUnit;
+      const widthIsLarger = largest === naturalWidth;
+      const aspectRatio = smallest / largest;
+      if (widthIsLarger) {
+        img.width = baseUnit;
+        img.height = baseUnit * aspectRatio;
+      } else {
+        img.height = baseUnit;
+        img.width = baseUnit * aspectRatio;
+      }
+    }
+    resolve(img);
+  }, { once: true });
+
+  img.onerror = (e) => {
+    console.log('image error', src, e);
+    reject('could not load image');
+  };
+  img.src = src;
+});
 
 export const TrackContext = createContext({})
 
@@ -37,6 +73,8 @@ const App = (props) => {
   const toggleLegendState = () => {
     setLegendOpen(!legendOpen)
   }
+
+  
 
   function initMap () {
     // set up google analytics
@@ -56,6 +94,12 @@ const App = (props) => {
     window.GlobalMap.addControl(nav, 'top-left')
 
     window.GlobalMap.on('load', function () {
+
+      console.log(process.env.PUBLIC_URL)
+      window.GlobalMap.loadImage(med, (_error, img) => {
+        window.GlobalMap.addImage('subject-popup-box', img, { sdf: true })
+      })
+
       // fetch call for subjects
       const url = `https://${config.server}/${config.public_name}/api/v1.0/subjects`
       fetch(url)
@@ -131,15 +175,7 @@ const App = (props) => {
     }
   }, []) /* eslint-disable-line react-hooks/exhaustive-deps */
 
-  useEffect(() => {
-    console.log(process.env.PUBLIC_URL)
-    if (window.GlobalMap) {
-      window.GlobalMap.loadImage(med, (_error, img) => {
-        window.GlobalMap.addImage('subject-popup-box', img, { sdf: true })
-      })
-    }
-  }, [window.GlobalMap])
-
+  
   function displayTracks (updatedTrack) {
     const id = updatedTrack[0]
     const displayed = updatedTrack[1]
@@ -220,9 +256,14 @@ const App = (props) => {
   }
 
   function addImage (json, imgURL) {
-    window.GlobalMap.loadImage(imgURL,
-      function (error, image) {
-        if (error) throw error
+    const width = !config.map || !config.map.map_icon_size ? MAP_ICON_SIZE : config.map.map_icon_size , height = undefined;
+    imgElFromSrc(
+      imgURL,
+      width * MAP_ICON_SCALE,
+      (height ? (height * MAP_ICON_SCALE) : undefined),
+    )
+      .then((image) => {
+        
         window.GlobalMap.addImage(json.subject_subtype + json.id, image)
         window.GlobalMap.addSource('point' + json.id, {
           type: 'geojson',
@@ -230,8 +271,8 @@ const App = (props) => {
         })
 
         // Animal Icon
-        const iconSize = (imgURL !== json.last_position.properties.image) ? 0.8 : 1.0
-        const iconSizeLayout = !config.map || config.map.simplify_map_data ? ['interpolate', ['linear'], ['zoom'], 1, iconSize/2, 12, iconSize] : iconSize
+        const iconSize = 0.5
+        const iconSizeLayout = !config.map || config.map.simplify_map_data ? ['interpolate', ['linear'], ['zoom'], 1, iconSize/MAP_ICON_SCALE, 12, iconSize] : iconSize
         window.GlobalMap.addLayer({
           id: 'points' + json.id,
           type: 'symbol',
@@ -296,8 +337,12 @@ const App = (props) => {
         window.GlobalMap.on('mouseleave', 'points' + json.id, () => {
           window.GlobalMap.getCanvas().style.cursor = ''
         })
-      }
-    )
+
+
+      })
+      .catch((error) => {
+        console.warn('imgElFromSrc error', error);
+      });
   }
 
   function goToLoc (coords) {

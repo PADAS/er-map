@@ -10,7 +10,8 @@ module.exports = {
     standard({
         eslint: {
           failOnError: false,
-          emitWarning: true
+          emitWarning: true,
+          rules: { 'babel/semi': ['error', 'always'] }
         }
       }
     ),

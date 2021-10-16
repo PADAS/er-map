@@ -44,8 +44,9 @@ Next steps: finish personalizing your Earth Ranger Embeddable Map by filling out
         "map": {
             "center": [<longitude>, <latitude>],
             "zoom": <number in range 0-22>,
-            "subject_names": <boolean for displaying labels under icons>
-            "simplify_map_data" <boolean, when true hide icons as map is zoomed out>
+            "subject_names": <boolean for displaying labels under icons>,
+            "simplify_map_data": <boolean, when true hide icons as map is zoomed out>,
+            "map_icon_size": <number>
         },
         "subjects":
         {
@@ -87,6 +88,8 @@ Next steps: finish personalizing your Earth Ranger Embeddable Map by filling out
     - default: false
 - map.simplify_map_data: a boolean for reducing icons on map as the map is zoomed out
     - default: true
+- map.map_icon_size: number to advise on the subject icon size
+    - default: 30
 - \<subject id>: the id of a subject in EarthRanger
 - \<subject id>.name: a new name for the subject
     - default: the subject's name from EarthRanger
