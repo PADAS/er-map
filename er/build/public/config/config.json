@@ -7,7 +7,6 @@
         "center": [-109.3666652, -27.1166662],
         "zoom": 11,
         "pitch": 75,
-        "subject_names": true,
         "map_icon_size": 90
     },
     "subjects":
