@@ -1,21 +1,21 @@
-import React from 'react'
-import './Legend.css'
-import Animal from './Animal.jsx'
+import React from 'react';
+import './Legend.css';
+import Animal from './Animal.jsx';
 
-import doubleCaretRight from '../../public/images/button_icons/double_caret-right.png'
-import doubleCaretLeft from '../../public/images/button_icons/double_caret-left.png'
-import logo from '../../public/images/LogoEarthRanger.png'
-import caretLeft from '../../public/images/button_icons/view-animals-caret-left.png'
+import doubleCaretRight from '../../public/images/button_icons/double_caret-right.png';
+import doubleCaretLeft from '../../public/images/button_icons/double_caret-left.png';
+import logo from '../../public/images/LogoEarthRanger.png';
+import caretLeft from '../../public/images/button_icons/view-animals-caret-left.png';
 
 /* eslint-disable react/prop-types */
 const Legend = ({
   subs, subjectData, onLocClick, legSub, onReturnClick, onStoryClick,
   legendOpen, onLegendStateToggle, tracks, title
 }) => {
-  const legImage = legendOpen ? doubleCaretRight : doubleCaretLeft
+  const legImage = legendOpen ? doubleCaretRight : doubleCaretLeft;
 
   function toggleLegend () {
-    onLegendStateToggle()
+    onLegendStateToggle();
   }
 
   function display () {
@@ -47,7 +47,7 @@ const Legend = ({
               ))}
           </div>
         </div>
-      )
+      );
     } else {
       return (
         <>
@@ -71,13 +71,13 @@ const Legend = ({
                 <Animal animal={legSub[0]} key={legSub[0].id} animalOnLocClicked={onLocClick} tracks={tracks[legSub[0].id]} />
               </div>
               {legSub[1].pictures.map((pic) => {
-                return <img className='sub-image' key={pic} src={pic.path} height={200} width={200} alt='picture' />
+                return <img className='sub-image' key={pic} src={pic.path} height={200} width={200} alt='picture' />;
               })}
               <div id='sub-content' className='default' dangerouslySetInnerHTML={{ __html: legSub[1].detail_description }} />
             </div>
           </div>
         </>
-      )
+      );
     }
   }
 
@@ -90,7 +90,7 @@ const Legend = ({
         {display()}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Legend
+export default Legend;

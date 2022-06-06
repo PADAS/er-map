@@ -44,7 +44,7 @@ Next steps: finish personalizing your Earth Ranger Embeddable Map by filling out
         "map": {
             "center": [<longitude>, <latitude>],
             "zoom": <number in range 0-22>,
-            "subject_names": <boolean for displaying labels under icons>,
+            "show_subject_names": <boolean for displaying labels under icons>,
             "simplify_map_data": <boolean, when true hide icons as map is zoomed out>,
             "map_icon_size": <number>
         },
@@ -84,7 +84,7 @@ Next steps: finish personalizing your Earth Ranger Embeddable Map by filling out
     - default: [-109.3666652, -27.1166662] (Easter Island)
 - map.zoom: the initial zoom level of the map in the range 0-22, higher numbers are more zoomed out
     - default: 11
-- map.subject_names: a boolean for whether or not to diplay subject names below their icons on the map
+- map.show_subject_names: a boolean for whether or not to diplay subject names below their icons on the map
     - default: false
 - map.simplify_map_data: a boolean for reducing icons on map as the map is zoomed out
     - default: true

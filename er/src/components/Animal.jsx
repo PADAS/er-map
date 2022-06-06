@@ -1,46 +1,46 @@
-import React from 'react'
-import TrackButton from './TrackButton.jsx'
-import LocButton from './LocButton.jsx'
-import './Legend.css'
+import React from 'react';
+import TrackButton from './TrackButton.jsx';
+import LocButton from './LocButton.jsx';
+import './Legend.css';
 
-import storyIcon from '../../public/images/button_icons/story-f.png'
+import storyIcon from '../../public/images/button_icons/story-f.png';
 
 /* eslint-disable react/prop-types */
 const Animal = ({ animal, configData, animalOnLocClicked, onNameClick, displayStory, tracks }) => {
-  const backgroundColor = { backgroundColor: animal.color }
-  const animalId = animal.id + ' animal'
-  let hover = 'hover'
-  let animalName = 'animal-name '
-  let display = { }
-  let truncAnimalName = animal.name
+  const backgroundColor = { backgroundColor: animal.color };
+  const animalId = animal.id + ' animal';
+  let hover = 'hover';
+  let animalName = 'animal-name ';
+  let display = { };
+  let truncAnimalName = animal.name;
 
   if (truncAnimalName.length > 15) {
-    truncAnimalName = truncAnimalName.substring(0, 15) + '...'
+    truncAnimalName = truncAnimalName.substring(0, 15) + '...';
   }
 
-  let trackState = ''
+  let trackState = '';
   if (tracks !== undefined && tracks) {
-    trackState = ' bold '
+    trackState = ' bold ';
   }
 
   if (configData === undefined || !displayStory) {
-    hover = 'default'
-    animalName = ''
-    display = { visibility: 'hidden' }
+    hover = 'default';
+    animalName = '';
+    display = { visibility: 'hidden' };
   }
 
   return (
     <>
       <div
         className='animal-legend-content' onClick={(e) => {
-          const name = document.getElementById(animalId)
-          const clicked = e.target
+          const name = document.getElementById(animalId);
+          const clicked = e.target;
 
           if (name.classList.contains('animal-name') && clicked.id !== 'subject-track-button' &&
           clicked.id !== 'subject-location-button') {
-            onNameClick([animal, configData.subjects[animal.id]])
-            name.classList.toggle('animal-name')
-            name.classList.toggle('hover')
+            onNameClick([animal, configData.subjects[animal.id]]);
+            name.classList.toggle('animal-name');
+            name.classList.toggle('hover');
           }
         }}
       >
@@ -67,7 +67,7 @@ const Animal = ({ animal, configData, animalOnLocClicked, onNameClick, displaySt
         <img id='story-button' className={hover} style={display} width='7px' height='10px' src={storyIcon} />
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Animal
+export default Animal;
