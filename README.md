@@ -21,11 +21,11 @@
 ## Introduction
 The EarthRanger PTP, Public Tracking Plaform, is an embeddable map that allows clients to customize and configure how they display animal tracking data in their own website using EarthRanger hosted collar data.
 
-Users of EarthRanger had asked for a way to publish specific animal tracks on a seperate informational website with a look and feel simiarl to EarthRanger. With that request in mind we built out a widget, itself a map with tracks on it, that is ready to be placed in a customers marketing/informational/educational website. Like EarthRanger, the widget uses Mapbox to display a map and has internal functionality to display animal tracks, icons and an informational card. 
+Users of EarthRanger had asked for a way to publish specific animal tracks on a seperate informational website with a look and feel similar to EarthRanger. With that request in mind, we built a widget platform, itself a map with tracks on it, that is ready to be placed in a customers marketing/informational/educational website. Like EarthRanger, the widget uses Mapbox to display a map and has internal functionality to display animal tracks, icons and an informational card. 
 
 The animal tracking data is provided by the client's EarthRanger server and this widget constructs a default map described below. Read the [Configuration](#Configuration) section below to learn more about customizing your map.
 
-Prior to using this PTP, think about how you plan on building a web page around this widget. You will be hosting this widget/map in your own website. This widget is provided as a directory of files that is designed to be embedded into your web page using an IFrame. A configuration file as described later defines basic attributes of the map as well as a place to enter a narrative including pictures of the animals you plan to showcase on your website.
+Prior to using this PTP, think about how you plan on building a web page around this widget. You will be hosting this widget/map in your own website. This widget is provided as a directory of files that is designed to be embedded into your web page utilizing an IFrame. A configuration file as described later defines basic attributes of the map as well as a place to enter a narrative including pictures of the animals you plan to showcase on your website.
 
 ## Examples
 See the location of Great White Sharks in this use of our PTP by (Sustainable Oceans Society)[https://www.sustainableoceansociety.co.nz/]
@@ -33,7 +33,8 @@ See the location of Great White Sharks in this use of our PTP by (Sustainable Oc
 ## Requirements
 A website to host the widget - wordpress or some other way to host the widget in a webpage.
 Web developer expertise - this widget is delivered as a directory of javascript and supporting files. You will require someone with some expertise of setting up and deploying the PTP
-A mapbox account - this to host the map used by the PTP. There is a no cost use of Mapbox below 50K pageviews. If you think your map will go viral, we can contact Mapbox about your use for possible discount pricing.
+A mapbox account - this to host the map used by the PTP. There is a no cost plan for using Mapbox when you stay below 50K pageviews. If you think your map will go viral, we can help you contact Mapbox about your use for possible discount pricing.
+Animal list - in EarthRanger, we will help you setup a subject group that will be used in populating the list of animals display in the PTP. There is some setup too on our side to make their track data available. Contact EarthRanger Support when you are ready.
 
 ## Installation
 1. Go to https://github.com/PADAS/er-map/releases and download the lastest release
@@ -141,4 +142,4 @@ yarn build
 yarn start
 ~~~
 ## Maintainers
-Manasi Shah, Zage Strassberg-Phillips, Lauren Vreeken
+Manasi Shah, Zage Strassberg-Phillips, Lauren Vreeken, Chris Jones
